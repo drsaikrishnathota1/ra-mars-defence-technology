@@ -893,7 +893,9 @@ The final journal manuscript should include the following result figures and tab
 ### Result Figures
 
 - Figure 1: RA-MARS system architecture.
+  - Source: `figures/architecture/final/ra_mars_architecture.png`
 - Figure 2: Threat model for jamming, GPS/GNSS spoofing, and mission-data tampering.
+  - Source: `figures/threat-model/final/ra_mars_threat_model.png`
 - Figure 3: AI attack detection performance.
   - Source: `figures/graphs/final/graph1_ai_detection_performance_v2.png`
 - Figure 4: Mission success rate across scenarios.
@@ -929,6 +931,11 @@ The final journal manuscript should include the following result figures and tab
   - Source: `tables/final/table_recovery_time_v2.md`
 
 ### Figure Caption Drafts
+
+
+**Figure 1.** RA-MARS system architecture for secure multi-UAV defence surveillance. The framework integrates UAV telemetry, communication monitoring, AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and tamper-resistant mission logging.
+
+**Figure 2.** RA-MARS threat model for contested multi-UAV defence surveillance. The model considers RF jamming, GPS/GNSS spoofing, and mission-data tampering attacks against UAV communication, navigation, and mission-record integrity.
 
 **Figure 3.** AI attack detection performance of candidate machine-learning models using balanced v2 row-level attack labels and non-leakage telemetry features.
 
