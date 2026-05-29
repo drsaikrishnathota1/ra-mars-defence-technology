@@ -1,7 +1,7 @@
 # Highlights
 
 - Proposes RA-MARS for resilient multi-UAV defence surveillance.
-- Detects jamming, GPS spoofing, and mission-data tampering.
-- Links AI-based attack detection with mission-risk scoring.
-- Supports adaptive mission continuation under adversarial conditions.
-- Uses tamper-resistant logging to improve mission-data trustworthiness.
+- Detects jamming, GPS/GNSS spoofing, and mission-data tampering.
+- Uses mission-risk scoring and adaptive continuation for UAV resilience.
+- Achieves 89.87% attack-detection accuracy using non-leakage features.
+- Improves combined-attack mission success from 63.21% to 78.60%.
