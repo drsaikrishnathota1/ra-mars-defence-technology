@@ -882,3 +882,67 @@ The code may be made available in a GitHub repository after the manuscript reach
 # Synthetic Data Statement
 
 This study uses simulation-generated synthetic data for controlled experimental evaluation. The data should not be interpreted as real-world UAV flight data or operational military mission data.
+
+---
+
+
+## Figure and Table Reference Plan
+
+The final journal manuscript should include the following result figures and tables.
+
+### Result Figures
+
+- Figure 1: RA-MARS system architecture.
+- Figure 2: Threat model for jamming, GPS/GNSS spoofing, and mission-data tampering.
+- Figure 3: AI attack detection performance.
+  - Source: `figures/graphs/final/graph1_ai_detection_performance_v2.png`
+- Figure 4: Mission success rate across scenarios.
+  - Source: `figures/graphs/final/graph2_mission_success_rate_v2.png`
+- Figure 5: Packet delivery ratio across scenarios.
+  - Source: `figures/graphs/final/graph3_packet_delivery_ratio_v2.png`
+- Figure 6: Average latency across scenarios.
+  - Source: `figures/graphs/final/graph4_average_latency_v2.png`
+- Figure 7: Average route deviation across scenarios.
+  - Source: `figures/graphs/final/graph5_route_deviation_v2.png`
+- Figure 8: Tamper-detection rate.
+  - Source: `figures/graphs/final/graph6_tamper_detection_rate_v2.png`
+- Figure 9: Energy consumption across scenarios.
+  - Source: `figures/graphs/final/graph7_energy_consumption_v2.png`
+- Figure 10: Mission recovery time across scenarios.
+  - Source: `figures/graphs/final/graph8_mission_recovery_time_v2.png`
+
+### Result Tables
+
+- Table 1: AI attack detection performance.
+  - Source: `tables/final/table_ai_detection_performance_v2.md`
+- Table 2: Mission success rate across scenarios.
+  - Source: `tables/final/table_mission_success_v2.md`
+- Table 3: Communication performance.
+  - Source: `tables/final/table_communication_results_v2.md`
+- Table 4: Average route deviation.
+  - Source: `tables/final/table_navigation_results_v2.md`
+- Table 5: Tamper-detection rate.
+  - Source: `tables/final/table_tamper_detection_v2.md`
+- Table 6: Energy consumption.
+  - Source: `tables/final/table_energy_consumption_v2.md`
+- Table 7: Mission recovery time.
+  - Source: `tables/final/table_recovery_time_v2.md`
+
+### Figure Caption Drafts
+
+**Figure 3.** AI attack detection performance of candidate machine-learning models using balanced v2 row-level attack labels and non-leakage telemetry features.
+
+**Figure 4.** Mission success rate comparison across normal, jamming, spoofing, tampering, and combined attack scenarios.
+
+**Figure 5.** Packet delivery ratio comparison across baseline systems and RA-MARS.
+
+**Figure 6.** Average communication latency across attack scenarios.
+
+**Figure 7.** Average route deviation under normal and adversarial mission conditions.
+
+**Figure 8.** Tamper-detection rate for mission-data tampering and combined attack scenarios.
+
+**Figure 9.** Estimated energy consumption across baseline systems and RA-MARS.
+
+**Figure 10.** Mission recovery time comparison across baseline systems and RA-MARS.
+
