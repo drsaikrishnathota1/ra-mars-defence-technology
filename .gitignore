@@ -53,3 +53,4 @@ simulations/datasets/temp/
 
 # Excel temporary files
 ~$*.xlsx
+simulations/datasets/synthetic_uav_mission_data.csv
