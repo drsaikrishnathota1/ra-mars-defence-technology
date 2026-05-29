@@ -1,49 +1,64 @@
 # RA-MARS: Resilient AI-Driven Mission Assurance for Secure Multi-UAV Defence Surveillance
 
-This repository documents the development of a journal article targeted for *Defence Technology*.
-
-## Proposed Title
-
-**RA-MARS: A Resilient AI-Driven Mission Assurance Framework for Secure Multi-UAV Defence Surveillance Under Jamming, GPS Spoofing, and Data-Tampering Attacks**
-
-## Project Goal
-
-The goal of this research is to design and evaluate a defence-oriented mission assurance framework for multi-UAV surveillance systems operating in contested environments. The framework focuses on AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and blockchain-inspired tamper-resistant mission logging.
-
-## Main Threats Considered
-
-* RF jamming
-* GPS spoofing
-* Mission-data tampering
-* Combined adversarial attack scenarios
-
-## Main Evaluation Metrics
-
-* Mission success rate
-* Attack detection accuracy
-* Precision
-* Recall
-* F1-score
-* Packet delivery ratio
-* Communication latency
-* Energy consumption
-* Tamper-detection rate
-* Mission recovery time
-
-## Repository Structure
-
-* `literature-review/` — references, literature matrix, and notes
-* `manuscript/` — article sections and draft files
-* `simulations/` — simulation scripts, datasets, and results
-* `figures/` — architecture diagrams, threat models, and graphs
-* `tables/` — manuscript tables and comparison results
-* `submission/` — cover letter, highlights, declarations, and submission notes
-* `archive/` — older drafts and unused material
+## Working Title
+RA-MARS: A Resilient AI-Driven Mission Assurance Framework for Secure Multi-UAV Defence Surveillance Under Jamming, GPS Spoofing, and Data-Tampering Attacks
 
 ## Target Journal
+Defence Technology
 
-*Defence Technology*
+## Project Goal
+This repository documents the development of a defence-oriented journal article focused on secure and resilient multi-UAV surveillance in contested environments.
 
-## Status
+## Proposed Framework
+RA-MARS integrates:
+- AI-based attack detection
+- Mission-risk scoring
+- Adaptive mission-continuation logic
+- Blockchain-inspired tamper-resistant mission logging
+- Simulation-based performance evaluation
 
-Project initiated. Literature review, simulation design, and manuscript development are in progress.
+## Main Threats
+- RF jamming
+- GPS/GNSS spoofing
+- Mission-data tampering
+- Combined attack scenarios
+
+## Main Evaluation Metrics
+- Mission success rate
+- Attack detection accuracy
+- Precision
+- Recall
+- F1-score
+- Packet delivery ratio
+- Average latency
+- Energy consumption
+- Tamper-detection rate
+- Mission recovery time
+
+## Repository Structure
+- literature-review: references, literature matrix, and notes
+- manuscript: article section drafts and final paper plan
+- simulations: Python/NS-3 simulation files, datasets, and results
+- figures: architecture, threat model, and result graph plans
+- tables: simulation parameters, baseline comparison, and result summaries
+- submission: cover letter, highlights, declaration, and response notes
+- archive: older drafts and unused material
+
+## Current Status
+Initial documentation structure is complete.
+
+## Next Phase
+1. Collect and verify 45-70 references.
+2. Build the literature comparison matrix.
+3. Develop the Python simulation.
+4. Generate synthetic UAV mission data.
+5. Produce result tables and graphs.
+6. Convert section drafts into a full manuscript.
+7. Polish the manuscript for journal submission.
+
+## Research Integrity Notes
+This project uses simulation-generated synthetic UAV telemetry data. It should not be presented as real military flight data.
+
+All final numerical results must be generated from simulation scripts and saved in CSV files before being used in the manuscript.
+
+RA-MARS should be positioned as a defence mission-assurance framework, not as a generic AI, blockchain, or quantum paper.
