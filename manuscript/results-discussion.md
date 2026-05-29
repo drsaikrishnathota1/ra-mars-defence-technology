@@ -2,214 +2,122 @@
 
 ## Overview
 
-This section will present the simulation results for the RA-MARS framework. The results will compare the proposed framework with baseline systems under normal operation, RF jamming, GPS spoofing, data-tampering, and combined attack scenarios.
+This section presents the v2 simulation results for the RA-MARS framework. The evaluation uses a simulation-generated synthetic multi-UAV telemetry dataset with row-level attack labels and non-leakage telemetry features. The results are intended to provide controlled simulation-based evidence of mission assurance under normal operation, RF jamming, GPS/GNSS spoofing, mission-data tampering, and combined attack scenarios.
 
-At this stage, this file provides the planned structure for the results section. Final numerical values should be added only after simulation is completed.
+RA-MARS is compared against four baseline systems:
 
-## Evaluation Scenarios
+- Conventional UAV System
+- AI-Only Detection System
+- Logging-Only System
+- Non-Adaptive Secure System
+- Proposed RA-MARS Framework
 
-The following scenarios will be evaluated:
+The evaluation includes both AI attack-detection performance and mission-level resilience metrics.
 
-1. Normal operation
-2. RF jamming attack
-3. GPS spoofing attack
-4. Data-tampering attack
-5. Combined attack scenario
+## AI Attack Detection Performance
 
-Each scenario should be tested using multiple simulation runs to improve reliability of the results.
+The v2 attack-detection experiment uses balanced sampling across the row-level attack classes. Only non-leakage telemetry features are used for training:
 
-## Baseline Methods
+- packet loss rate
+- latency
+- route deviation
+- GPS jump
+- velocity inconsistency
+- battery level
+- mission progress
 
-The proposed RA-MARS framework will be compared against the following baselines:
+The best-performing model is **Gradient Boosting**, achieving:
 
-- Conventional UAV surveillance system
-- AI-only attack detection system
-- Logging-only system
-- Non-adaptive secure system
-- Proposed RA-MARS framework
+| Metric | Value |
+|---|---:|
+| Accuracy | 0.8987 |
+| Macro Precision | 0.9050 |
+| Macro Recall | 0.8986 |
+| Macro F1-score | 0.8971 |
 
-## Attack Detection Performance
+These results are more realistic than the earlier clean-label experiment because the model does not use direct leakage features such as risk score, tamper flag, or log-integrity status. The results show that AI-based detection can classify cyber-physical mission states with strong but not artificially perfect performance.
 
-This subsection will report the performance of AI-based attack detection models.
+Related figure:
 
-Metrics to include:
-
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Confusion matrix
-
-Models to compare:
-
-- Logistic Regression
-- Support Vector Machine
-- Random Forest
-- Gradient Boosting or XGBoost
-- Lightweight Neural Network
-
-Discussion should explain which model performs best and why it is suitable for the RA-MARS detection module.
+- `figures/graphs/final/graph1_ai_detection_performance_v2.png`
 
 ## Mission Success Rate
 
-This subsection will compare mission success rate across all baseline systems and attack scenarios.
+Mission success rate is the most important mission-assurance metric in this study. Under the combined attack scenario, the Conventional UAV System achieves a mission success rate of **63.21%**, while RA-MARS achieves **78.60%**.
 
-Mission success rate should measure the percentage of mission zones successfully covered within the mission duration.
+Under the jamming scenario, the Conventional UAV System achieves **66.92%**, while RA-MARS achieves **83.22%**.
 
-Expected discussion points:
+These results indicate that RA-MARS improves mission continuity under adversarial conditions by combining AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and tamper-resistant logging.
 
-- How jamming affects mission completion
-- How GPS spoofing causes route deviation
-- How combined attacks reduce mission effectiveness
-- Whether RA-MARS improves mission continuity compared with baselines
-- Whether adaptive mission-continuation logic improves mission recovery
+Related figure:
+
+- `figures/graphs/final/graph2_mission_success_rate_v2.png`
 
 ## Communication Performance
 
-This subsection will discuss packet delivery ratio and average latency.
+Communication performance is evaluated using packet delivery ratio and average latency. Under the combined attack scenario, the packet delivery ratio improves from **0.761** for the Conventional UAV System to **0.885** for RA-MARS.
 
-Metrics to include:
+This improvement suggests that adaptive mission logic and risk-aware operation can help reduce the mission-level impact of communication degradation under jamming and combined attacks.
 
-- Packet delivery ratio
-- Average latency
-- Communication degradation under jamming
-- Recovery after adaptive response
+Related figures:
 
-Expected discussion points:
+- `figures/graphs/final/graph3_packet_delivery_ratio_v2.png`
+- `figures/graphs/final/graph4_average_latency_v2.png`
 
-- Conventional systems may show reduced packet delivery under jamming
-- AI-only detection may identify attacks but may not improve delivery
-- RA-MARS may improve mission-level communication resilience through adaptive mission logic
-- Any added latency from security and logging modules should be reported honestly
+## Navigation Reliability
 
-## GPS Spoofing Detection and Navigation Reliability
+Navigation reliability is evaluated using average route deviation. Under the combined attack scenario, the Conventional UAV System produces an average route deviation of **67.32 m**, while RA-MARS reduces this to **48.00 m**.
 
-This subsection will discuss how well the system detects GPS spoofing and limits navigation degradation.
+This reduction supports the role of mission-risk scoring and adaptive mission response in limiting the operational effect of GPS/GNSS spoofing and route deviation.
 
-Metrics to include:
+Related figure:
 
-- Spoofing detection accuracy
-- Route deviation
-- Mission-zone completion rate
-- Recovery time after spoofing detection
-
-Expected discussion points:
-
-- GPS spoofing can create abnormal location jumps or gradual drift
-- AI-based detection can identify inconsistent movement patterns
-- Mission-risk scoring can help determine whether a UAV should continue, reroute, or transfer mission responsibility
+- `figures/graphs/final/graph5_route_deviation_v2.png`
 
 ## Tamper-Detection Performance
 
-This subsection will evaluate the tamper-resistant logging module.
+The tamper-resistant logging component is evaluated using tamper-detection rate. RA-MARS achieves a tamper-detection rate of **0.96** in the tampering scenario and **0.96** in the combined attack scenario.
 
-Metrics to include:
+These results support the use of lightweight hash-chain or blockchain-inspired logging as a mission-data trustworthiness layer. The logging module should not be interpreted as the primary novelty of RA-MARS, but as a supporting component for preserving mission-record integrity.
 
-- Number of tampered records
-- Number of detected tampered records
-- Tamper-detection rate
-- Verification time
-- Logging overhead
+Related figure:
 
-Expected discussion points:
-
-- Conventional logs may not detect post-mission modification
-- Hash-chain or blockchain-inspired logging can detect altered records
-- RA-MARS links tamper detection with mission assurance and operational trust
-- Logging overhead should be discussed carefully
+- `figures/graphs/final/graph6_tamper_detection_rate_v2.png`
 
 ## Energy Consumption and Operational Overhead
 
-This subsection will report the energy and computational overhead caused by AI detection, adaptive logic, and tamper-resistant logging.
+RA-MARS introduces additional operational overhead because it includes AI detection, mission-risk scoring, adaptive decision logic, and tamper-resistant logging. Under the combined attack scenario, estimated energy consumption increases from **6.80%** for the Conventional UAV System to **8.28%** for RA-MARS.
 
-Metrics to include:
+This overhead is expected because RA-MARS performs additional monitoring and response functions. However, the overhead is justified in the simulation because RA-MARS improves mission success, packet delivery, route stability, tamper detection, and recovery time.
 
-- Battery consumption
-- Communication overhead
-- Logging overhead
-- Security-processing overhead
+Related figure:
 
-Expected discussion points:
-
-- RA-MARS may increase overhead compared with a conventional UAV system
-- The overhead should be justified only if mission success and resilience improve
-- The paper should avoid claiming zero overhead
-- The tradeoff between resilience and resource consumption should be clearly explained
+- `figures/graphs/final/graph7_energy_consumption_v2.png`
 
 ## Mission Recovery Time
 
-This subsection will compare how quickly each system restores stable mission operation after attack detection.
+Mission recovery time evaluates how quickly each system restores stable mission operation after attack detection. Under the combined attack scenario, the Conventional UAV System has an estimated recovery time of **117.64 s**, while RA-MARS reduces this to **67.97 s**.
 
-Metrics to include:
+This result supports the mission-assurance value of adaptive mission-continuation logic. Detection alone is not sufficient; mission recovery requires linking detection results to risk-aware operational decisions.
 
-- Average recovery time
-- Recovery time under jamming
-- Recovery time under GPS spoofing
-- Recovery time under combined attacks
+Related figure:
 
-Expected discussion points:
+- `figures/graphs/final/graph8_mission_recovery_time_v2.png`
 
-- Detection alone may not reduce recovery time
-- Adaptive mission-continuation logic should reduce recovery delay
-- RA-MARS should be evaluated based on operational recovery, not just classification accuracy
+## Discussion
 
-## Ablation Study
+The v2 results show that RA-MARS improves mission assurance across multiple operational dimensions. The framework improves mission success rate, communication reliability, navigation stability, tamper detection, and recovery time compared with the selected baselines.
 
-The ablation study will evaluate the contribution of each RA-MARS module.
+The most important finding is that RA-MARS evaluates UAV resilience at the mission level rather than only at the attack-classification level. This is important for defence UAV surveillance because operational success depends not only on detecting an attack, but also on maintaining surveillance coverage, communication continuity, navigation trustworthiness, and reliable mission records.
 
-Variants to test:
+The results also show a realistic tradeoff. RA-MARS improves resilience but introduces additional energy and operational overhead. This tradeoff should be acknowledged clearly because secure and resilient UAV systems typically require additional computation, communication, and logging operations.
 
-- Full RA-MARS
-- RA-MARS without AI detection
-- RA-MARS without mission-risk scoring
-- RA-MARS without adaptive mission logic
-- RA-MARS without tamper-resistant logging
+## Research Integrity Note
 
-Expected discussion points:
+The results are based on simulation-generated synthetic UAV telemetry data. They should not be interpreted as real-world military flight validation. The results provide controlled simulation-based evidence that integrated mission assurance can improve multi-UAV surveillance resilience under jamming, spoofing, tampering, and combined attacks.
 
-- Which module contributes most to mission success
-- Whether adaptive logic improves mission continuity
-- Whether tamper-resistant logging improves data trustworthiness
-- Whether mission-risk scoring improves decision quality
-- Whether all modules are necessary for the full framework
-
-## Defence Relevance
-
-This subsection should connect the results to defence applications.
-
-Discussion should mention:
-
-- Border monitoring
-- Battlefield reconnaissance
-- Critical-infrastructure protection
-- Convoy or perimeter surveillance
-- Contested electromagnetic environments
-- Need for mission continuity and trustworthy surveillance records
-
-The discussion should be careful and simulation-based. Avoid claiming direct military deployment readiness unless real-world testing is performed.
-
-## Safe Result Language
-
-Use careful language such as:
-
-- Simulation results indicate that...
-- Under the tested conditions...
-- Compared with the selected baselines...
-- The proposed framework shows improved resilience in the simulated scenarios...
-- The findings suggest that integrated mission assurance can improve UAV surveillance reliability...
-- Further field validation is required before operational deployment.
-
-## Claims to Avoid
-
-Do not write these unless fully supported by strong evidence:
-
-- RA-MARS guarantees secure UAV operation
-- RA-MARS is military-grade
-- RA-MARS prevents all attacks
-- RA-MARS is ready for battlefield deployment
-- RA-MARS proves real-world superiority
-- RA-MARS has no overhead
+Further validation using hardware-in-the-loop testing, real UAV experiments, realistic RF environments, and operational datasets is required before any real-world deployment claims can be made.
 
 ## Summary
 
-The results and discussion section should demonstrate that RA-MARS improves multi-UAV mission assurance by connecting attack detection, mission-risk scoring, adaptive mission continuation, and tamper-resistant logging. The main focus should be on measurable operational resilience rather than only AI classification performance.
+The v2 evaluation supports the core claim of RA-MARS: integrating AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and tamper-resistant logging can improve secure multi-UAV defence surveillance under contested conditions. The strongest evidence is the improvement in mission success and recovery time under combined attacks, together with strong but realistic AI detection performance.
