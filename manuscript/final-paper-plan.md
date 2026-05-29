@@ -69,7 +69,8 @@ Required subsections:
 - Research gap summary
 
 ### 6. System Model and Threat Model
-New section to write later.
+Source file:
+`manuscript/system-threat-model.md`
 
 Should include:
 - Multi-UAV mission environment
@@ -96,7 +97,8 @@ Should include:
 - Algorithm/pseudocode
 
 ### 8. Experimental Setup
-New section to write after simulation code is prepared.
+Source file:
+`manuscript/experimental-setup.md`
 
 Should include:
 - Simulation environment
@@ -123,6 +125,9 @@ Required results:
 - Ablation study
 
 ### 10. Limitations
+Source file:
+`manuscript/limitations.md`
+
 Include:
 - Simulation-generated dataset
 - No real UAV flight testing
@@ -137,7 +142,16 @@ Source file:
 
 The conclusion should be revised after final results are available.
 
-### 12. References
+### 12. Data and Code Availability
+Source file:
+`manuscript/data-availability.md`
+
+Should include:
+- Data availability statement
+- Code availability statement
+- Synthetic data statement
+
+### 13. References
 Source files:
 - `literature-review/reference-list.md`
 - `literature-review/literature-matrix.md`
