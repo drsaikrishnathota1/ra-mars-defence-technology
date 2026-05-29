@@ -29,11 +29,11 @@ RA-MARS integrates:
 - [x] Create GitHub repository
 - [x] Add initial folder structure
 - [ ] Finalize paper title
-- [ ] Finalize abstract
-- [ ] Write novelty gap
-- [ ] Create full paper outline
-- [ ] Define research questions
-- [ ] Define main contributions
+- [x] Finalize abstract
+- [x] Write novelty gap
+- [x] Create full paper outline
+- [x] Define research questions
+- [x] Define main contributions
 
 ### Phase 2: Literature Review
 - [ ] Collect 10 papers on UAV defence surveillance
@@ -41,40 +41,40 @@ RA-MARS integrates:
 - [ ] Collect 10 papers on GPS spoofing detection
 - [ ] Collect 10 papers on UAV cybersecurity
 - [ ] Collect 10 papers on blockchain/tamper-resistant logging
-- [ ] Build literature comparison table
-- [ ] Identify final research gap
+- [x] Build literature comparison table
+- [x] Identify final research gap
 
 ### Phase 3: Methodology
-- [ ] Define RA-MARS architecture
-- [ ] Define threat model
-- [ ] Define AI detection module
-- [ ] Define mission-risk scoring model
-- [ ] Define adaptive mission-continuation logic
-- [ ] Define tamper-resistant logging module
+- [x] Define RA-MARS architecture
+- [x] Define threat model
+- [x] Define AI detection module
+- [x] Define mission-risk scoring model
+- [x] Define adaptive mission-continuation logic
+- [x] Define tamper-resistant logging module
 
 ### Phase 4: Simulation
-- [ ] Define UAV mission scenario
-- [ ] Define simulation parameters
-- [ ] Generate synthetic mission data
-- [ ] Simulate normal scenario
-- [ ] Simulate jamming attack
-- [ ] Simulate GPS spoofing attack
-- [ ] Simulate data-tampering attack
-- [ ] Simulate combined attack scenario
-- [ ] Compare RA-MARS with baselines
+- [x] Define UAV mission scenario
+- [x] Define simulation parameters
+- [x] Generate synthetic mission data
+- [x] Simulate normal scenario
+- [x] Simulate jamming attack
+- [x] Simulate GPS spoofing attack
+- [x] Simulate data-tampering attack
+- [x] Simulate combined attack scenario
+- [x] Compare RA-MARS with baselines
 
 ### Phase 5: Manuscript Writing
-- [ ] Abstract
-- [ ] Introduction
-- [ ] Related work
-- [ ] System model and threat model
-- [ ] Proposed RA-MARS framework
-- [ ] Experimental setup
-- [ ] Results and discussion
-- [ ] Conclusion
-- [ ] Cover letter
-- [ ] Highlights
-- [ ] Declaration of competing interest
+- [x] Abstract
+- [x] Introduction
+- [x] Related work
+- [x] System model and threat model
+- [x] Proposed RA-MARS framework
+- [x] Experimental setup
+- [x] Results and discussion
+- [x] Conclusion
+- [x] Cover letter
+- [x] Highlights
+- [x] Declaration of competing interest
 
 ## Target Manuscript Quality
 - 45–70 references
@@ -86,3 +86,32 @@ RA-MARS integrates:
 
 ## Notes
 Avoid making quantum the main claim. Focus on AI-driven mission assurance, UAV resilience, jamming/spoofing detection, and tamper-resistant mission logging.
+
+
+## Current Progress Update
+
+The v2 simulation pipeline is complete.
+
+Completed outputs include:
+- Clean v2 synthetic UAV telemetry dataset generator
+- Balanced AI model training results
+- Mission-level evaluation results
+- Communication, navigation, tamper-detection, energy, and recovery-time results
+- Eight result graphs
+- Updated abstract, conclusion, highlights, cover letter, and results discussion
+
+Best v2 AI model:
+- Gradient Boosting
+- Accuracy: 89.87%
+- Macro Precision: 90.50%
+- Macro Recall: 89.86%
+- Macro F1-score: 89.71%
+
+Key combined-attack improvement:
+- Conventional UAV mission success: 63.21%
+- RA-MARS mission success: 78.60%
+- Conventional recovery time: 117.64 s
+- RA-MARS recovery time: 67.97 s
+
+Next major task:
+- Assemble the full manuscript from section files into one journal-style draft.
