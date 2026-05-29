@@ -1,0 +1,26 @@
+scenario,method,energy_consumption
+combined,Conventional UAV System,6.803737494379672
+combined,AI-Only Detection,7.543274178551376
+combined,Logging-Only System,7.691181515385717
+combined,Non-Adaptive Secure System,7.986996189054398
+combined,RA-MARS,8.28281086272308
+jamming,Conventional UAV System,6.930270412509319
+jamming,AI-Only Detection,7.683560674738593
+jamming,Logging-Only System,7.834218727184448
+jamming,Non-Adaptive Secure System,8.135534832076157
+jamming,RA-MARS,8.436850936967868
+normal,Conventional UAV System,6.8619937259735435
+normal,AI-Only Detection,7.607862609231537
+normal,Logging-Only System,7.7570363858831355
+normal,Non-Adaptive Secure System,8.055383939186333
+normal,RA-MARS,8.353731492489532
+spoofing,Conventional UAV System,6.906819672402855
+spoofing,AI-Only Detection,7.657560941142295
+spoofing,Logging-Only System,7.807709194890183
+spoofing,Non-Adaptive Secure System,8.10800570238596
+spoofing,RA-MARS,8.408302209881736
+tampering,Conventional UAV System,6.893248606853953
+tampering,AI-Only Detection,7.64251475977286
+tampering,Logging-Only System,7.792367990356642
+tampering,Non-Adaptive Secure System,8.092074451524205
+tampering,RA-MARS,8.391780912691768

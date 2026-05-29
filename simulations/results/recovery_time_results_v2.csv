@@ -1,0 +1,26 @@
+scenario,method,mission_recovery_time_sec
+combined,Conventional UAV System,117.64122891970928
+combined,AI-Only Detection,100.21289870938197
+combined,Logging-Only System,106.31281428299653
+combined,Non-Adaptive Secure System,91.49873360421833
+combined,RA-MARS,67.97048782027647
+jamming,Conventional UAV System,111.3209186897359
+jamming,AI-Only Detection,94.82893073570095
+jamming,Logging-Only System,100.60112651961319
+jamming,Non-Adaptive Secure System,86.58293675868349
+jamming,RA-MARS,64.3187530207363
+normal,Conventional UAV System,66.62718048158028
+normal,AI-Only Detection,56.75648707690171
+normal,Logging-Only System,60.21122976853921
+normal,Non-Adaptive Secure System,51.82114037456244
+normal,RA-MARS,38.49570427824638
+spoofing,Conventional UAV System,99.67164895159587
+spoofing,AI-Only Detection,84.90547873654461
+spoofing,Logging-Only System,90.07363831181256
+spoofing,Non-Adaptive Secure System,77.522393629019
+spoofing,RA-MARS,57.58806383869983
+tampering,Conventional UAV System,95.52112482189072
+tampering,AI-Only Detection,81.36984707049949
+tampering,Logging-Only System,86.32279428348642
+tampering,Non-Adaptive Secure System,74.29420819480389
+tampering,RA-MARS,55.189983230425746

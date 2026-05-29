@@ -1,0 +1,26 @@
+scenario,method,tamper_detection_rate
+combined,Conventional UAV System,0.15
+combined,AI-Only Detection,0.2
+combined,Logging-Only System,0.88
+combined,Non-Adaptive Secure System,0.9
+combined,RA-MARS,0.96
+jamming,Conventional UAV System,0.0
+jamming,AI-Only Detection,0.0
+jamming,Logging-Only System,0.0
+jamming,Non-Adaptive Secure System,0.0
+jamming,RA-MARS,0.0
+normal,Conventional UAV System,0.0
+normal,AI-Only Detection,0.0
+normal,Logging-Only System,0.0
+normal,Non-Adaptive Secure System,0.0
+normal,RA-MARS,0.0
+spoofing,Conventional UAV System,0.0
+spoofing,AI-Only Detection,0.0
+spoofing,Logging-Only System,0.0
+spoofing,Non-Adaptive Secure System,0.0
+spoofing,RA-MARS,0.0
+tampering,Conventional UAV System,0.15
+tampering,AI-Only Detection,0.2
+tampering,Logging-Only System,0.88
+tampering,Non-Adaptive Secure System,0.9
+tampering,RA-MARS,0.96

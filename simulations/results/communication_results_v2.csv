@@ -1,0 +1,26 @@
+scenario,method,packet_delivery_ratio,avg_latency_ms
+combined,Conventional UAV System,0.7613823703411555,126.66276516230221
+combined,AI-Only Detection,0.8145020705975152,113.996488646072
+combined,Logging-Only System,0.7790889370932754,118.21858081814874
+combined,Non-Adaptive Secure System,0.8410619207256951,110.82991951701445
+combined,RA-MARS,0.8853283376059948,105.55230430191851
+jamming,Conventional UAV System,0.7656674332566743,125.67530404829819
+jamming,AI-Only Detection,0.819086091390861,113.10777364346839
+jamming,Logging-Only System,0.7834736526347366,117.29695044507832
+jamming,Non-Adaptive Secure System,0.8457954204579542,109.96589104226094
+jamming,RA-MARS,0.8903109689031097,104.7294200402485
+normal,Conventional UAV System,0.86,57.294969003037785
+normal,AI-Only Detection,0.92,51.56547210273401
+normal,Logging-Only System,0.88,53.47530440283528
+normal,Non-Adaptive Secure System,0.95,50.13309787765807
+normal,RA-MARS,1.0,47.74580750253149
+spoofing,Conventional UAV System,0.86,57.07021051755401
+spoofing,AI-Only Detection,0.92,51.36318946579861
+spoofing,Logging-Only System,0.88,53.26552981638375
+spoofing,Non-Adaptive Secure System,0.95,49.936434202859765
+spoofing,RA-MARS,1.0,47.55850876462834
+tampering,Conventional UAV System,0.86,56.86342706058571
+tampering,AI-Only Detection,0.92,51.17708435452714
+tampering,Logging-Only System,0.88,53.07253192321333
+tampering,Non-Adaptive Secure System,0.95,49.7554986780125
+tampering,RA-MARS,1.0,47.38618921715476

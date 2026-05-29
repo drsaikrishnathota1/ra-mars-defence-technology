@@ -1,0 +1,26 @@
+scenario,method,avg_route_deviation
+combined,Conventional UAV System,67.31690246291154
+combined,AI-Only Detection,61.46325877048446
+combined,Logging-Only System,64.390080616698
+combined,Non-Adaptive Secure System,56.19497944730007
+combined,RA-MARS,47.99987827790214
+jamming,Conventional UAV System,8.593106771965981
+jamming,AI-Only Detection,7.845880096142854
+jamming,Logging-Only System,8.219493434054419
+jamming,Non-Adaptive Secure System,7.173376087902037
+jamming,RA-MARS,6.127258741749657
+normal,Conventional UAV System,8.559609483758432
+normal,AI-Only Detection,7.8152956156055255
+normal,Logging-Only System,8.18745254968198
+normal,Non-Adaptive Secure System,7.145413134267908
+normal,RA-MARS,6.103373718853838
+spoofing,Conventional UAV System,68.08006881422253
+spoofing,AI-Only Detection,62.16006283037709
+spoofing,Logging-Only System,65.12006582229982
+spoofing,Non-Adaptive Secure System,56.832057444916195
+spoofing,RA-MARS,48.54404906753258
+tampering,Conventional UAV System,8.613881785687235
+tampering,AI-Only Detection,7.864848586931824
+tampering,Logging-Only System,8.23936518630953
+tampering,Non-Adaptive Secure System,7.190718708051953
+tampering,RA-MARS,6.142072229794376
