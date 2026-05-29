@@ -1,0 +1,9 @@
+# Abstract
+
+Multi-UAV surveillance systems are increasingly used in defence reconnaissance, border monitoring, battlefield awareness, and critical-infrastructure protection. However, their operational reliability can be severely degraded in contested environments where adversaries conduct radio-frequency jamming, GPS spoofing, and mission-data tampering. These attacks can reduce communication reliability, corrupt navigation decisions, compromise mission records, and weaken operational trust during time-sensitive defence missions.
+
+To address these challenges, this paper proposes RA-MARS, a resilient AI-driven mission assurance framework for secure multi-UAV defence surveillance. RA-MARS integrates AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and blockchain-inspired tamper-resistant mission logging. The framework is designed to detect communication, navigation, and data-integrity anomalies while supporting mission continuity under adversarial conditions.
+
+A simulation-based evaluation is proposed under normal, jamming, GPS spoofing, data-tampering, and combined attack scenarios. The proposed framework will be compared against conventional UAV surveillance, AI-only attack detection, blockchain-only logging, and non-adaptive mission baselines. Evaluation metrics include mission success rate, attack detection accuracy, precision, recall, F1-score, packet delivery ratio, average latency, energy consumption, tamper-detection rate, and mission recovery time.
+
+The expected contribution of this study is an integrated defence-oriented mission assurance model that evaluates UAV resilience not only through attack detection performance but also through mission continuity, communication reliability, operational overhead, and mission-data trustworthiness. The proposed RA-MARS framework aims to support secure and resilient multi-UAV surveillance in contested defence environments.
