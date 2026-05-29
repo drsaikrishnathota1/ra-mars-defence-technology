@@ -1,4 +1,3 @@
-cat > simulations/python/generate_dataset.py <<'EOF'
 """
 RA-MARS Synthetic UAV Mission Dataset Generator
 
@@ -11,17 +10,13 @@ Scenarios:
 3. GPS/GNSS spoofing
 4. Mission-data tampering
 5. Combined attack
-
-Important:
-This script generates synthetic simulation data only.
-It does not represent real military UAV flight data.
 """
 
 import os
 import random
 import hashlib
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import Dict, List
 
 import numpy as np
 import pandas as pd
@@ -46,9 +41,6 @@ SCENARIOS = ["normal", "jamming", "spoofing", "tampering", "combined"]
 
 
 def hash_record(record: Dict, previous_hash: str) -> str:
-    """
-    Create a simple hash-chain record hash.
-    """
     record_string = (
         f"{record['timestamp']}-{record['run_id']}-{record['uav_id']}-"
         f"{record['x_position']:.3f}-{record['y_position']:.3f}-"
@@ -70,9 +62,6 @@ def generate_base_telemetry(
     config: SimulationConfig,
     previous_hash: str,
 ) -> Dict:
-    """
-    Generate one normal telemetry record before attack effects are applied.
-    """
     mission_area_m = config.mission_area_km * 1000
 
     expected_x = np.random.uniform(0, mission_area_m)
@@ -82,25 +71,15 @@ def generate_base_telemetry(
     y_position = expected_y + np.random.normal(0, 5)
 
     speed = np.random.uniform(10, 25)
-    battery_level = max(0, 100 - (timestamp / config.simulation_duration) * np.random.uniform(10, 25))
+    battery_level = max(
+        0,
+        100 - (timestamp / config.simulation_duration) * np.random.uniform(10, 25),
+    )
     assigned_zone = assign_zone(uav_id, config.mission_zones)
-    mission_progress = min(100, (timestamp / config.simulation_duration) * 100 + np.random.normal(0, 2))
-
-    packet_delivered = 1
-    packet_loss_rate = np.random.uniform(0.00, 0.05)
-    latency_ms = np.random.uniform(20, 60)
-
-    route_deviation = np.random.uniform(0, 10)
-    gps_jump = np.random.uniform(0, 5)
-    velocity_inconsistency = np.random.uniform(0, 2)
-
-    log_integrity_status = 1
-    tamper_flag = 0
-
-    attack_probability = np.random.uniform(0.00, 0.10)
-    risk_score = np.random.uniform(0.00, 0.20)
-    risk_level = "low"
-    adaptive_action = "continue"
+    mission_progress = min(
+        100,
+        (timestamp / config.simulation_duration) * 100 + np.random.normal(0, 2),
+    )
 
     record = {
         "timestamp": timestamp,
@@ -115,18 +94,18 @@ def generate_base_telemetry(
         "battery_level": battery_level,
         "assigned_zone": assigned_zone,
         "mission_progress": mission_progress,
-        "packet_delivered": packet_delivered,
-        "packet_loss_rate": packet_loss_rate,
-        "latency_ms": latency_ms,
-        "route_deviation": route_deviation,
-        "gps_jump": gps_jump,
-        "velocity_inconsistency": velocity_inconsistency,
-        "log_integrity_status": log_integrity_status,
-        "tamper_flag": tamper_flag,
-        "attack_probability": attack_probability,
-        "risk_score": risk_score,
-        "risk_level": risk_level,
-        "adaptive_action": adaptive_action,
+        "packet_delivered": 1,
+        "packet_loss_rate": np.random.uniform(0.00, 0.05),
+        "latency_ms": np.random.uniform(20, 60),
+        "route_deviation": np.random.uniform(0, 10),
+        "gps_jump": np.random.uniform(0, 5),
+        "velocity_inconsistency": np.random.uniform(0, 2),
+        "log_integrity_status": 1,
+        "tamper_flag": 0,
+        "attack_probability": np.random.uniform(0.00, 0.10),
+        "risk_score": np.random.uniform(0.00, 0.20),
+        "risk_level": "low",
+        "adaptive_action": "continue",
         "previous_hash": previous_hash,
         "label": scenario,
     }
@@ -140,7 +119,10 @@ def apply_jamming(record: Dict) -> Dict:
     record["packet_delivered"] = 0 if np.random.random() < record["packet_loss_rate"] else 1
     record["latency_ms"] += np.random.uniform(50, 300)
     record["attack_probability"] = np.random.uniform(0.65, 0.95)
-    record["risk_score"] = min(1.0, 0.30 + record["packet_loss_rate"] + np.random.uniform(0.05, 0.15))
+    record["risk_score"] = min(
+        1.0,
+        0.30 + record["packet_loss_rate"] + np.random.uniform(0.05, 0.15),
+    )
     return record
 
 
@@ -154,14 +136,20 @@ def apply_spoofing(record: Dict) -> Dict:
     record["gps_jump"] = np.random.uniform(30, 250)
     record["velocity_inconsistency"] = np.random.uniform(5, 25)
     record["attack_probability"] = np.random.uniform(0.65, 0.95)
-    record["risk_score"] = min(1.0, 0.40 + (record["route_deviation"] / 500) + np.random.uniform(0.05, 0.15))
+    record["risk_score"] = min(
+        1.0,
+        0.40 + (record["route_deviation"] / 500) + np.random.uniform(0.05, 0.15),
+    )
     return record
 
 
 def apply_tampering(record: Dict) -> Dict:
     record["tamper_flag"] = 1
     record["log_integrity_status"] = 0
-    record["mission_progress"] = max(0, min(100, record["mission_progress"] + np.random.uniform(-20, 20)))
+    record["mission_progress"] = max(
+        0,
+        min(100, record["mission_progress"] + np.random.uniform(-20, 20)),
+    )
     record["attack_probability"] = np.random.uniform(0.65, 0.95)
     record["risk_score"] = min(1.0, 0.55 + np.random.uniform(0.10, 0.25))
     return record
@@ -192,9 +180,15 @@ def generate_dataset(config: SimulationConfig) -> pd.DataFrame:
     for scenario in SCENARIOS:
         for run_id in range(1, config.runs_per_scenario + 1):
             for uav_count in config.uav_counts:
-                previous_hash_map = {uav_id: "GENESIS" for uav_id in range(1, uav_count + 1)}
+                previous_hash_map = {
+                    uav_id: "GENESIS" for uav_id in range(1, uav_count + 1)
+                }
 
-                for timestamp in range(0, config.simulation_duration, config.telemetry_interval):
+                for timestamp in range(
+                    0,
+                    config.simulation_duration,
+                    config.telemetry_interval,
+                ):
                     attack_active = 150 <= timestamp <= 450
 
                     for uav_id in range(1, uav_count + 1):
@@ -262,4 +256,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-EOF
