@@ -1,0 +1,9 @@
+actual_attack_type,count
+normal,261882
+jamming_tampering,13566
+combined,13539
+spoofing,13535
+jamming_spoofing,13525
+jamming,13511
+tampering,13431
+spoofing_tampering,13411
