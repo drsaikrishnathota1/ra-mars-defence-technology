@@ -5,6 +5,9 @@ echo "Starting RA-MARS v3 full RunPod pipeline..."
 
 source .venv/bin/activate
 
+echo "Step 0: Patch v3 generator for RunPod full-scale settings"
+python simulations/python/patch_v3_for_runpod.py
+
 echo "Step 1: Generate v3 dataset"
 python simulations/python/generate_dataset_v3.py
 
