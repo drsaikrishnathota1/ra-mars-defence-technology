@@ -28,6 +28,8 @@ WINDOW_SIZE = 20
 STRIDE = 5
 
 FEATURES = [
+    # Non-leakage raw telemetry / communication / navigation features only.
+    # Mission Assurance Index and component scores are excluded from classifier input.
     "packet_loss_rate",
     "latency_ms",
     "route_deviation",
@@ -37,12 +39,6 @@ FEATURES = [
     "mission_progress",
     "zone_coverage",
     "energy_consumption",
-    "mission_assurance_index",
-    "communication_score",
-    "navigation_score",
-    "coverage_score",
-    "integrity_score",
-    "recovery_score",
 ]
 
 

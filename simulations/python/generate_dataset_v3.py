@@ -34,12 +34,12 @@ np.random.seed(RANDOM_SEED)
 class V3Config:
     mission_area_m: float = 5000.0
     mission_zones: int = 25
-    simulation_duration: int = 180
+    simulation_duration: int = 240
     telemetry_interval: int = 1
-    seeds: tuple = tuple(range(1, 4))   # local-safe: 3 seeds; RunPod can expand to 30
-    uav_counts: tuple = (10, 20)   # local-safe; RunPod can use 10,20,30,50
-    attack_start: int = 45
-    attack_end: int = 135
+    seeds: tuple = tuple(range(1, 9))   # fast RunPod: 8 seeds
+    uav_counts: tuple = (10, 20, 30)   # fast RunPod: 3 swarm sizes
+    attack_start: int = 60
+    attack_end: int = 180
 
 
 SCENARIOS = [
@@ -383,10 +383,34 @@ def main() -> None:
     summary_path = os.path.join(output_dir, "dataset_summary_v3.csv")
     class_path = os.path.join(output_dir, "class_distribution_v3.csv")
 
-    df.to_csv(full_path, index=False)
+    print('Skipping full CSV save to avoid huge files.')
 
-    sample_size = min(40000, len(df))
-    sample_df = df.sample(n=sample_size, random_state=RANDOM_SEED)
+    # Sequence-safe sampling: select complete UAV time-series groups.
+    target_sample_size = min(90000, len(df))
+    group_cols = ["seed", "scenario", "attack_intensity", "uav_count", "uav_id"]
+
+    group_keys = list(df.groupby(group_cols).groups.keys())
+    random.Random(RANDOM_SEED).shuffle(group_keys)
+
+    sampled_groups = []
+    sampled_rows = 0
+
+    for key in group_keys:
+        group_df = df[
+            (df["seed"] == key[0]) &
+            (df["scenario"] == key[1]) &
+            (df["attack_intensity"] == key[2]) &
+            (df["uav_count"] == key[3]) &
+            (df["uav_id"] == key[4])
+        ].sort_values("timestamp")
+
+        sampled_groups.append(group_df)
+        sampled_rows += len(group_df)
+
+        if sampled_rows >= target_sample_size:
+            break
+
+    sample_df = pd.concat(sampled_groups, ignore_index=True)
     sample_df.to_csv(sample_path, index=False)
 
     summary = df.groupby(["scenario", "attack_intensity", "actual_attack_type"]).agg(
@@ -403,7 +427,7 @@ def main() -> None:
 
     df["actual_attack_type"].value_counts().to_csv(class_path)
 
-    print(f"Generated full v3 dataset: {full_path}")
+    print("Full v3 dataset was not saved by fast RunPod configuration.")
     print(f"Generated GitHub-safe v3 sample: {sample_path}")
     print(f"Generated v3 summary: {summary_path}")
     print(f"Generated v3 class distribution: {class_path}")

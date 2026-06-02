@@ -28,9 +28,9 @@ OUTPUT_PATH = os.path.join(OUTPUT_DIR, "model_performance_v3_sequence.csv")
 
 RANDOM_SEED = 42
 BATCH_SIZE = 64
-EPOCHS = 20
+EPOCHS = 8
 LEARNING_RATE = 0.001
-HIDDEN_SIZE = 64
+HIDDEN_SIZE = 48
 NUM_LAYERS = 1
 
 
