@@ -1,7 +1,7 @@
 # Highlights
 
-- Proposes RA-MARS for resilient multi-UAV defence surveillance.
-- Detects jamming, GPS/GNSS spoofing, and mission-data tampering.
-- Uses mission-risk scoring and adaptive continuation for UAV resilience.
-- Achieves 89.87% attack-detection accuracy using non-leakage features.
-- Improves combined-attack mission success from 63.21% to 78.60%.
+- Proposes RA-MARS as a mission assurance digital twin for multi-UAV defence surveillance.
+- Uses temporal non-leakage telemetry windows for cyber-electromagnetic attack detection.
+- Introduces a Mission Assurance Index for communication, navigation, integrity, and recovery.
+- Shows ablation evidence that adaptive continuation and digital twin action selection improve mission success.
+- Achieves 78.25% mission success under stressed attack scenarios using synthetic simulation data.
