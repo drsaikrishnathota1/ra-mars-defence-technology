@@ -260,3 +260,117 @@ if __name__ == "__main__":
     print("Updated v3 journal figures with ablation and mission-assurance plots.")
     for f in sorted(OUT_DIR.glob("*")):
         print(f)
+
+def save_ablation_results():
+    path = RESULTS_DIR / "ablation_results_v3.csv"
+    if not path.exists():
+        return
+
+    df = pd.read_csv(path).sort_values("mission_success_rate_mean", ascending=False)
+
+    plt.figure(figsize=(12, 6))
+    plt.bar(df["method"], df["mission_success_rate_mean"])
+    plt.ylabel("Mission Success Rate (%)")
+    plt.xlabel("RA-MARS Variant")
+    plt.title("RA-MARS v3 Ablation Study: Mission Success")
+    plt.xticks(rotation=35, ha="right")
+    plt.tight_layout()
+    plt.savefig(OUT_DIR / "v3_ablation_mission_success.png", dpi=600)
+    plt.savefig(OUT_DIR / "v3_ablation_mission_success.pdf")
+    plt.close()
+
+    plt.figure(figsize=(12, 6))
+    plt.bar(df["method"], df["mission_assurance_index_mean"])
+    plt.ylabel("Mission Assurance Index")
+    plt.xlabel("RA-MARS Variant")
+    plt.title("RA-MARS v3 Ablation Study: Mission Assurance Index")
+    plt.xticks(rotation=35, ha="right")
+    plt.tight_layout()
+    plt.savefig(OUT_DIR / "v3_ablation_mission_assurance_index.png", dpi=600)
+    plt.savefig(OUT_DIR / "v3_ablation_mission_assurance_index.pdf")
+    plt.close()
+
+
+def save_mission_assurance_by_scenario():
+    path = RESULTS_DIR / "mission_assurance_index_v3.csv"
+    if not path.exists():
+        return
+
+    df = pd.read_csv(path)
+    pivot = df.pivot_table(
+        index="scenario",
+        columns="attack_intensity",
+        values="mission_assurance_index_mean",
+        aggfunc="mean",
+    )
+
+    pivot.plot(kind="bar", figsize=(11, 6))
+    plt.ylabel("Mission Assurance Index")
+    plt.xlabel("Scenario")
+    plt.title("RA-MARS v3 Mission Assurance by Scenario and Attack Intensity")
+    plt.xticks(rotation=35, ha="right")
+    plt.tight_layout()
+    plt.savefig(OUT_DIR / "v3_mission_assurance_by_scenario.png", dpi=600)
+    plt.savefig(OUT_DIR / "v3_mission_assurance_by_scenario.pdf")
+    plt.close()
+
+
+def save_scalability_results():
+    path = RESULTS_DIR / "scalability_results_v3.csv"
+    if not path.exists():
+        return
+
+    df = pd.read_csv(path)
+
+    plt.figure(figsize=(9, 6))
+    plt.errorbar(
+        df["uav_count"],
+        df["mission_success_rate_mean"],
+        yerr=df["mission_success_rate_ci95"],
+        marker="o",
+        capsize=4,
+    )
+    plt.ylabel("Mission Success Rate (%)")
+    plt.xlabel("Number of UAVs")
+    plt.title("RA-MARS v3 Scalability Analysis")
+    plt.tight_layout()
+    plt.savefig(OUT_DIR / "v3_scalability_mission_success.png", dpi=600)
+    plt.savefig(OUT_DIR / "v3_scalability_mission_success.pdf")
+    plt.close()
+
+
+def save_attack_intensity_results():
+    path = RESULTS_DIR / "attack_intensity_results_v3.csv"
+    if not path.exists():
+        return
+
+    df = pd.read_csv(path)
+    df = df[df["attack_intensity"] != "none"]
+
+    order = ["low", "medium", "high"]
+    df["attack_intensity"] = pd.Categorical(df["attack_intensity"], categories=order, ordered=True)
+    df = df.sort_values("attack_intensity")
+
+    plt.figure(figsize=(8, 6))
+    plt.errorbar(
+        df["attack_intensity"].astype(str),
+        df["mission_success_rate_mean"],
+        yerr=df["mission_success_rate_ci95"],
+        marker="o",
+        capsize=4,
+    )
+    plt.ylabel("Mission Success Rate (%)")
+    plt.xlabel("Attack Intensity")
+    plt.title("RA-MARS v3 Attack Intensity Stress Test")
+    plt.tight_layout()
+    plt.savefig(OUT_DIR / "v3_attack_intensity_stress_test.png", dpi=600)
+    plt.savefig(OUT_DIR / "v3_attack_intensity_stress_test.pdf")
+    plt.close()
+
+
+save_ablation_results()
+save_mission_assurance_by_scenario()
+save_scalability_results()
+save_attack_intensity_results()
+
+print("Generated additional v3 ablation and mission-assurance figures.")
