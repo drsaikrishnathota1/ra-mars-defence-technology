@@ -701,6 +701,98 @@ The results should be interpreted as simulation-based evidence of mission-assura
 
 ---
 
+
+
+---
+
+## v3 Prior Work Comparison
+
+### Table: Comparison of RA-MARS v3 With Prior UAV Security and Resilience Approaches
+
+| Research Direction | Jamming | GPS/GNSS Spoofing | Data Tampering | Temporal AI | Mission Assurance Metric | Digital Twin Action Selection | Ablation Study | Scalability Test |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Anti-jamming UAV communication | Yes | No | No | Sometimes | No | No | Rare | Sometimes |
+| GPS/GNSS spoofing detection | No | Yes | No | Sometimes | No | No | Rare | Rare |
+| UAV intrusion detection systems | Sometimes | Sometimes | Sometimes | Sometimes | No | No | Sometimes | Rare |
+| Blockchain-based UAV logging | No | No | Yes | No | No | No | Rare | Rare |
+| UAV swarm task allocation | Sometimes | Sometimes | No | Sometimes | Partial | No | Sometimes | Yes |
+| UAV swarm resilience models | Sometimes | Sometimes | Rare | No | Partial | Rare | Sometimes | Sometimes |
+| **RA-MARS v3** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** |
+
+## Manuscript Use
+
+This table should be inserted near the end of the Related Work section or at the beginning of the Research Gap section.
+
+## Main Novelty Message
+
+RA-MARS v3 differs from prior work by connecting cyber-electromagnetic attack detection, Mission Assurance Index scoring, digital twin action selection, adaptive mission continuation, and tamper-resistant mission provenance in a single mission-level framework.
+
+
+
+
+---
+
+# Leakage Prevention and Reproducibility Controls
+
+To improve scientific validity, the v3 attack-detection experiment uses only raw non-leakage input features. Derived Mission Assurance Index values and derived component scores are excluded from classifier input. The purpose of this design choice is to prevent the model from learning labels indirectly from post-processed risk or assurance scores.
+
+The v3 classifier input includes only the following raw telemetry, communication, navigation, energy, and mission-progress features:
+
+- packet loss rate
+- communication latency
+- route deviation
+- GPS jump
+- velocity inconsistency
+- battery level
+- mission progress
+- zone coverage
+- energy consumption
+
+The following derived features are not used as classifier inputs:
+
+- Mission Assurance Index
+- communication score
+- navigation score
+- coverage score
+- integrity score
+- recovery score
+- risk level
+- adaptive action
+- projected mission assurance
+
+The Mission Assurance Index is used only for mission-level evaluation and digital twin decision analysis, not for attack classification. This separation ensures that the attack-detection task remains more realistic and avoids artificial performance inflation.
+
+The v3 dataset uses sequence-safe sampling, where complete UAV time-series groups are preserved before creating 20-step telemetry windows. This prevents broken or randomly scattered windows and supports temporal attack-detection analysis. Fixed random seeds are used for reproducibility. The train/test split is stratified by class labels to preserve class distribution across model evaluation.
+
+All v3 results are based on synthetic simulation data and should be interpreted as simulation-based evidence. The results do not represent real military UAV flight validation, classified operational data, or deployed battlefield testing.
+
+
+
+
+---
+
+## v3 Digital Twin Action Selection Example
+
+### Table: Digital Twin Candidate Action Selection Example
+
+| Candidate Action | Operational Meaning | Projected Mission Assurance | Expected Effect |
+|---|---|---:|---|
+| Continue | Continue current mission without intervention | 0.58 | Lowest overhead but higher exposure to attack effects |
+| Monitor | Continue mission with increased monitoring | 0.62 | Improves awareness but limited recovery impact |
+| Reroute | Modify UAV path to reduce navigation or communication risk | 0.71 | Reduces route deviation and avoids degraded areas |
+| Reassign | Transfer mission-zone responsibility to healthier UAVs | 0.78 | Highest projected mission assurance in this example |
+| Isolate Node | Remove suspected compromised UAV from mission coordination | 0.74 | Improves integrity and limits compromised-node influence |
+| Return to Base | Abort affected UAV mission and return to base | 0.66 | Improves safety but reduces mission coverage |
+
+## Manuscript Use
+
+This table should be inserted in the RA-MARS methodology section under digital twin-based adaptive mission continuation.
+
+## Explanation
+
+For each degraded mission state, the RA-MARS digital twin evaluates candidate actions using projected communication reliability, navigation trustworthiness, coverage completion, log integrity, recovery efficiency, and energy overhead. The action with the highest projected Mission Assurance Index is selected unless operational constraints require a safer fallback action.
+
+
 # v3 Results and Discussion
 
 ## v3 Dataset and Sequence-Window Configuration
