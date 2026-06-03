@@ -1,8 +1,6 @@
 # RA-MARS Reference List
 
-## Target Journal
-Defence Technology
-
+## 
 ## Working Title
 RA-MARS: A Resilient AI-Driven Mission Assurance Framework for Secure Multi-UAV Defence Surveillance Under Jamming, GPS Spoofing, and Data-Tampering Attacks
 
