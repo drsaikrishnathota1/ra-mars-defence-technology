@@ -1,5 +1,4 @@
-# RA-MARS Journal Manuscript Draft
-
+# 
 ## Title
 
 RA-MARS: A Cross-Layer Mission Assurance Digital Twin for Secure Multi-UAV Defence Surveillance Under Cyber-Electromagnetic and Navigation Attacks
@@ -8,10 +7,7 @@ RA-MARS: A Cross-Layer Mission Assurance Digital Twin for Secure Multi-UAV Defen
 
 Dr. Sai Krishna Thota
 
-## Target Journal
-
-Defence Technology
-
+## 
 ## Highlights
 
 - Proposes RA-MARS as a mission assurance digital twin for multi-UAV defence surveillance.
@@ -58,7 +54,7 @@ The main contributions of this paper are as follows:
 
 4. A blockchain-inspired tamper-resistant logging mechanism is incorporated to improve the integrity, traceability, and auditability of UAV mission records.
 
-5. A simulation-based evaluation plan is established to compare the proposed framework with conventional UAV surveillance, AI-only detection, blockchain-only logging, and non-adaptive security baselines using mission success rate, detection accuracy, packet delivery ratio, latency, energy consumption, and tamper-detection performance.
+5. A simulation-based evaluation is conducted to compare the proposed framework with conventional UAV surveillance, AI-only detection, blockchain-only logging, and non-adaptive security baselines using mission success rate, detection accuracy, packet delivery ratio, latency, energy consumption, and tamper-detection performance.
 
 The remainder of this paper is organized as follows. Section 2 reviews related work on UAV defence surveillance, AI-based attack detection, jamming and spoofing mitigation, UAV cybersecurity, and tamper-resistant mission logging. Section 3 presents the system model and threat model. Section 4 describes the proposed RA-MARS framework. Section 5 explains the experimental setup and evaluation metrics. Section 6 discusses the results and comparative analysis. Section 7 presents limitations and future work. Section 8 concludes the paper.
 
@@ -387,7 +383,7 @@ The following machine-learning models can be evaluated:
 - Gradient Boosting or XGBoost
 - Lightweight Neural Network
 
-The best-performing model can be selected based on accuracy, precision, recall, and F1-score.
+The best-performing model was selected based on accuracy, precision, recall, and F1-score.
 
 ## Mission-Risk Scoring Module
 
@@ -461,7 +457,7 @@ The RA-MARS workflow follows these steps:
 
 ## Evaluation Strategy
 
-RA-MARS will be evaluated under five scenarios:
+RA-MARS was evaluated under five scenarios:
 
 1. Normal operation
 2. RF jamming attack
@@ -479,7 +475,7 @@ The framework will be compared against:
 
 ## Evaluation Metrics
 
-The evaluation will use the following metrics:
+The evaluation used the following metrics:
 
 - Mission success rate
 - Attack detection accuracy
@@ -679,7 +675,7 @@ The evaluation follows these steps:
 
 ## Result Files
 
-The simulation should generate the following result files:
+The simulation generated the following result files:
 
 | File | Purpose |
 |---|---|
@@ -719,10 +715,7 @@ The results should be interpreted as simulation-based evidence of mission-assura
 | UAV swarm resilience models | Sometimes | Sometimes | Rare | No | Partial | Rare | Sometimes | Sometimes |
 | **RA-MARS v3** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** |
 
-## Manuscript Use
-
-This table should be inserted near the end of the Related Work section or at the beginning of the Research Gap section.
-
+## 
 ## Main Novelty Message
 
 RA-MARS v3 differs from prior work by connecting cyber-electromagnetic attack detection, Mission Assurance Index scoring, digital twin action selection, adaptive mission continuation, and tamper-resistant mission provenance in a single mission-level framework.
@@ -784,10 +777,7 @@ All v3 results are based on synthetic simulation data and should be interpreted 
 | Isolate Node | Remove suspected compromised UAV from mission coordination | 0.74 | Improves integrity and limits compromised-node influence |
 | Return to Base | Abort affected UAV mission and return to base | 0.66 | Improves safety but reduces mission coverage |
 
-## Manuscript Use
-
-This table should be inserted in the RA-MARS methodology section under digital twin-based adaptive mission continuation.
-
+## 
 ## Explanation
 
 For each degraded mission state, the RA-MARS digital twin evaluates candidate actions using projected communication reliability, navigation trustworthiness, coverage completion, log integrity, recovery efficiency, and energy overhead. The action with the highest projected Mission Assurance Index is selected unless operational constraints require a safer fallback action.
@@ -901,19 +891,19 @@ This study has limitations. The evaluation is based on synthetic simulation data
 
 # Data Availability Statement
 
-The data used in this study will be generated through a Python-based simulation of multi-UAV defence surveillance under normal and adversarial mission conditions.
+The data used in this study were generated through a Python-based simulation of multi-UAV defence surveillance under normal and adversarial mission conditions.
 
-The generated dataset will consist of synthetic UAV telemetry records, mission-status information, communication indicators, navigation-deviation features, attack labels, mission-risk scores, and log-integrity indicators.
+The generated dataset consists of synthetic UAV telemetry records, mission-status information, communication indicators, navigation-deviation features, attack labels, mission-risk scores, and log-integrity indicators.
 
-The dataset will not contain real military UAV flight data, classified defence information, personal information, or operationally sensitive mission records.
+The dataset does not contain real military UAV flight data, classified defence information, personal information, or operationally sensitive mission records.
 
-Simulation scripts and generated non-sensitive synthetic datasets may be made available upon reasonable request or through a public repository, subject to journal requirements and author discretion.
+Simulation scripts, synthetic dataset generation scripts, evaluation scripts, result files, and figures are available in the project repository: https://github.com/drsaikrishnathota1/ra-mars-defence-technology.
 
 # Code Availability Statement
 
-The simulation code will be developed in Python and used to generate synthetic UAV telemetry data, attack scenarios, AI detection results, mission-risk scores, and performance metrics.
+The simulation code was developed in Python and used to generate synthetic UAV telemetry data, attack scenarios, AI detection results, mission-risk scores, and performance metrics.
 
-The code may be made available in a GitHub repository after the manuscript reaches a suitable preprint or publication stage.
+The code is available in the project repository: https://github.com/drsaikrishnathota1/ra-mars-defence-technology.
 
 # Synthetic Data Statement
 
