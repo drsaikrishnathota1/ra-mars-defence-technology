@@ -846,6 +846,21 @@ The combined attack scenario applies communication degradation, navigation manip
 These attack models are intentionally software-safe and reproducible. They support controlled mission-assurance evaluation, but they do not replace real RF-channel testing, GNSS spoofing testbeds, hardware-in-the-loop validation, or real UAV flight experiments.
 
 
+
+## Validation Layer Comparison
+
+Table X summarizes the validation layers used in this study and clarifies the level of evidence supported by each layer.
+
+| Validation Layer | Data or Telemetry Source | Attack Conditions | Main Outputs | Claim Supported |
+|---|---|---|---|---|
+| Synthetic v3 simulation | 90,000 synthetic multi-UAV telemetry rows and 16,875 temporal windows | Jamming, spoofing, tampering, combined attacks | Attack detection, Mission Assurance Index, ablation, scalability, attack-intensity results | Statistical mission-assurance evaluation under controlled synthetic conditions |
+| PX4-style MAVLink telemetry emulation | 1,800 PX4-style telemetry records from three UAVs | Packet-loss/latency degradation, GPS drift/jump, log tampering, combined interval | Mission Assurance Index, action selection, packet delivery ratio, route deviation, tamper mismatch detection | Engineering plausibility for processing simulator-style UAV telemetry |
+| Future PX4/Gazebo SITL validation | Real PX4/Gazebo software-in-the-loop MAVLink logs | Software-emulated packet loss, GPS drift, and mission-log tampering | End-to-end simulator validation with autopilot-generated telemetry | Future work toward stronger UAV simulator validation |
+| Future hardware-in-the-loop or UAV testbed | Physical UAV platform or hardware-in-the-loop setup | Safe controlled degradation and mission-recovery scenarios | Real-time latency, recovery behavior, operator interpretation, mission performance | Future work toward operational engineering validation |
+
+The comparison shows that the present study provides simulation-based and PX4-style telemetry-emulation evidence. It does not claim real PX4/Gazebo SITL execution, hardware-in-the-loop validation, real UAV flight testing, or battlefield deployment.
+
+
 ## PX4-Style MAVLink Telemetry Validation Case Study
 
 To complement the synthetic v3 evaluation, a lightweight PX4-style MAVLink telemetry validation case study was conducted. This case study does not claim real PX4/Gazebo execution, real UAV flight testing, hardware-in-the-loop validation, or military-grade field validation. Instead, it emulates MAVLink/PX4-style telemetry fields to evaluate whether RA-MARS can process UAV simulator-style telemetry streams under safe software-emulated attack conditions.
