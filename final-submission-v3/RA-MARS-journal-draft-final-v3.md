@@ -856,7 +856,7 @@ The ablation results show that adaptive continuation, Mission Assurance Index sc
 
 ### PX4 Case Study vs Main Evaluation
 
-The PX4-style case study achieved a higher mission success rate (97.94%) than the main v3 evaluation (78.25%). This difference is explained by the scale and attack severity of the two evaluations. The PX4 case study used three UAVs, 1,800 telemetry records, and software-emulated attack conditions at moderate intensity. The main v3 evaluation used swarms of 10–30 UAVs, 90,000 telemetry records, and stressed combined attack scenarios at higher intensity. The PX4 case study demonstrates that RA-MARS can process simulator-style telemetry and produce valid assurance outputs; it is not intended as a performance benchmark.
+The PX4-style case study achieved a higher mission success rate (97.94%) than the main v3 evaluation (78.25%). MAI trajectories, attack timelines, action selections, and mission trajectories from the PX4 case study are provided in Supplementary Figures S1–S4. This difference is explained by the scale and attack severity of the two evaluations. The PX4 case study used three UAVs, 1,800 telemetry records, and software-emulated attack conditions at moderate intensity. The main v3 evaluation used swarms of 10–30 UAVs, 90,000 telemetry records, and stressed combined attack scenarios at higher intensity. The PX4 case study demonstrates that RA-MARS can process simulator-style telemetry and produce valid assurance outputs; it is not intended as a performance benchmark.
 
 The v3 results should be interpreted as simulation-based evidence. They do not represent real military UAV flight validation or battlefield deployment.
 
@@ -938,29 +938,43 @@ This study uses simulation-generated synthetic data for controlled experimental 
 
 ## Figures
 
-![Figure 1. RA-MARS v3 cross-layer mission assurance digital twin architecture.](../figures/conceptual/v3/figure_v3_cross_layer_architecture.png)
+![Graphical Abstract. RA-MARS cross-layer mission assurance digital twin framework overview.](figures/ra_mars_graphical_abstract_531x1328.png)
 
-![Figure 2. RA-MARS threat model for cyber-electromagnetic and navigation attacks.](../figures/threat-model/final/ra_mars_threat_model.png)
+![Figure 1. RA-MARS v3 cross-layer mission assurance digital twin architecture.](figures/figure_v3_cross_layer_architecture.png)
 
-![Figure 3. RA-MARS v3 closed-loop mission assurance workflow.](../figures/conceptual/v3/figure_v3_closed_loop_workflow.png)
+![Figure 2. RA-MARS threat model for cyber-electromagnetic and navigation attacks.](figures/ra_mars_threat_model.png)
 
-![Figure 4. Mission Assurance Index component model.](../figures/conceptual/v3/figure_v3_mission_assurance_index_components.png)
+![Figure 3. RA-MARS v3 closed-loop mission assurance workflow.](figures/figure_v3_closed_loop_workflow.png)
 
-![Figure 5. RA-MARS v3 experimental evaluation pipeline.](../figures/conceptual/v3/figure_v3_experimental_pipeline.png)
+![Figure 4. Mission Assurance Index component model.](figures/figure_v3_mission_assurance_index_components.png)
 
-![Figure 6. RA-MARS v3 attack timeline with detection and recovery events.](../figures/conceptual/v3/figure_v3_attack_timeline.png)
+![Figure 5. RA-MARS v3 experimental evaluation pipeline.](figures/figure_v3_experimental_pipeline.png)
 
-![Figure 7. RA-MARS v3 model comparison by macro F1-score.](../figures/graphs/v3/v3_model_comparison_macro_f1.png)
+![Figure 6. RA-MARS v3 attack timeline with detection and recovery events.](figures/figure_v3_attack_timeline.png)
 
-![Figure 8. RA-MARS v3 confusion matrix.](../figures/graphs/v3/v3_confusion_matrix.png)
+![Figure 7. RA-MARS v3 model comparison by macro F1-score.](figures/v3_model_comparison_macro_f1.png)
 
-![Figure 9. RA-MARS v3 per-class F1-score.](../figures/graphs/v3/v3_per_class_f1.png)
+![Figure 8. RA-MARS v3 confusion matrix.](figures/v3_confusion_matrix.png)
 
-![Figure 10. RA-MARS v3 ablation study for mission success.](../figures/graphs/v3/v3_ablation_mission_success.png)
+![Figure 9. RA-MARS v3 per-class F1-score.](figures/v3_per_class_f1.png)
 
-![Figure 11. RA-MARS v3 scalability analysis by UAV count.](../figures/graphs/v3/v3_scalability_mission_success.png)
+![Figure 10. RA-MARS v3 ablation study for mission success.](figures/v3_ablation_mission_success.png)
 
-![Figure 12. RA-MARS v3 attack-intensity stress test.](../figures/graphs/v3/v3_attack_intensity_stress_test.png)
+![Figure 11. RA-MARS v3 scalability analysis by UAV count.](figures/v3_scalability_mission_success.png)
+
+![Figure 12. RA-MARS v3 attack-intensity stress test.](figures/v3_attack_intensity_stress_test.png)
+
+## Supplementary Figures
+
+The following supplementary figures accompany the PX4-style MAVLink telemetry validation case study described in Section 6.4.
+
+![Supplementary Figure S1. PX4-style mission assurance index over time across attack intervals.](figures/px4_style_mission_assurance_index.png)
+
+![Supplementary Figure S2. PX4-style attack timeline showing jamming, spoofing, tampering, and combined attack intervals with MAI response.](figures/px4_style_attack_timeline.png)
+
+![Supplementary Figure S3. PX4-style digital twin action selection across mission intervals.](figures/px4_style_action_selection.png)
+
+![Supplementary Figure S4. PX4-style UAV mission trajectories under normal and spoofing-like attack conditions.](figures/px4_style_mission_trajectories.png)
 
 # Funding
 
