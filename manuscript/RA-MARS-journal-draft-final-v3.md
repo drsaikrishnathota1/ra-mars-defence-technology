@@ -822,6 +822,30 @@ The v3 results should be interpreted as simulation-based evidence. They do not r
 ---
 
 # 
+
+## Software-Safe Attack Emulation Model
+
+To support safe and reproducible defence-oriented evaluation, this study uses software-emulated attack models rather than real RF jamming, real GNSS spoofing, or unsafe electromagnetic experimentation. The purpose of the attack-emulation model is to reproduce mission-level degradation patterns that affect communication reliability, navigation trustworthiness, log integrity, and adaptive mission continuation.
+
+### Jamming-Like Communication Degradation
+
+Jamming-like degradation is modeled by increasing packet loss and communication latency during selected mission intervals. Under normal operation, packet delivery probability remains close to one. During jamming-like intervals, packet delivery probability is reduced according to attack intensity, and latency is increased using an additive delay term. These values are software-controlled and are not produced by real RF transmission.
+
+### Spoofing-Like Navigation Manipulation
+
+Spoofing-like navigation degradation is modeled by injecting controlled drift and jump effects into UAV position telemetry. Gradual drift represents slow navigation deviation, while sudden jump components represent abrupt spoofing-like location changes. Route deviation and GPS drift are then computed from the difference between expected and reported positions.
+
+### Mission-Log Tampering Emulation
+
+Mission-log tampering is modeled by modifying selected telemetry records after collection. RA-MARS uses hash-chain verification to detect integrity violations. Each record stores the previous record hash and current record hash. If a stored record is modified after logging, the recomputed hash no longer matches the stored hash, creating a tamper mismatch.
+
+### Combined Attack Interval
+
+The combined attack scenario applies communication degradation, navigation manipulation, and log tampering within overlapping mission intervals. This evaluates whether RA-MARS can preserve mission assurance when multiple cyber-electromagnetic and data-integrity stressors occur together.
+
+These attack models are intentionally software-safe and reproducible. They support controlled mission-assurance evaluation, but they do not replace real RF-channel testing, GNSS spoofing testbeds, hardware-in-the-loop validation, or real UAV flight experiments.
+
+
 ## PX4-Style MAVLink Telemetry Validation Case Study
 
 To complement the synthetic v3 evaluation, a lightweight PX4-style MAVLink telemetry validation case study was conducted. This case study does not claim real PX4/Gazebo execution, real UAV flight testing, hardware-in-the-loop validation, or military-grade field validation. Instead, it emulates MAVLink/PX4-style telemetry fields to evaluate whether RA-MARS can process UAV simulator-style telemetry streams under safe software-emulated attack conditions.
