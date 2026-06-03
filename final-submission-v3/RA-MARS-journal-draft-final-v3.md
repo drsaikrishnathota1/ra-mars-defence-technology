@@ -106,6 +106,12 @@ Mission assurance and resilience research examines how autonomous swarms maintai
 
 These studies are important because they shift the focus from isolated attack prevention to operational continuity and recovery. However, many resilience models treat degradation abstractly and do not explicitly integrate cyber-electromagnetic threats such as jamming, spoofing, and mission-data tampering. RA-MARS addresses this gap by connecting cyber-physical attack detection, mission-risk scoring, adaptive mission continuation, and tamper-resistant logging in one framework.
 
+## Digital Twins for Cyber-Physical Defence Systems
+
+Digital twins have emerged as a key enabling technology for monitoring, simulation, and decision support in cyber-physical defence systems. A digital twin creates a virtual representation of a physical system that continuously updates based on real-time sensor data, enabling predictive analysis, anomaly detection, and adaptive control without disrupting live operations [44]. In defence contexts, digital twins have been proposed for UAV health monitoring, predictive maintenance of autonomous platforms, and mission rehearsal under adversarial conditions [45].
+
+Recent work has applied digital twin principles to cyber-physical security, where the twin serves as a reference model for detecting deviations caused by cyberattacks or sensor manipulation [46]. However, existing digital twin frameworks for UAV systems primarily focus on individual platform health or communication performance. A mission-level digital twin that connects attack detection, risk scoring, adaptive decision-making, and tamper-resistant logging across a multi-UAV swarm has not been proposed in prior work.
+
 ## Research Gap
 
 The reviewed literature shows that UAV surveillance, anti-jamming communication, GPS spoofing detection, UAV cybersecurity, AI-based intrusion detection, blockchain-based data integrity, and swarm resilience have each been studied extensively. However, these themes are often treated as separate research problems.
@@ -337,22 +343,9 @@ The multi-UAV surveillance layer represents a coordinated UAV team assigned to m
 
 The surveillance mission is considered successful when a predefined percentage of mission zones is covered within the mission duration while maintaining acceptable communication reliability and navigation consistency.
 
-## Threat Model
-
-RA-MARS considers three major attack types:
-
-### RF Jamming
-RF jamming disrupts UAV communication by increasing packet loss and communication latency. In the simulation, jamming is modeled by reducing packet delivery ratio and increasing communication delay for affected UAV nodes.
-
-### GPS Spoofing
-GPS spoofing manipulates UAV navigation by injecting false location values. In the simulation, spoofing is modeled through abnormal location jumps, gradual position drift, and inconsistent movement patterns.
-
-### Data Tampering
-Data tampering modifies mission telemetry records or surveillance logs after collection. In the simulation, tampering is modeled by altering selected records, including location values, timestamps, mission status, or UAV identifiers.
-
 ## AI-Based Attack Detection Module
 
-The AI-based attack detection module classifies mission states as normal or attacked based on UAV telemetry and mission-status features.
+The threat model for RA-MARS — covering RF jamming, GPS/GNSS spoofing, and mission-data tampering — is defined in Section 3. The AI-based attack detection module classifies mission states as normal or attacked based on the UAV telemetry and mission-status features described below.
 
 ### Input Features
 
@@ -1065,4 +1058,10 @@ During the preparation of this work the author used AI-assisted writing tools in
 [42] K. Li, J. Liu, X. Gu, Y. Yang, C. Chang, H. Chen, L. Wan, and Y. Lin, “Dynamic Decision-Making of UAV Swarm Based on Constrained Multi-Objective Optimization Under Incomplete Interference Information,” Chin. J. Aeronaut., article 103846, 2025, doi: 10.1016/j.cja.2025.103846.
 
 [43] X. Wang, Z. Zhao, L. Yi, Z. Ning, L. Guo, F. R. Yu, and S. Guo, “A Survey on Security of UAV Swarm Networks: Attacks and Countermeasures,” ACM Comput. Surv., vol. 57, no. 3, article 74, pp. 1–37, 2024, doi: 10.1145/3703625.
+
+[44] E. Glaessgen and D. Stargel, "The Digital Twin Paradigm for Future NASA and U.S. Air Force Vehicles," in Proc. 53rd AIAA/ASME/ASCE/AHS/ASC Struct., Struct. Dyn. Mater. Conf., 2012, doi: 10.2514/6.2012-1818.
+
+[45] A. Rasheed, O. San, and T. Kvamsdal, "Digital Twin: Values, Challenges and Enablers From a Modeling Perspective," IEEE Access, vol. 8, pp. 21980–22012, 2020, doi: 10.1109/ACCESS.2020.2970143.
+
+[46] M. Eckhart and A. Ekelhart, "A Specification-Based State Replication Approach for Digital Twins," in Proc. ACM Workshop Cyber-Phys. Syst. Secur. Privacy (CPSS), 2018, pp. 36–47, doi: 10.1145/3264888.3264892.
 
