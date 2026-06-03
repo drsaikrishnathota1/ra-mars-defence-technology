@@ -952,17 +952,17 @@ This study uses simulation-generated synthetic data for controlled experimental 
 
 ![Figure 6. RA-MARS v3 attack timeline with detection and recovery events.](figures/figure_v3_attack_timeline.png)
 
-![Figure 7. RA-MARS v3 model comparison by macro F1-score.](figures/v3_model_comparison_macro_f1.png)
+![Figure 7. RA-MARS v3 model comparison by macro F1-score.](figures/fig07_model_comparison_macro_f1.png)
 
-![Figure 8. RA-MARS v3 confusion matrix.](figures/v3_confusion_matrix.png)
+![Figure 8. Confusion matrix — Weighted LSTM (best model, 8 mission-state classes).](figures/fig08_confusion_matrix_weighted_lstm.png)
 
-![Figure 9. RA-MARS v3 per-class F1-score.](figures/v3_per_class_f1.png)
+![Figure 9. Per-class precision, recall and F1-score — Weighted LSTM.](figures/fig09_per_class_f1_weighted_lstm.png)
 
-![Figure 10. RA-MARS v3 ablation study for mission success.](figures/v3_ablation_mission_success.png)
+![Figure 10. Ablation study — component contribution to mission performance (95% CI, 30 runs) for mission success.](figures/fig10_ablation_study.png)
 
-![Figure 11. RA-MARS v3 scalability analysis by UAV count.](figures/v3_scalability_mission_success.png)
+![Figure 11. Scalability analysis — mission performance across 10, 20 and 30 UAV swarm sizes (95% CI) by UAV count.](figures/fig11_scalability.png)
 
-![Figure 12. RA-MARS v3 attack-intensity stress test.](figures/v3_attack_intensity_stress_test.png)
+![Figure 12. Attack intensity stress test — mission performance under none, low, medium and high intensity attacks (95% CI).](figures/fig12_attack_intensity.png)
 
 ## Supplementary Figures
 
