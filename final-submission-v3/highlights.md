@@ -1,7 +1,7 @@
-# Highlights
+## Highlights
 
-- Proposes RA-MARS as a mission assurance digital twin for multi-UAV defence surveillance.
-- Uses temporal non-leakage telemetry windows for cyber-electromagnetic attack detection.
-- Introduces a Mission Assurance Index for communication, navigation, integrity, and recovery.
-- Shows ablation evidence that adaptive continuation and digital twin action selection improve mission success.
-- Achieves 78.25% mission success under stressed attack scenarios using synthetic simulation data.
+- Proposes RA-MARS, an AI-driven mission assurance digital twin for multi-UAV defence surveillance.
+- Employs physics-based Friis RF channel model with SINR-based packet delivery ratio for jamming simulation.
+- Binary LSTM achieves 95.73% macro F1-score for attack/normal detection using non-leakage telemetry windows.
+- Introduces a formal Mission Assurance Index integrating communication, navigation, integrity, and recovery scores.
+- Demonstrates 73.61% mission success under stressed combined cyber-electromagnetic attack scenarios.

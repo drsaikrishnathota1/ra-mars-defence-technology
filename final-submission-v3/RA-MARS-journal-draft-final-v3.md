@@ -290,6 +290,23 @@ The study uses the following assumptions:
 - UAVs operate within a predefined surveillance region.
 - Mission logs can be verified using hash-chain or blockchain-inspired integrity checks.
 
+## Energy Model
+
+The energy consumption of each UAV is modelled using a power-based approach. Each UAV is assumed to be a multi-rotor platform in the DJI Matrice 300 class, with the following power parameters:
+
+| Flight mode | Power draw |
+|---|---|
+| Hover | 300 W |
+| Cruise (15 m/s) | 180 W |
+| Companion computer (Jetson Nano class) | 10 W |
+| Communication overhead | 2 W |
+
+Energy consumed per telemetry interval (1 second) is computed as E = P × Δt, where P is the total power draw for the current flight mode and Δt = 1 s. Energy is normalised to [0, 1] relative to the hover + compute baseline (312 W). The energy penalty in the Mission Assurance Index penalises high consumption rates that reduce mission endurance. Under normal operation, the normalised energy rate is approximately 0.013 per telemetry interval, corresponding to approximately 75 minutes of hover endurance at full battery capacity.
+
+## Inter-UAV Communication Model
+
+UAV-to-UAV coordination within RA-MARS uses MAVLink 2 messaging over the 900 MHz C2 link. Each UAV broadcasts its current mission state, MAI score, and adaptive action at the MAVLink telemetry rate (10 Hz). The GCS aggregates swarm-level MAI scores and issues mission-level commands at 4 Hz. Under jamming conditions, the C2 link SINR degradation affects both GCS-to-UAV and UAV-to-UAV links equally, as all links share the same frequency band and are subject to the same jammer ERP. Future work will investigate mesh networking protocols (e.g., OLSR, AODV) to improve swarm communication resilience under partial jamming.
+
 ## Limitations
 
 The threat model does not currently include:
@@ -906,6 +923,23 @@ The v3 results should be interpreted as simulation-based evidence. They do not r
 
 # Limitations and Future Work
 
+## Energy Model
+
+The energy consumption of each UAV is modelled using a power-based approach. Each UAV is assumed to be a multi-rotor platform in the DJI Matrice 300 class, with the following power parameters:
+
+| Flight mode | Power draw |
+|---|---|
+| Hover | 300 W |
+| Cruise (15 m/s) | 180 W |
+| Companion computer (Jetson Nano class) | 10 W |
+| Communication overhead | 2 W |
+
+Energy consumed per telemetry interval (1 second) is computed as E = P × Δt, where P is the total power draw for the current flight mode and Δt = 1 s. Energy is normalised to [0, 1] relative to the hover + compute baseline (312 W). The energy penalty in the Mission Assurance Index penalises high consumption rates that reduce mission endurance. Under normal operation, the normalised energy rate is approximately 0.013 per telemetry interval, corresponding to approximately 75 minutes of hover endurance at full battery capacity.
+
+## Inter-UAV Communication Model
+
+UAV-to-UAV coordination within RA-MARS uses MAVLink 2 messaging over the 900 MHz C2 link. Each UAV broadcasts its current mission state, MAI score, and adaptive action at the MAVLink telemetry rate (10 Hz). The GCS aggregates swarm-level MAI scores and issues mission-level commands at 4 Hz. Under jamming conditions, the C2 link SINR degradation affects both GCS-to-UAV and UAV-to-UAV links equally, as all links share the same frequency band and are subject to the same jammer ERP. Future work will investigate mesh networking protocols (e.g., OLSR, AODV) to improve swarm communication resilience under partial jamming.
+
 ## Limitations
 
 Although RA-MARS is designed to improve mission assurance for multi-UAV defence surveillance under contested conditions, this study has several limitations.
@@ -1021,6 +1055,14 @@ The following supplementary figures accompany the PX4-style MAVLink telemetry va
 ![Supplementary Figure S3. PX4-style digital twin action selection across mission intervals.](figures/px4_style_action_selection.png)
 
 ![Supplementary Figure S4. PX4-style UAV mission trajectories under normal and spoofing-like attack conditions.](figures/px4_style_mission_trajectories.png)
+
+# Author Contributions
+
+**Dr. Sai Krishna Thota:** Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing — original draft, Writing — review and editing, Visualization.
+
+# Declaration of Competing Interests
+
+The author declares that there are no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
 # Funding
 
