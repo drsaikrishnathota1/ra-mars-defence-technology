@@ -890,7 +890,15 @@ The ablation results show that adaptive continuation, Mission Assurance Index sc
 
 ### PX4 Case Study vs Main Evaluation
 
-The PX4-style case study achieved a higher mission success rate (97.94%) than the main v3 evaluation (78.25%). MAI trajectories, attack timelines, action selections, and mission trajectories from the PX4 case study are provided in Supplementary Figures S1–S4. This difference is explained by the scale and attack severity of the two evaluations. The PX4 case study used three UAVs, 1,800 telemetry records, and software-emulated attack conditions at moderate intensity. The main v3 evaluation used swarms of 10–30 UAVs, 90,000 telemetry records, and stressed combined attack scenarios at higher intensity. The PX4 case study demonstrates that RA-MARS can process simulator-style telemetry and produce valid assurance outputs; it is not intended as a performance benchmark.
+The PX4-style case study achieved a higher mission success rate (97.94%) than the main v3 evaluation (78.25%). MAI trajectories, attack timelines, action selections, and mission trajectories from the PX4 case study are provided in Supplementary Figures S1–S4.
+
+### Adversarial Robustness Analysis
+
+The binary LSTM classifier (clean macro F1 = 0.9573) was evaluated against white-box adversarial perturbations using FGSM and PGD attacks. Under FGSM at ε = 0.01, the macro F1 degraded to 0.307 — below the random-guessing threshold of 0.50 for binary classification. Under PGD at ε = 0.05 (10 iterations, α = 0.01), the macro F1 degraded to 0.257. These results indicate that the classifier's decision boundary is susceptible to small gradient-directed perturbations in the telemetry feature space.
+
+This finding is consistent with known adversarial vulnerability of deep learning classifiers trained on clean data without adversarial augmentation. It motivates three directions for future work: (1) adversarial training using PGD-augmented examples during LSTM training; (2) input validation and anomaly detection on raw telemetry before classifier inference to detect manipulated inputs; and (3) ensemble-based detection combining the LSTM with classical models (Random Forest: F1 = 0.555) that exhibit different gradient landscapes and may be more robust to gradient-based evasion.
+
+Within the RA-MARS framework, the adversarial vulnerability of the detection module is partially mitigated by the Mission Assurance Index, which aggregates five independent telemetry signals. An adversary who successfully evades the LSTM classifier must simultaneously manipulate all five MAI component channels — communication, navigation, integrity, recovery, and energy — to prevent mission-level degradation detection. The ablation study confirms that the MAI is the second most important component for mission success, contributing independently of the classification result. This difference is explained by the scale and attack severity of the two evaluations. The PX4 case study used three UAVs, 1,800 telemetry records, and software-emulated attack conditions at moderate intensity. The main v3 evaluation used swarms of 10–30 UAVs, 90,000 telemetry records, and stressed combined attack scenarios at higher intensity. The PX4 case study demonstrates that RA-MARS can process simulator-style telemetry and produce valid assurance outputs; it is not intended as a performance benchmark.
 
 The v3 results should be interpreted as simulation-based evidence. They do not represent real military UAV flight validation or battlefield deployment.
 
@@ -998,7 +1006,7 @@ This study uses simulation-generated synthetic data for controlled experimental 
 
 ![Figure 12. Attack intensity stress test — mission performance under none, low, medium and high intensity attacks (95% CI).](figures/fig12_attack_intensity_v4.png)
 
-![Figure 13. Adversarial robustness — FGSM and PGD perturbation attack on the binary LSTM classifier.](figures/fig13_adversarial_robustness_v4.png)
+![Figure 13. Adversarial robustness — binary LSTM classifier (clean F1=0.957) under FGSM and PGD white-box attacks. F1 drops below 0.31 at ε=0.01, motivating adversarial training as future work.](figures/fig13_adversarial_robustness_v4.png)
 
 ![Figure 14. RF channel model validation — SINR, PDR and latency under Friis path loss with jammer ERP model.](figures/fig05_rf_channel_validation_v4.png)
 
