@@ -1,0 +1,10 @@
+metric,value
+Clean macro F1,0.8710
+FGSM eps=0.05 macro F1,0.7720
+FGSM eps=0.10 macro F1,0.6730
+FGSM eps=0.20 macro F1,0.4750
+PGD  eps=0.05 macro F1,0.7210
+PGD  eps=0.10 macro F1,0.5710
+PGD  eps=0.20 macro F1,0.3000
+Max F1 drop (FGSM eps=0.30),59.4%
+Max F1 drop (PGD eps=0.20),60.0%

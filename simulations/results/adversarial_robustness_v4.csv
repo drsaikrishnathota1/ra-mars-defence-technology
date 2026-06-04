@@ -1,0 +1,9 @@
+attack_type,epsilon,clean_accuracy,clean_f1_macro,adv_accuracy,adv_f1_macro,acc_drop_pct,f1_drop_pct,note
+FGSM,0.01,0.892,0.871,0.874,0.8512,1.8000000000000003,1.9800000000000002,placeholder — run after RunPod training
+FGSM,0.05,0.892,0.871,0.802,0.772,9.000000000000002,9.9,placeholder — run after RunPod training
+FGSM,0.1,0.892,0.871,0.712,0.6729999999999999,18.000000000000004,19.8,placeholder — run after RunPod training
+FGSM,0.2,0.892,0.871,0.532,0.4749999999999999,36.00000000000001,39.6,placeholder — run after RunPod training
+FGSM,0.3,0.892,0.871,0.5,0.4,54.0,59.400000000000006,placeholder — run after RunPod training
+PGD,0.05,0.892,0.871,0.767,0.721,12.5,15.0,placeholder — run after RunPod training
+PGD,0.1,0.892,0.871,0.642,0.571,25.0,30.0,placeholder — run after RunPod training
+PGD,0.2,0.892,0.871,0.4,0.3,50.0,60.0,placeholder — run after RunPod training
