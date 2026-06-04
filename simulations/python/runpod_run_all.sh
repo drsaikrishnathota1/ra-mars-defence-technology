@@ -63,6 +63,8 @@ echo "  ✓ Step 5 complete"
 # ── Step 6: Adversarial robustness ────────────────────────────
 echo ""
 echo "STEP 6/7: Running FGSM + PGD adversarial robustness tests..."
+# Model files now saved by train_sequence_models_v4.py
+ls simulations/results/best_model_v4_*.pt 2>/dev/null && echo "Model files found" || echo "No model files"
 python simulations/python/adversarial_robustness_v4.py
 echo "  ✓ Step 6 complete"
 

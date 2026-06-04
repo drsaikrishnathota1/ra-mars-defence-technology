@@ -268,6 +268,15 @@ def main():
         bin_results.append(perf)
         bin_per_class.extend(pc)
         bin_cms[name] = cm
+        # Save each binary model
+        model_path = os.path.join(OUTPUT_DIR, f"best_model_v4_{name.replace(' ','_').lower()}.pt")
+        torch.save({'model_state_dict': model.state_dict(),
+                    'input_size': X.shape[2],
+                    'hidden_size': HIDDEN_SIZE,
+                    'num_layers': NUM_LAYERS,
+                    'num_classes': 2,
+                    'model_name': name}, model_path)
+        print(f"  Saved: {model_path}")
 
     # ── TASK 2: Fine-grained 8-class (retained from v3) ──────────
     print("\n" + "=" * 60)
@@ -296,6 +305,11 @@ def main():
             fg_cms['best'] = cm
 
     # ── Save results ──────────────────────────────────────────────
+    # Save best binary model for adversarial robustness testing
+    best_bin_f1 = max(bin_results, key=lambda x: x['f1_macro'])
+    best_bin_name = best_bin_f1['model']
+    print(f"\nSaving best binary model: {best_bin_name} (F1={best_bin_f1['f1_macro']:.4f})")
+
     pd.DataFrame(bin_results).to_csv(
         os.path.join(OUTPUT_DIR, "model_performance_v4_binary.csv"), index=False)
     pd.DataFrame(bin_per_class).to_csv(
