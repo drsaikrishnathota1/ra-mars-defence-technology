@@ -18,7 +18,7 @@ Defence Technology
 - Introduces a hierarchical two-tier detection architecture: 95.73% macro F1 binary real-time classifier (Tier 1) and 60.07% macro F1 eight-class forensic classifier (Tier 2).
 - Physics-based Friis RF channel model with SINR-derived PDR replaces parametric jamming models; normal SINR 39.9 dB, high-intensity jammed SINR 26.9 dB.
 - Formal Mission Assurance Index integrating communication, navigation, integrity, recovery, and energy scores under a Dolev-Yao bounded attacker model.
-- Achieves 73.61 ± 0.87% mission success and Mission Assurance Index of 0.7012 ± 0.0042 under stressed combined cyber-electromagnetic attack scenarios.
+- Includes PX4-style MAVLink telemetry emulation while clearly limiting validation claims.
 
 # Abstract
 
@@ -34,7 +34,7 @@ These findings support evaluating multi-UAV resilience through mission-level met
 
 ## Keywords
 
-Multi-UAV systems; Defence surveillance; Mission assurance; Digital twin; UAV cybersecurity; Jamming; GPS spoofing
+Multi-UAV systems; Defence surveillance; Mission assurance; Digital twin; UAV cybersecurity; Cyber-electromagnetic attacks
 
 # Introduction
 
@@ -58,7 +58,9 @@ The main contributions of this paper are as follows:
 
 4. A blockchain-inspired tamper-resistant logging mechanism is incorporated to improve the integrity, traceability, and auditability of UAV mission records.
 
-5. A simulation-based evaluation plan is established to compare the proposed framework with conventional UAV surveillance, AI-only detection, blockchain-only logging, and non-adaptive security baselines using mission success rate, detection accuracy, packet delivery ratio, latency, energy consumption, and tamper-detection performance.
+5. A simulation-based evaluation is conducted to compare the proposed framework with conventional UAV surveillance, AI-only detection, logging-only, and non-adaptive security baselines using mission success rate, detection accuracy, packet delivery ratio, latency, energy consumption, and tamper-detection performance.
+
+6. A PX4-style MAVLink telemetry emulation case study is included to test whether RA-MARS can process simulator-style UAV telemetry streams while clearly separating this evidence from real PX4/Gazebo SITL, hardware-in-the-loop, or flight-test validation.
 
 The remainder of this paper is organized as follows. Section 2 reviews related work on UAV defence surveillance, AI-based attack detection, jamming and spoofing mitigation, UAV cybersecurity, and tamper-resistant mission logging. Section 3 presents the system model and threat model. Section 4 describes the proposed RA-MARS framework. Section 5 explains the experimental setup and evaluation metrics. Section 6 discusses the results and comparative analysis. Section 7 presents limitations and future work. Section 8 concludes the paper.
 
@@ -432,7 +434,7 @@ The Mission Assurance Index (MAI) aggregates five normalised component scores in
 
 MAI = α · C_score + β · N_score + γ · I_score + δ · R_score + ε · V_score  (1)
 
-where C_score is the communication score derived from packet delivery ratio and latency, N_score is the navigation trust score derived from route deviation and GPS consistency, I_score is the log integrity score from hash-chain verification, R_score is the mission recovery score from zone-coverage progress, and V_score is the energy viability score from battery drain rate. The weighting coefficients satisfy α + β + γ + δ + ε = 1. In the v3 evaluation, equal weights (α = β = γ = δ = ε = 0.20) were used as a baseline configuration. Each component score is normalised to [0, 1], such that MAI ∈ [0, 1], where values closer to 1 indicate higher mission assurance.
+where C_score is the communication score derived from packet delivery ratio and latency, N_score is the navigation trust score derived from route deviation and GPS consistency, I_score is the log integrity score from hash-chain verification, R_score is the mission recovery score from zone-coverage progress, and V_score is the energy viability score from battery drain rate. The weighting coefficients satisfy α + β + γ + δ + ε = 1. In the v4 evaluation, equal weights (α = β = γ = δ = ε = 0.20) were used as a baseline configuration. Each component score is normalised to [0, 1], such that MAI ∈ [0, 1], where values closer to 1 indicate higher mission assurance.
 
 ### Mission Risk Score
 
@@ -440,7 +442,7 @@ A mission risk score is derived from AI detection results and operational degrad
 
 Risk Score = w1 · P_attack + w2 · L_packet + w3 · D_route + w4 · Δ_latency + w5 · F_integrity  (2)
 
-where P_attack is the predicted attack probability from the detection model, L_packet is the packet loss rate, D_route is the normalised route deviation, Δ_latency is the normalised latency increase above baseline, and F_integrity is the log integrity violation flag. In the v3 evaluation, weights w1 = 0.30, w2 = 0.25, w3 = 0.20, w4 = 0.15, and w5 = 0.10 were used, reflecting the relative severity of each degradation type in defence surveillance missions.
+where P_attack is the predicted attack probability from the detection model, L_packet is the packet loss rate, D_route is the normalised route deviation, Δ_latency is the normalised latency increase above baseline, and F_integrity is the log integrity violation flag. In the v4 evaluation, weights w1 = 0.30, w2 = 0.25, w3 = 0.20, w4 = 0.15, and w5 = 0.10 were used, reflecting the relative severity of each degradation type in defence surveillance missions.
 
 The risk score can be categorized as:
 
@@ -525,6 +527,8 @@ The framework was compared against:
 - Logging-only system
 - Non-adaptive secure system
 - Proposed RA-MARS framework
+
+Each baseline receives the same mission scenario, attack intervals, telemetry fields, and mission-success criteria. The baselines differ only in the enabled RA-MARS modules so that the comparison isolates the contribution of attack detection, mission assurance scoring, adaptive continuation, and tamper-resistant provenance.
 
 ## Evaluation Metrics
 
@@ -657,6 +661,16 @@ RA-MARS is compared against four baseline systems.
 | B4: Non-Adaptive Secure System | Uses AI detection, risk scoring, and logging, but does not perform adaptive mission continuation |
 | B5: RA-MARS | Uses AI detection, mission-risk scoring, adaptive mission logic, and tamper-resistant logging |
 
+### Baseline Module Configuration
+
+| System | AI detection | Mission Assurance Index | Digital twin action selection | Adaptive continuation | Tamper-resistant logging |
+|---|---:|---:|---:|---:|---:|
+| B1: Conventional UAV System | No | No | No | No | No |
+| B2: AI-Only Detection System | Yes | No | No | No | No |
+| B3: Logging-Only System | No | No | No | No | Yes |
+| B4: Non-Adaptive Secure System | Yes | Yes | No | No | Yes |
+| B5: RA-MARS | Yes | Yes | Yes | Yes | Yes |
+
 ## AI Detection Models
 
 The AI detection module classifies UAV mission states into: normal, jamming, spoofing, tampering, and combined attack classes (eight classes total including pairwise combinations). The following models were evaluated:
@@ -674,7 +688,7 @@ The best-performing model was selected based on macro F1-score to account for cl
 
 ### LSTM and GRU Hyperparameters
 
-Table 2 lists the hyperparameters used for the recurrent models in the v3 evaluation.
+Table 2 lists the hyperparameters used for the recurrent models in the v4 evaluation.
 
 | Hyperparameter | Value |
 |---|---|
@@ -709,6 +723,8 @@ The AI detection module uses telemetry, communication, navigation, and integrity
 | battery_drain_rate | Energy degradation pattern |
 | mission_progress_rate | Mission-zone completion progress |
 | log_integrity_status | Whether the mission record passes integrity verification |
+
+Derived mission-assurance variables are excluded from attack-detection inputs. The classifier does not use Mission Assurance Index, communication score, navigation score, coverage score, integrity score, recovery score, risk level, adaptive action, or projected mission assurance. These variables are used only after classification for mission-level scoring, action selection, and evaluation.
 
 ## Evaluation Metrics
 
@@ -765,15 +781,21 @@ All numerical values used in the final manuscript must be generated from the sim
 
 The results should be interpreted as simulation-based evidence of mission-assurance improvement under controlled attack scenarios. Real-world flight testing and hardware-in-the-loop validation are left for future work.
 
+## Reproducibility Controls
+
+The v4 simulation uses fixed scenario definitions, fixed random seeds, sequence-safe window generation, and stratified class splitting. The mission area is 5 km x 5 km, the nominal mission duration is 600 s, telemetry is sampled at 1 Hz, and each scenario is evaluated over 30 runs. The primary swarm configurations include 10, 20, and 30 UAVs. Attack effects are injected through software-controlled parameters: affected UAV ratio, attack start time, attack duration, jammer ERP, SINR-derived packet delivery ratio, additive latency, spoofing drift, spoofing jump magnitude, and tamper rate.
+
+All model-performance values, RF-channel validation values, ablation results, scalability results, attack-intensity results, latency-budget values, adversarial-robustness results, and PX4-style validation summaries are stored as CSV files under the repository results directories. The manuscript reports only values generated from these result files.
+
 ---
 
 
 
 ---
 
-## v3 Prior Work Comparison
+## v4 Prior Work Comparison
 
-### Table: Comparison of RA-MARS v3 With Prior UAV Security and Resilience Approaches
+### Table: Comparison of RA-MARS v4 With Prior UAV Security and Resilience Approaches
 
 | Research Direction | Jamming | GPS/GNSS Spoofing | Data Tampering | Temporal AI | Mission Assurance Metric | Digital Twin Action Selection | Ablation Study | Scalability Test |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -783,7 +805,7 @@ The results should be interpreted as simulation-based evidence of mission-assura
 | Blockchain-based UAV logging | No | No | Yes | No | No | No | Rare | Rare |
 | UAV swarm task allocation | Sometimes | Sometimes | No | Sometimes | Partial | No | Sometimes | Yes |
 | UAV swarm resilience models | Sometimes | Sometimes | Rare | No | Partial | Rare | Sometimes | Sometimes |
-| **RA-MARS v3** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** |
+| **RA-MARS v4** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** |
 
 
 
@@ -793,9 +815,9 @@ The results should be interpreted as simulation-based evidence of mission-assura
 
 # Leakage Prevention and Reproducibility Controls
 
-To improve scientific validity, the v3 attack-detection experiment uses only raw non-leakage input features. Derived Mission Assurance Index values and derived component scores are excluded from classifier input. The purpose of this design choice is to prevent the model from learning labels indirectly from post-processed risk or assurance scores.
+To improve scientific validity, the v4 attack-detection experiment uses only raw non-leakage input features. Derived Mission Assurance Index values and derived component scores are excluded from classifier input. The purpose of this design choice is to prevent the model from learning labels indirectly from post-processed risk or assurance scores.
 
-The v3 classifier input includes only the following raw telemetry, communication, navigation, energy, and mission-progress features:
+The v4 classifier input includes only the following raw telemetry, communication, navigation, energy, and mission-progress features:
 
 - packet loss rate
 - communication latency
@@ -821,16 +843,16 @@ The following derived features are not used as classifier inputs:
 
 The Mission Assurance Index is used only for mission-level evaluation and digital twin decision analysis, not for attack classification. This separation ensures that the attack-detection task remains more realistic and avoids artificial performance inflation.
 
-The v3 dataset uses sequence-safe sampling, where complete UAV time-series groups are preserved before creating 20-step telemetry windows. This prevents broken or randomly scattered windows and supports temporal attack-detection analysis. Fixed random seeds are used for reproducibility. The train/test split is stratified by class labels to preserve class distribution across model evaluation.
+The v4 dataset uses sequence-safe sampling, where complete UAV time-series groups are preserved before creating temporal telemetry windows. This prevents broken or randomly scattered windows and supports temporal attack-detection analysis. Fixed random seeds are used for reproducibility. The train/test split is stratified by class labels to preserve class distribution across model evaluation.
 
-All v3 results are based on synthetic simulation data and should be interpreted as simulation-based evidence. The results do not represent real military UAV flight validation, classified operational data, or deployed battlefield testing.
+All v4 results are based on synthetic simulation data and should be interpreted as simulation-based evidence. The results do not represent real military UAV flight validation, classified operational data, or deployed battlefield testing.
 
 
 
 
 ---
 
-## v3 Digital Twin Action Selection Example
+## Digital Twin Action Selection Example
 
 ### Table: Digital Twin Candidate Action Selection Example
 
@@ -845,11 +867,11 @@ All v3 results are based on synthetic simulation data and should be interpreted 
 
 
 
-# v3 Results and Discussion
+# v4 Results and Discussion
 
-## v3 Dataset and Sequence-Window Configuration
+## v4 Dataset and Sequence-Window Configuration
 
-The optimized v3 evaluation uses synthetic multi-UAV telemetry data generated under normal, jamming, spoofing, tampering, and combined attack scenarios. The final v3 sample contains 90,000 sequence-safe telemetry rows and 16,875 time-series windows. Each window contains 20 telemetry steps and 9 raw non-leakage features per step.
+The optimized v4 evaluation uses synthetic multi-UAV telemetry data generated under normal, jamming, spoofing, tampering, and combined attack scenarios. The final v4 sample contains 90,000 sequence-safe telemetry rows. Temporal attack-detection windows use raw non-leakage telemetry features rather than derived mission-assurance scores.
 
 The classifier input excludes derived Mission Assurance Index and component scores to avoid feature leakage. The attack-detection task includes eight mission-state classes: normal, jamming, spoofing, tampering, jamming_spoofing, jamming_tampering, spoofing_tampering, and combined.
 
@@ -901,13 +923,13 @@ The Tier 2 classifier performs well on high-frequency classes (jamming: F1 = 0.7
 
 The hierarchical two-tier design resolves the apparent tension between real-time detection reliability and forensic classification granularity. Tier 1 provides the binary signal needed for adaptive mission continuation with 95.73% macro F1 — well above the 85% operational threshold established in the evaluation criteria. Tier 2 provides the attack-type attribution needed for post-mission analysis at 60.07% macro F1 — consistent with the state of the art for multi-class UAV intrusion detection under synthetic telemetry data. Together, the two tiers address the full operational cycle: detect and respond in real time; analyse and attribute post-mission.
 
-## v3 Mission Assurance Results
+## v4 Mission Assurance Results
 
 Full RA-MARS achieved a Mission Assurance Index of 0.7012 ± 0.0042 and a mission success rate of 73.61 ± 0.87% under stressed attack scenarios. The packet delivery ratio was 0.9533, mean route deviation was 36.88 m, and the recovery-time proxy was 5.81 s.
 
 The ablation study shows that each major RA-MARS module contributes to mission-level resilience. Removing adaptive continuation reduced mission success to 61.82%. Removing the Mission Assurance Index reduced mission success to 65.73%. Removing digital twin action selection reduced mission success to 66.51%. Removing the navigation trust module reduced mission success to 64.17%.
 
-## v3 Baseline Comparison Results
+## v4 Baseline Comparison Results
 
 Table 1 presents the mission-level comparison of RA-MARS against the four baseline systems across all five attack scenarios. All values represent means over 30 simulation runs under the combined attack scenario, which represents the most demanding evaluation condition.
 
@@ -928,13 +950,13 @@ RA-MARS outperforms all baselines across every mission-level metric. Compared wi
 
 The energy overhead of RA-MARS (1.09 ± 0.02, normalised) represents a 9% increase relative to the conventional baseline, which is attributable to the computational cost of temporal AI inference, Mission Assurance Index calculation, and hash-chain integrity verification. This overhead is modest relative to the mission success improvement achieved.
 
-## v3 Scalability and Attack-Intensity Results
+## v4 Scalability and Attack-Intensity Results
 
 Scalability analysis shows that mission success remains stable across UAV swarm sizes. The mission success rate was 80.19 ± 0.63% for 10 UAVs, 79.42 ± 0.54% for 20 UAVs, and 79.38 ± 0.52% for 30 UAVs.
 
 Attack-intensity stress testing shows the expected degradation pattern. Mission success decreased from 81.34 ± 0.17% under low-intensity attacks to 79.70 ± 0.36% under medium-intensity attacks and 76.98 ± 0.62% under high-intensity attacks.
 
-## v3 Discussion
+## v4 Discussion
 
 The v4 evaluation supports the central claim that multi-UAV resilience should be evaluated through mission-assurance metrics rather than attack-classification accuracy alone. The hierarchical two-tier detection architecture — Tier 1 binary classifier (95.73% macro F1) for real-time mission adaptation and Tier 2 fine-grained classifier (60.07% macro F1) for post-mission forensic attribution — reflects a deliberate design choice grounded in operational requirements. Detection alone is not sufficient for defence surveillance missions. A resilient UAV framework must also estimate mission risk, select adaptive actions, preserve trustworthy mission records, and support operational recovery under degraded conditions.
 
@@ -944,7 +966,7 @@ To confirm that the observed performance differences are not attributable to sim
 
 ### Component Contribution Analysis
 
-The ablation results show that adaptive continuation, Mission Assurance Index scoring, and digital twin action selection are the most important RA-MARS components for mission success. Removing adaptive continuation produced the largest degradation (78.25% → 61.82%, −16.43 pp), confirming that reactive mission adjustment under attack is the single most impactful capability. Removing the navigation trust module produced the second largest degradation (78.25% → 64.17%, −14.08 pp), reflecting the high impact of GPS spoofing on zone-coverage accuracy when navigation anomalies go unaddressed.
+The ablation results show that adaptive continuation, Mission Assurance Index scoring, and digital twin action selection are the most important RA-MARS components for mission success. Removing adaptive continuation produced the largest degradation (73.61% → 61.82%, −11.79 pp), confirming that reactive mission adjustment under attack is the single most impactful capability. Removing the navigation trust module produced the second largest degradation (73.61% → 64.17%, −9.44 pp), reflecting the high impact of GPS spoofing on zone-coverage accuracy when navigation anomalies go unaddressed.
 
 ### MAI Weight Sensitivity Analysis
 
@@ -958,7 +980,7 @@ These results confirm that the MAI is robust to reasonable weight misspecificati
 
 ### PX4 Case Study vs Main Evaluation
 
-The PX4-style case study achieved a higher mission success rate (97.94%) than the main v3 evaluation (78.25%). MAI trajectories, attack timelines, action selections, and mission trajectories from the PX4 case study are provided in Supplementary Figures S1–S4.
+The PX4-style case study achieved a higher mission success rate (97.94%) than the main v4 evaluation (73.61%). MAI trajectories, attack timelines, action selections, and mission trajectories from the PX4 case study are provided in Supplementary Figures S1–S4.
 
 ### Adversarial Robustness Analysis
 
@@ -966,9 +988,15 @@ The binary LSTM classifier (clean macro F1 = 0.9573) was evaluated against white
 
 This finding is consistent with known adversarial vulnerability of deep learning classifiers trained on clean data without adversarial augmentation. It motivates three directions for future work: (1) adversarial training using PGD-augmented examples during LSTM training; (2) input validation and anomaly detection on raw telemetry before classifier inference to detect manipulated inputs; and (3) ensemble-based detection combining the LSTM with classical models (Random Forest: F1 = 0.555) that exhibit different gradient landscapes and may be more robust to gradient-based evasion.
 
-Within the RA-MARS framework, the adversarial vulnerability of the detection module is partially mitigated by the Mission Assurance Index, which aggregates five independent telemetry signals. An adversary who successfully evades the LSTM classifier must simultaneously manipulate all five MAI component channels — communication, navigation, integrity, recovery, and energy — to prevent mission-level degradation detection. The ablation study confirms that the MAI is the second most important component for mission success, contributing independently of the classification result. This difference is explained by the scale and attack severity of the two evaluations. The PX4 case study used three UAVs, 1,800 telemetry records, and software-emulated attack conditions at moderate intensity. The main v3 evaluation used swarms of 10–30 UAVs, 90,000 telemetry records, and stressed combined attack scenarios at higher intensity. The PX4 case study demonstrates that RA-MARS can process simulator-style telemetry and produce valid assurance outputs; it is not intended as a performance benchmark.
+Within the RA-MARS framework, the adversarial vulnerability of the detection module is partially mitigated by the Mission Assurance Index, which aggregates five independent telemetry signals. An adversary who successfully evades the LSTM classifier must simultaneously manipulate all five MAI component channels — communication, navigation, integrity, recovery, and energy — to prevent mission-level degradation detection. The ablation study confirms that the MAI is one of the most important components for mission success, contributing independently of the classification result. This difference is explained by the scale and attack severity of the two evaluations. The PX4 case study used three UAVs, 1,800 telemetry records, and software-emulated attack conditions at moderate intensity. The main v4 evaluation used swarms of 10–30 UAVs, 90,000 telemetry records, and stressed combined attack scenarios at higher intensity. The PX4 case study demonstrates that RA-MARS can process simulator-style telemetry and produce valid assurance outputs; it is not intended as a performance benchmark.
 
-The v3 results should be interpreted as simulation-based evidence. They do not represent real military UAV flight validation or battlefield deployment.
+The v4 results should be interpreted as simulation-based evidence. They do not represent real military UAV flight validation or battlefield deployment.
+
+## Failure Case Analysis
+
+The high-intensity, combined-attack, and adversarial-robustness results identify important failure modes. Mission success decreases when communication degradation, navigation manipulation, and integrity violations overlap for long intervals because adaptive continuation has less reliable telemetry for estimating the mission state. Severe packet loss can delay attack recognition and reduce the value of rerouting or reassignment decisions. Large spoofing-like drift can increase route deviation enough that mission-zone coverage falls below the success threshold even when the attack is detected.
+
+The adversarial robustness test also shows that the binary LSTM detector is vulnerable to white-box gradient perturbations when trained only on clean telemetry. RA-MARS is therefore most effective when at least partial telemetry continuity remains available, when healthier UAVs can absorb reassigned mission zones, and when the adversary cannot simultaneously manipulate all mission-assurance channels. The framework is less effective when many UAVs are simultaneously degraded, when compromised telemetry is persistent, or when the mission lacks redundant coverage capacity. These failure cases motivate adversarial training, stronger navigation fusion, online learning, and hardware-in-the-loop validation.
 
 ---
 
@@ -1066,7 +1094,7 @@ This paper proposed RA-MARS, a cross-layer mission assurance digital twin for se
 
 Unlike isolated UAV security approaches that focus only on attack detection, anti-jamming communication, navigation trust, task allocation, or secure logging, RA-MARS evaluates resilience at the mission level. The framework is designed to support mission continuity by converting raw telemetry, communication, navigation, energy, and mission-progress indicators into operational assurance decisions.
 
-The optimized v3 evaluation used synthetic multi-UAV telemetry data with 90,000 sequence-safe telemetry rows and 16,875 time-series windows. Each window contained 20 telemetry steps and 9 raw non-leakage features per step. Derived Mission Assurance Index and component scores were excluded from classifier inputs to avoid feature leakage. Across eight mission-state classes, the best macro-F1 model, Weighted LSTM, achieved 95.73% binary F1 and 75.36% fine-grained accuracy, 58.10% macro precision, 60.91% macro recall, 57.02% macro F1-score, and 74.83% weighted F1-score. The Random Forest classical baseline achieved 77.06% accuracy and 56.56% macro F1-score.
+The optimized v4 evaluation used synthetic multi-UAV telemetry data with 90,000 sequence-safe telemetry rows and temporal non-leakage windows. Derived Mission Assurance Index and component scores were excluded from classifier inputs to avoid feature leakage. The Tier 1 Binary LSTM achieved 95.73% macro F1-score for real-time attack/normal detection, while the Tier 2 Weighted GRU achieved 60.07% macro F1-score for eight-class forensic attribution.
 
 At the mission level, full RA-MARS achieved a Mission Assurance Index of 0.7012 ± 0.0042 and a mission success rate of 73.61 ± 0.87% under stressed attack scenarios. The ablation study showed that removing adaptive continuation reduced mission success to 61.82%, removing the Mission Assurance Index reduced it to 65.73%, and removing digital twin action selection reduced it to 66.51%. Scalability results showed that mission success remained stable across 10, 20, and 30 UAV swarms, while attack-intensity analysis showed an expected reduction in mission success from low-intensity to high-intensity attacks.
 
@@ -1088,7 +1116,7 @@ Simulation scripts, synthetic dataset generation scripts, evaluation scripts, re
 
 # Code Availability Statement
 
-The simulation code will be developed in Python and used to generate synthetic UAV telemetry data, attack scenarios, AI detection results, mission-risk scores, and performance metrics.
+The simulation code was developed in Python and used to generate synthetic UAV telemetry data, attack scenarios, AI detection results, mission-risk scores, and performance metrics.
 
 The simulation code is available at: https://github.com/drsaikrishnathota1/ra-mars-defence-technology
 
@@ -1100,19 +1128,19 @@ This study uses simulation-generated synthetic data for controlled experimental 
 
 ## Figures
 
-![Figure 1. RA-MARS v3 cross-layer mission assurance digital twin architecture.](figures/figure_v3_cross_layer_architecture.png)
+![Figure 1. RA-MARS cross-layer mission assurance digital twin architecture.](figures/figure_v3_cross_layer_architecture.png)
 
 ![Figure 2. RA-MARS threat model for cyber-electromagnetic and navigation attacks.](figures/ra_mars_threat_model.png)
 
-![Figure 3. RA-MARS v3 closed-loop mission assurance workflow.](figures/figure_v3_closed_loop_workflow.png)
+![Figure 3. RA-MARS closed-loop mission assurance workflow.](figures/figure_v3_closed_loop_workflow.png)
 
 ![Figure 4. Mission Assurance Index component model.](figures/figure_v3_mission_assurance_index_components.png)
 
-![Figure 5. RA-MARS v3 experimental evaluation pipeline.](figures/figure_v3_experimental_pipeline.png)
+![Figure 5. RA-MARS experimental evaluation pipeline.](figures/figure_v3_experimental_pipeline.png)
 
-![Figure 6. RA-MARS v3 attack timeline with detection and recovery events.](figures/figure_v3_attack_timeline.png)
+![Figure 6. RA-MARS attack timeline with detection and recovery events.](figures/figure_v3_attack_timeline.png)
 
-![Figure 7. RA-MARS v3 model comparison by macro F1-score.](figures/fig07_model_comparison_v4.png)
+![Figure 7. RA-MARS v4 model comparison by macro F1-score.](figures/fig07_model_comparison_v4.png)
 
 ![Figure 8. Binary LSTM confusion matrix — attack/normal classification (95.73% macro F1).](figures/fig08_confusion_matrix_binary_v4.png)
 
@@ -1252,4 +1280,3 @@ During the preparation of this work the author used AI-assisted writing tools in
 [46] M. Eckhart and A. Ekelhart, "A Specification-Based State Replication Approach for Digital Twins," in Proc. ACM Workshop Cyber-Phys. Syst. Secur. Privacy (CPSS), 2018, pp. 36–47, doi: 10.1145/3264888.3264892.
 
 [47] D. Dolev and A. C. Yao, "On the Security of Public Key Protocols," IEEE Trans. Inf. Theory, vol. 29, no. 2, pp. 198–208, 1983, doi: 10.1109/TIT.1983.1056650., "A Specification-Based State Replication Approach for Digital Twins," in Proc. ACM Workshop Cyber-Phys. Syst. Secur. Privacy (CPSS), 2018, pp. 36–47, doi: 10.1145/3264888.3264892.
-

@@ -25,6 +25,7 @@ The v4 simulation evaluation, conducted using physics-based RF channel modelling
 - **Framework overhead:** 11.5 ms per telemetry cycle (1.15% of the 1-second MAVLink interval)
 - **Adversarial robustness:** Binary LSTM F1 degrades to 0.307 under FGSM at ε=0.01, motivating adversarial training as future work
 - **Tamper detection:** 100% under the defined Dolev-Yao bounded attacker model
+- **PX4-style telemetry emulation:** 1,800 MAVLink-style telemetry records from three UAVs demonstrate simulator-style RA-MARS processing without claiming real PX4/Gazebo SITL, hardware-in-the-loop, or flight-test validation
 
 The simulation code, synthetic dataset generation scripts, evaluation scripts, and all result files are available at: https://github.com/drsaikrishnathota1/ra-mars-defence-technology
 
