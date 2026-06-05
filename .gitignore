@@ -57,3 +57,10 @@ simulations/datasets/synthetic_uav_mission_data.csv
 simulations/datasets/synthetic_uav_mission_data_v2_full.csv
 simulations/datasets/uav_mission_telemetry_v3_full.csv
 ~$*
+*.zip
+~$*
+__pycache__/
+*.pyc
+.DS_Store
+simulations/datasets/
+simulations/results/*.csv
