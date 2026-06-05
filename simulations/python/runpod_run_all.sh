@@ -86,3 +86,10 @@ echo ""
 echo "NEXT: Download simulations/results/ folder"
 echo "      and simulations/datasets/uav_mission_telemetry_v4_sample.csv"
 echo "=============================================="
+
+# ── Step 8: Adversarial training ──────────────────────────────────
+echo ""
+echo "STEP 8/8: Adversarial training (PGD-augmented binary LSTM)..."
+echo "  Target: F1 >= 0.80 at FGSM ε=0.01 (was 0.307 with clean training)"
+python simulations/python/train_adversarial_v4.py
+echo "  ✓ Step 8 complete"
