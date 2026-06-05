@@ -44,7 +44,9 @@ However, the operational benefits of multi-UAV systems also introduce new missio
 
 Radio-frequency jamming, GPS spoofing, and mission-data tampering represent three major threats to defence UAV operations. Jamming can increase packet loss, delay command-and-control communication, and isolate UAV nodes from the ground control station. GPS spoofing can mislead UAV navigation by injecting false position information, causing incorrect routing, loss of formation, or mission deviation. Data tampering can compromise the integrity of telemetry records, surveillance logs, and mission evidence, reducing the reliability of operational assessment and command accountability.
 
-Existing UAV security studies often focus on isolated problems such as jamming detection, GPS spoofing identification, secure communication, or data-integrity protection. Although these studies provide valuable insights, defence UAV missions frequently face combined and cascading threats. For example, a UAV swarm may experience communication degradation from jamming while also receiving manipulated navigation data and producing mission logs that are vulnerable to tampering. In such conditions, attack detection alone is not sufficient. A defence-oriented UAV system must also estimate mission risk, support adaptive continuation, and preserve trustworthy mission records.
+Existing UAV security studies often focus on isolated problems such as jamming detection, GPS spoofing identification, intrusion detection, secure communication, task allocation, or data-integrity protection. These studies provide important component-level advances, but they do not fully address the mission-assurance problem faced by defence UAV swarms. In operational surveillance, the key question is not only whether an attack can be detected, but whether the swarm can preserve coverage, recover from degradation, maintain trustworthy mission records, and support command decisions under combined cyber-electromagnetic stress.
+
+This creates a research gap at the intersection of threat detection, mission recovery, and mission provenance. A UAV swarm may experience communication degradation from jamming while also receiving manipulated navigation data and producing mission logs that are vulnerable to tampering. Evaluating these effects separately can overstate operational resilience because the mission may fail even when the detector reports high accuracy. A defence-oriented UAV system must therefore connect attack detection with mission-risk estimation, adaptive continuation, and trusted post-mission evidence.
 
 To address this need, this paper proposes RA-MARS, a resilient AI-driven mission assurance framework for secure multi-UAV defence surveillance under jamming, GPS spoofing, and data-tampering attacks. RA-MARS integrates AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and blockchain-inspired tamper-resistant mission logging. Instead of treating UAV cybersecurity, mission continuity, and data integrity as separate problems, RA-MARS connects them into a unified mission-assurance workflow.
 
@@ -56,7 +58,7 @@ The main contributions of this paper are as follows:
 
 3. A mission-risk scoring model is introduced to estimate operational degradation and support adaptive mission-continuation decisions under adversarial conditions.
 
-4. A blockchain-inspired tamper-resistant logging mechanism is incorporated to improve the integrity, traceability, and auditability of UAV mission records.
+4. A tamper-resistant mission provenance mechanism is incorporated to improve the integrity, traceability, and auditability of UAV mission records.
 
 5. A simulation-based evaluation is conducted to compare the proposed framework with conventional UAV surveillance, AI-only detection, logging-only, and non-adaptive security baselines using mission success rate, detection accuracy, packet delivery ratio, latency, energy consumption, and tamper-detection performance.
 
@@ -116,11 +118,11 @@ Recent work has applied digital twin principles to cyber-physical security, wher
 
 ## Research Gap
 
-The reviewed literature shows that UAV surveillance, anti-jamming communication, GPS spoofing detection, UAV cybersecurity, AI-based intrusion detection, blockchain-based data integrity, and swarm resilience have each been studied extensively. However, these themes are often treated as separate research problems.
+The reviewed literature shows that UAV surveillance, anti-jamming communication, GPS spoofing detection, UAV cybersecurity, AI-based intrusion detection, tamper-resistant data integrity, digital twins, and swarm resilience have each been studied extensively. However, these themes are often treated as separate research problems.
 
-Existing studies commonly focus on one of the following: improving UAV coverage or task allocation, detecting jamming or spoofing, securing communication or authentication, classifying cyberattacks using AI, preserving data integrity using blockchain, or evaluating swarm resilience under generic degradation.
+Existing studies commonly focus on one of the following: improving UAV coverage or task allocation, detecting jamming or spoofing, securing communication or authentication, classifying cyberattacks using AI, preserving data integrity, building digital twins for platform monitoring, or evaluating swarm resilience under generic degradation.
 
-A clear gap remains for an integrated defence-oriented mission-assurance framework that jointly addresses communication disruption, navigation manipulation, mission-data tampering, mission-risk estimation, adaptive mission continuation, and trustworthy mission logging.
+A clear gap remains for an integrated defence-oriented mission-assurance framework that jointly addresses communication disruption, navigation manipulation, mission-data tampering, mission-risk estimation, adaptive mission continuation, and trustworthy mission logging under combined cyber-electromagnetic attack conditions. This gap is especially important because component-level metrics such as classification accuracy, packet delivery ratio, latency, or route deviation do not by themselves show whether the surveillance mission can continue, recover, and produce auditable evidence after attack exposure.
 
 ## RA-MARS Positioning
 
@@ -130,7 +132,7 @@ The framework evaluates UAV resilience not only through attack detection accurac
 
 ## Novelty Statement
 
-The novelty of RA-MARS lies in treating UAV security as a mission-assurance problem rather than an isolated detection, communication, navigation, or logging problem. By integrating AI-based cyber-physical attack detection with mission-risk scoring, adaptive mission continuation, and tamper-resistant logging, RA-MARS provides a unified evaluation framework for secure multi-UAV defence surveillance under jamming, GPS spoofing, and data-tampering attacks.
+The novelty of RA-MARS lies in treating UAV security as a mission-assurance problem rather than an isolated detection, communication, navigation, task-allocation, digital-twin, or logging problem. By integrating AI-based cyber-physical attack detection with mission-risk scoring, adaptive mission continuation, digital twin action selection, and tamper-resistant mission provenance, RA-MARS provides a unified evaluation framework for secure multi-UAV defence surveillance under jamming, GPS spoofing, data-tampering, and combined attacks.
 
 ---
 
