@@ -655,13 +655,15 @@ The combined attack scenario applies RF jamming, GPS/GNSS spoofing, and mission-
 
 RA-MARS is compared against four baseline systems.
 
-| Baseline | Description |
-|---|---|
-| B1: Conventional UAV System | No AI detection, no risk scoring, no adaptive response, and no tamper-resistant logging |
-| B2: AI-Only Detection System | Uses AI detection but does not include risk scoring, adaptive logic, or tamper-resistant logging |
-| B3: Logging-Only System | Uses tamper-resistant logging but does not include AI detection or adaptive mission logic |
-| B4: Non-Adaptive Secure System | Uses AI detection, risk scoring, and logging, but does not perform adaptive mission continuation |
-| B5: RA-MARS | Uses AI detection, mission-risk scoring, adaptive mission logic, and tamper-resistant logging |
+All baselines are evaluated using the same mission geometry, UAV count, attack schedule, telemetry stream, mission-success definition, and random seeds. No baseline receives additional information that is unavailable to the others. The only difference between the compared systems is which RA-MARS modules are enabled after telemetry is received.
+
+| Baseline | Description | Permitted response |
+|---|---|---|
+| B1: Conventional UAV System | No AI detection, no risk scoring, no adaptive response, and no tamper-resistant logging | Continue nominal mission plan |
+| B2: AI-Only Detection System | Uses AI detection but does not include risk scoring, adaptive logic, or tamper-resistant logging | Raise attack alert only |
+| B3: Logging-Only System | Uses tamper-resistant logging but does not include AI detection or adaptive mission logic | Verify post-mission log integrity only |
+| B4: Non-Adaptive Secure System | Uses AI detection, risk scoring, and logging, but does not perform adaptive mission continuation | Raise alert and record risk state without rerouting, reassignment, or node isolation |
+| B5: RA-MARS | Uses AI detection, mission-risk scoring, digital twin action selection, adaptive mission logic, and tamper-resistant logging | Select adaptive action and update mission plan |
 
 ### Baseline Module Configuration
 
@@ -672,6 +674,8 @@ RA-MARS is compared against four baseline systems.
 | B3: Logging-Only System | No | No | No | No | Yes |
 | B4: Non-Adaptive Secure System | Yes | Yes | No | No | Yes |
 | B5: RA-MARS | Yes | Yes | Yes | Yes | Yes |
+
+The comparison is designed as a controlled module-ablation experiment rather than a comparison against unrelated implementations. B2 isolates the value of detection without mission-level decision support. B3 isolates mission-record integrity without attack awareness or recovery. B4 isolates the effect of adaptive continuation by retaining detection, scoring, and logging while disabling operational changes. B5 then measures the integrated effect of detection, scoring, action selection, adaptive continuation, and provenance.
 
 ## AI Detection Models
 
@@ -933,7 +937,7 @@ The ablation study shows that each major RA-MARS module contributes to mission-l
 
 ## v4 Baseline Comparison Results
 
-Table 1 presents the mission-level comparison of RA-MARS against the four baseline systems across all five attack scenarios. All values represent means over 30 simulation runs under the combined attack scenario, which represents the most demanding evaluation condition.
+Table 1 presents the mission-level comparison of RA-MARS against the four baseline systems across all five attack scenarios. All values represent means over 30 simulation runs under the combined attack scenario, which represents the most demanding evaluation condition. For fairness, all systems are evaluated on identical attack traces, UAV trajectories, telemetry records, mission-zone assignments, and success thresholds; only the enabled assurance and response modules differ.
 
 | Metric | B1: Conventional | B2: AI-Only | B3: Logging-Only | B4: Non-Adaptive | B5: RA-MARS |
 |---|---:|---:|---:|---:|---:|
@@ -948,7 +952,7 @@ Table 1 presents the mission-level comparison of RA-MARS against the four baseli
 
 **B1:** Conventional UAV system (no AI detection, no risk scoring, no adaptive response, no tamper-resistant logging). **B2:** AI-only detection system. **B3:** Logging-only system. **B4:** Non-adaptive secure system (AI detection, risk scoring, and logging, but no adaptive mission continuation). **B5:** Proposed RA-MARS framework. N/A indicates that recovery logic is absent in that baseline. Energy overhead is normalised relative to B1. Values are mean ± standard deviation over 30 runs.
 
-RA-MARS outperforms all baselines across every mission-level metric. Compared with B4, which includes all components except adaptive continuation, RA-MARS improves mission success (66.51% baseline to 73.61% full framework) and reduces mission recovery time by 59.6% (14.37 s to 5.81 s). This difference isolates the contribution of adaptive mission continuation, consistent with the ablation results in Section 6.3. Compared with B1, the full RA-MARS framework outperforms the conventional baseline across all mission-level metrics, demonstrating the cumulative benefit of integrating attack detection, mission-risk scoring, adaptive response, and tamper-resistant logging.
+RA-MARS outperforms all baselines across every mission-level metric. Compared with B4, which includes detection, scoring, and logging but disables adaptive continuation, RA-MARS improves mission success (66.51% baseline to 73.61% full framework) and reduces mission recovery time by 59.6% (14.37 s to 5.81 s). Because B4 observes the same telemetry and uses the same risk information as RA-MARS, this difference isolates the contribution of digital twin action selection and adaptive mission continuation. Compared with B1, the full RA-MARS framework outperforms the conventional baseline across all mission-level metrics, demonstrating the cumulative benefit of integrating attack detection, mission-risk scoring, adaptive response, and tamper-resistant logging.
 
 The energy overhead of RA-MARS (1.09 ± 0.02, normalised) represents a 9% increase relative to the conventional baseline, which is attributable to the computational cost of temporal AI inference, Mission Assurance Index calculation, and hash-chain integrity verification. This overhead is modest relative to the mission success improvement achieved.
 
