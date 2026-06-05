@@ -946,6 +946,16 @@ To confirm that the observed performance differences are not attributable to sim
 
 The ablation results show that adaptive continuation, Mission Assurance Index scoring, and digital twin action selection are the most important RA-MARS components for mission success. Removing adaptive continuation produced the largest degradation (78.25% → 61.82%, −16.43 pp), confirming that reactive mission adjustment under attack is the single most impactful capability. Removing the navigation trust module produced the second largest degradation (78.25% → 64.17%, −14.08 pp), reflecting the high impact of GPS spoofing on zone-coverage accuracy when navigation anomalies go unaddressed.
 
+### MAI Weight Sensitivity Analysis
+
+The equal-weight assumption (α = β = γ = δ = ε = 0.20) adopted in the baseline evaluation requires validation to confirm that the Mission Assurance Index is robust to alternative weight configurations. A sensitivity analysis was conducted by independently perturbing each component weight by ±10%, ±25%, and ±50% of its baseline value, renormalising the remaining weights to maintain the unit-sum constraint, and computing the resulting MAI change under the combined attack scenario.
+
+Across all 35 perturbation conditions (5 components × 7 perturbation levels), the maximum absolute MAI deviation from the baseline (0.696) was 0.023, corresponding to a maximum relative deviation of 3.3% under a ±50% weight perturbation. The MAI is most sensitive to perturbation of the energy viability weight (V) — reflecting the relatively high component score of the energy channel under attack conditions — and least sensitive to the recovery weight (R), where the component score is close to the mean. Figure 15 illustrates the full sensitivity surface.
+
+These results confirm that the MAI is robust to reasonable weight misspecification. A practitioner who estimates component weights differently — for example, prioritising communication integrity (higher α) over energy viability (lower ε) in a bandwidth-constrained mission — would obtain MAI values within ±3.3% of the baseline. This robustness is a consequence of the additive linear structure of the MAI and the bounded [0, 1] normalisation of all component scores. Future work may consider Bayesian weight estimation from historical mission data to replace the equal-weight assumption with mission-context-specific configurations.
+
+![Figure 15. MAI weight sensitivity analysis — equal baseline α=β=γ=δ=ε=0.20. Maximum MAI deviation ±0.023 (3.3%) across all ±50% weight perturbations confirms robustness.](figures/fig15_mai_sensitivity_v4.png)
+
 ### PX4 Case Study vs Main Evaluation
 
 The PX4-style case study achieved a higher mission success rate (97.94%) than the main v3 evaluation (78.25%). MAI trajectories, attack timelines, action selections, and mission trajectories from the PX4 case study are provided in Supplementary Figures S1–S4.
