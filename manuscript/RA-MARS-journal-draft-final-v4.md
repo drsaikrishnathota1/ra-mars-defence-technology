@@ -1053,18 +1053,17 @@ This study uses simulation-generated synthetic data for controlled experimental 
 
 [43] X. Wang, Z. Zhao, L. Yi, Z. Ning, L. Guo, F. R. Yu, and S. Guo, “A Survey on Security of UAV Swarm Networks: Attacks and Countermeasures,” ACM Computing Surveys, vol. 57, no. 3, article 74, pp. 1–37, 2024, doi: 10.1145/3703625.
 
+# v5 Figure Links
 
-# v4 Figure Links
+![Figure 1. RA-MARS v5 model macro-F1 comparison.](../figures/graphs/v5/figure_v5_model_f1_comparison.svg)
 
-![Figure 1. RA-MARS v4 model macro-F1 comparison.](../figures/graphs/v4/figure_v4_model_f1_comparison.svg)
+![Figure 2. RA-MARS v5 mission success by scenario.](../figures/graphs/v5/figure_v5_mission_success_by_scenario.svg)
 
-![Figure 2. RA-MARS v4 mission success by scenario.](../figures/graphs/v4/figure_v4_mission_success_by_scenario.svg)
+![Figure 3. RA-MARS v5 ablation study for mission success.](../figures/graphs/v5/figure_v5_ablation_mission_success.svg)
 
-![Figure 3. RA-MARS v4 ablation study for mission success.](../figures/graphs/v4/figure_v4_ablation_mission_success.svg)
+![Figure 4. RA-MARS v5 RF/SINR validation summary.](../figures/graphs/v5/figure_v5_rf_sinr_validation.svg)
 
-![Figure 4. RA-MARS v4 RF/SINR validation summary.](../figures/graphs/v4/figure_v4_rf_sinr_validation.svg)
+![Figure 5. RA-MARS v5 detection-delay analysis.](../figures/graphs/v5/figure_v5_detection_delay.svg)
 
-![Figure 5. RA-MARS v4 detection-delay analysis.](../figures/graphs/v4/figure_v4_detection_delay.svg)
-
-![Figure 6. RA-MARS v4 adversarial training robustness.](../figures/graphs/v4/figure_v4_adversarial_training_robustness.svg)
+![Figure 6. RA-MARS v5 adversarial training robustness.](../figures/graphs/v5/figure_v5_adversarial_training_robustness.svg)
 
