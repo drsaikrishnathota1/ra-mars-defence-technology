@@ -217,7 +217,7 @@ def main():
 
     # Try v4 data first, fall back to v3
     data_path = DATA_PATH if os.path.exists(DATA_PATH) else \
-                "simulations/datasets/uav_sequence_windows_v3.npz"
+                "simulations/datasets/uav_sequence_windows_v4.npz"
     print(f"Using data: {data_path}")
 
     df = run_robustness_test(MODEL_PATH, data_path, device)

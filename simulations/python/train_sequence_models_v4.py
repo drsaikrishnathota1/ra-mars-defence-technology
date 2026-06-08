@@ -13,7 +13,7 @@ Key improvements over v3:
 7. Train/val/test split: 70/15/15 (stratified)
 8. Best model checkpoint saved by val F1
 
-Input:  simulations/datasets/uav_sequence_windows_v3.npz
+Input:  simulations/datasets/uav_sequence_windows_v4.npz
 Output: simulations/results/model_performance_v4_*.csv
 """
 
@@ -31,7 +31,7 @@ from sklearn.metrics import (accuracy_score, precision_score,
                               recall_score, f1_score,
                               classification_report, confusion_matrix)
 
-DATA_PATH  = "simulations/datasets/uav_sequence_windows_v3.npz"
+DATA_PATH  = "simulations/datasets/uav_sequence_windows_v4.npz"
 OUTPUT_DIR = "simulations/results"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

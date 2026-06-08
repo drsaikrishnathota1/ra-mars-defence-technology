@@ -1,15 +1,15 @@
 """
-RA-MARS v3 Classical Model Training on Time-Series Windows
+RA-MARS v4 Classical Baseline Training on Time-Series Windows
 
 Trains classical ML models by flattening sequence windows.
 
 Input:
-- simulations/datasets/uav_sequence_windows_v3.npz
+- simulations/datasets/uav_sequence_windows_v4.npz
 
 Output:
-- simulations/results/model_performance_v3_classical.csv
-- simulations/results/per_class_metrics_v3_classical.csv
-- simulations/results/confusion_matrix_v3_classical.csv
+- simulations/results/model_performance_v4_classical.csv
+- simulations/results/per_class_metrics_v4_classical.csv
+- simulations/results/confusion_matrix_v4_classical.csv
 """
 
 import os
@@ -30,12 +30,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 
 
-DATA_PATH = "simulations/datasets/uav_sequence_windows_v3.npz"
+DATA_PATH = "simulations/datasets/uav_sequence_windows_v4.npz"
 OUTPUT_DIR = "simulations/results"
 
-PERFORMANCE_PATH = os.path.join(OUTPUT_DIR, "model_performance_v3_classical.csv")
-PER_CLASS_PATH = os.path.join(OUTPUT_DIR, "per_class_metrics_v3_classical.csv")
-CONFUSION_PATH = os.path.join(OUTPUT_DIR, "confusion_matrix_v3_classical.csv")
+PERFORMANCE_PATH = os.path.join(OUTPUT_DIR, "model_performance_v4_classical.csv")
+PER_CLASS_PATH = os.path.join(OUTPUT_DIR, "per_class_metrics_v4_classical.csv")
+CONFUSION_PATH = os.path.join(OUTPUT_DIR, "confusion_matrix_v4_classical.csv")
 
 
 def load_data():
