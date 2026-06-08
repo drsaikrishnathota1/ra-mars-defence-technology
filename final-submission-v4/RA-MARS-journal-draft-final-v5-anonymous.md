@@ -20,13 +20,16 @@ RA-MARS: A Cross-Layer Mission Assurance Digital Twin for Secure Multi-UAV Defen
 
 Multi-UAV defence surveillance systems are increasingly used for reconnaissance, battlefield awareness, border monitoring, and critical-infrastructure protection. However, their mission reliability can be degraded in contested cyber-electromagnetic environments where adversaries conduct radio-frequency jamming, GPS/GNSS spoofing, mission-data tampering, and combined attacks. Existing studies often address anti-jamming communication, spoofing detection, intrusion detection, task allocation, or secure logging as isolated problems, but defence surveillance requires mission-level assurance that connects attack detection with operational recovery and trustworthy mission records.
 
-This paper proposes RA-MARS, a cross-layer mission assurance digital twin for secure multi-UAV defence surveillance under cyber-electromagnetic and navigation attacks. RA-MARS integrates temporal AI-based attack detection, a Mission Assurance Index, digital twin-based action selection, adaptive mission continuation, and tamper-resistant mission provenance. The framework converts communication, navigation, integrity, and mission-progress indicators into mission-level assurance decisions.
+This paper proposes RA-MARS, a cross-layer mission assurance digital twin for secure multi-UAV defence surveillance under cyber-electromagnetic and navigation attacks. RA-MARS integrates temporal AI-based attack detection, a Mission Assurance Index, digital twin-based action selection, adaptive mission continuation, and tamper-evident mission provenance. The framework converts communication, navigation, integrity, and mission-progress indicators into mission-level assurance decisions.
 
-A simulation-based v4 evaluation is conducted using synthetic multi-UAV telemetry data. The physics-based v4 dataset contains 90,000 sampled telemetry rows and 82,875 time-series windows, with 20 telemetry steps per window and 9 raw non-leakage features per step. The classifier excludes derived Mission Assurance Index and component scores from attack-detection inputs to avoid leakage. For attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task. These high classification scores should be interpreted within the controlled synthetic-telemetry setting: the data are simulation-generated, the attack signatures are physics-informed but not collected from real military flight tests, and the primary contribution of RA-MARS is the mission-assurance integration of detection, risk scoring, adaptive continuation, and tamper-evident provenance.
+A simulation-based final validation evaluation is conducted using synthetic multi-UAV telemetry data. The physics-informed synthetic dataset contains 90,000 sampled telemetry rows and 82,875 time-series windows, with 20 telemetry steps per window and 9 raw non-leakage features per step. The classifier excludes derived Mission Assurance Index and component scores from attack-detection inputs to avoid leakage. For attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task.
+
+The high classification scores should be interpreted as evidence that the controlled physics-informed synthetic telemetry produces strongly separable attack signatures under the assumed simulation conditions. These values should not be interpreted as direct battlefield performance, real-flight deployment readiness, or validation on classified operational data. Therefore, the main contribution of RA-MARS is not classifier accuracy alone, but the integration of temporal attack detection with mission-risk scoring, adaptive mission continuation, RF/SINR-aware mission evaluation, and hash-chain-based tamper-evident mission provenance.
+ These high classification scores should be interpreted within the controlled synthetic-telemetry setting: the data are simulation-generated, the attack signatures are physics-informed but not collected from real military flight tests, and the primary contribution of RA-MARS is the mission-assurance integration of detection, risk scoring, adaptive continuation, and tamper-evident provenance.
 
 Mission-level evaluation shows that full RA-MARS achieved a Mission Assurance Index of 0.7012 and a mission success rate of 73.61% under stressed attack scenarios. With PGD-augmented adversarial training, the binary classifier achieved 99.86% clean macro-F1, 99.75% macro-F1 under FGSM at ε=0.01, and 98.31% macro-F1 under PGD at ε=0.05. Ablation analysis confirmed that removing core mission-assurance components reduced mission performance. Latency-budget analysis showed that RA-MARS added only 11.5 ms of framework overhead per telemetry cycle. Scalability analysis showed stable mission success across 10, 20, and 30 UAV swarms, while attack-intensity testing showed mission success decreasing from 81.34% under low-intensity attacks to 76.98% under high-intensity attacks.
 
-The results indicate that RA-MARS improves multi-UAV resilience by linking temporal attack detection, mission assurance scoring, adaptive action selection, operational recovery, and tamper-resistant mission provenance. The study provides simulation-based evidence for a defence-oriented mission assurance digital twin, while acknowledging that real UAV flight tests and hardware-in-the-loop validation are required before deployment claims can be made.
+The results indicate that RA-MARS improves multi-UAV resilience by linking temporal attack detection, mission assurance scoring, adaptive action selection, operational recovery, and tamper-evident mission provenance. The study provides simulation-based evidence for a defence-oriented mission assurance digital twin, while acknowledging that real UAV flight tests and hardware-in-the-loop validation are required before deployment claims can be made.
 
 ## Keywords
 
@@ -42,7 +45,7 @@ Radio-frequency jamming, GPS spoofing, and mission-data tampering represent thre
 
 Existing UAV security studies often focus on isolated problems such as jamming detection, GPS spoofing identification, secure communication, or data-integrity protection. Although these studies provide valuable insights, defence UAV missions frequently face combined and cascading threats. For example, a UAV swarm may experience communication degradation from jamming while also receiving manipulated navigation data and producing mission logs that are vulnerable to tampering. In such conditions, attack detection alone is not sufficient. A defence-oriented UAV system must also estimate mission risk, support adaptive continuation, and preserve trustworthy mission records.
 
-To address this need, this paper proposes RA-MARS, a resilient AI-driven mission assurance framework for secure multi-UAV defence surveillance under jamming, GPS spoofing, and data-tampering attacks. RA-MARS integrates AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and blockchain-inspired tamper-resistant mission logging. Instead of treating UAV cybersecurity, mission continuity, and data integrity as separate problems, RA-MARS connects them into a unified mission-assurance workflow.
+To address this need, this paper proposes RA-MARS, a resilient AI-driven mission assurance framework for secure multi-UAV defence surveillance under jamming, GPS spoofing, and data-tampering attacks. RA-MARS integrates AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and hash-chain-based tamper-evident mission provenance. Instead of treating UAV cybersecurity, mission continuity, and data integrity as separate problems, RA-MARS connects them into a unified mission-assurance workflow.
 
 The main contributions of this paper are as follows:
 
@@ -52,11 +55,11 @@ The main contributions of this paper are as follows:
 
 3. A mission-risk scoring model is introduced to estimate operational degradation and support adaptive mission-continuation decisions under adversarial conditions.
 
-4. A blockchain-inspired tamper-resistant logging mechanism is incorporated to improve the integrity, traceability, and auditability of UAV mission records.
+4. A hash-chain-based tamper-evident provenance mechanism is incorporated to improve the integrity, traceability, and auditability of UAV mission records.
 
 5. A simulation-based evaluation is conducted to compare the proposed framework with conventional UAV surveillance, AI-only detection, blockchain-only logging, and non-adaptive security baselines using mission success rate, detection accuracy, packet delivery ratio, latency, energy consumption, and tamper-detection performance.
 
-The remainder of this paper is organized as follows. Section 2 reviews related work on UAV defence surveillance, AI-based attack detection, jamming and spoofing mitigation, UAV cybersecurity, and tamper-resistant mission logging. Section 3 presents the system model and threat model. Section 4 describes the proposed RA-MARS framework. Section 5 explains the experimental setup and evaluation metrics. Section 6 discusses the results and comparative analysis. Section 7 presents limitations and future work. Section 8 concludes the paper.
+The remainder of this paper is organized as follows. Section 2 reviews related work on UAV defence surveillance, AI-based attack detection, jamming and spoofing mitigation, UAV cybersecurity, and tamper-evident mission provenance. Section 3 presents the system model and threat model. Section 4 describes the proposed RA-MARS framework. Section 5 explains the experimental setup and evaluation metrics. Section 6 discusses the results and comparative analysis. Section 7 presents limitations and future work. Section 8 concludes the paper.
 
 ---
 
@@ -64,7 +67,7 @@ The remainder of this paper is organized as follows. Section 2 reviews related w
 
 ## Overview
 
-This section reviews prior work related to UAV defence surveillance, contested UAV communication, GPS/GNSS spoofing, UAV cybersecurity, AI-based intrusion detection, tamper-resistant mission logging, and mission assurance. The purpose of this section is to identify the research gap that motivates RA-MARS.
+This section reviews prior work related to UAV defence surveillance, contested UAV communication, GPS/GNSS spoofing, UAV cybersecurity, AI-based intrusion detection, tamper-evident mission provenance, and mission assurance. The purpose of this section is to identify the research gap that motivates RA-MARS.
 
 ## UAV Defence Surveillance and Swarm Reconnaissance
 
@@ -94,13 +97,13 @@ AI-based intrusion detection can improve UAV attack awareness, especially when t
 
 Blockchain, hash-chain, Merkle-tree, and lightweight consensus mechanisms have been proposed to improve UAV data integrity, authentication, secure communication, and auditability. Secure logging frameworks such as DASLog show how UAV ecosystem records can be verified using cryptographic proofs and decentralized audit structures. Lightweight blockchain mechanisms also address the resource limitations of UAV ad-hoc networks.
 
-However, blockchain should not be treated as the main novelty of RA-MARS. Instead, tamper-resistant logging is used as a supporting component to preserve mission-data trustworthiness. Existing blockchain-UAV studies often focus on data integrity or authentication but do not fully connect log integrity with mission assurance under jamming, spoofing, and operational degradation.
+However, blockchain should not be treated as the main novelty of RA-MARS. Instead, tamper-evident provenance is used as a supporting component to preserve mission-data trustworthiness. Existing blockchain-UAV studies often focus on data integrity or authentication but do not fully connect log integrity with mission assurance under jamming, spoofing, and operational degradation.
 
 ## Mission Assurance, Resilience, and Adaptive Swarm Coordination
 
 Mission assurance and resilience research examines how autonomous swarms maintain acceptable performance under failure, degradation, uncertainty, or adversarial interference. Recent studies have proposed dynamic mission abort policies, resilience evaluation metrics, multistate network models, unmanned weapon system-of-systems recovery strategies, dynamic resilience evaluation under confrontation, and distributed task allocation for UAV swarms.
 
-These studies are important because they shift the focus from isolated attack prevention to operational continuity and recovery. However, many resilience models treat degradation abstractly and do not explicitly integrate cyber-electromagnetic threats such as jamming, spoofing, and mission-data tampering. RA-MARS addresses this gap by connecting cyber-physical attack detection, mission-risk scoring, adaptive mission continuation, and tamper-resistant logging in one framework.
+These studies are important because they shift the focus from isolated attack prevention to operational continuity and recovery. However, many resilience models treat degradation abstractly and do not explicitly integrate cyber-electromagnetic threats such as jamming, spoofing, and mission-data tampering. RA-MARS addresses this gap by connecting cyber-physical attack detection, mission-risk scoring, adaptive mission continuation, and tamper-evident provenance in one framework.
 
 ## Research Gap
 
@@ -112,13 +115,13 @@ A clear gap remains for an integrated defence-oriented mission-assurance framewo
 
 ## RA-MARS Positioning
 
-RA-MARS is positioned as a resilient AI-driven mission assurance framework for secure multi-UAV defence surveillance in contested environments. Unlike prior studies that focus only on isolated security or optimization functions, RA-MARS integrates AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and tamper-resistant mission logging.
+RA-MARS is positioned as a resilient AI-driven mission assurance framework for secure multi-UAV defence surveillance in contested environments. Unlike prior studies that focus only on isolated security or optimization functions, RA-MARS integrates AI-based attack detection, mission-risk scoring, adaptive mission-continuation logic, and tamper-evident mission provenance.
 
 The framework evaluates UAV resilience not only through attack detection accuracy but also through operational metrics such as mission success rate, packet delivery ratio, latency, energy consumption, tamper-detection rate, and mission recovery time.
 
 ## Novelty Statement
 
-The novelty of RA-MARS lies in treating UAV security as a mission-assurance problem rather than an isolated detection, communication, navigation, or logging problem. By integrating AI-based cyber-physical attack detection with mission-risk scoring, adaptive mission continuation, and tamper-resistant logging, RA-MARS provides a unified evaluation framework for secure multi-UAV defence surveillance under jamming, GPS spoofing, and data-tampering attacks.
+The novelty of RA-MARS lies in treating UAV security as a mission-assurance problem rather than an isolated detection, communication, navigation, or logging problem. By integrating AI-based cyber-physical attack detection with mission-risk scoring, adaptive mission continuation, and tamper-evident provenance, RA-MARS provides a unified evaluation framework for secure multi-UAV defence surveillance under jamming, GPS spoofing, and data-tampering attacks.
 
 ---
 
@@ -167,7 +170,7 @@ Under GPS/GNSS spoofing, false position values may be injected into UAV telemetr
 
 Each UAV telemetry record is stored as part of a mission log. The mission log is used for post-mission analysis, mission accountability, and surveillance record verification.
 
-RA-MARS uses a tamper-resistant logging model based on hash-chain or blockchain-inspired record linking. Each mission record includes the hash of the previous record and its own current hash. If any record is modified after storage, the recalculated hash will not match the stored hash, allowing tampering to be detected.
+RA-MARS uses a tamper-evident provenance model based on hash-chain or blockchain-inspired record linking. Each mission record includes the hash of the previous record and its own current hash. If any record is modified after storage, the recalculated hash will not match the stored hash, allowing tampering to be detected.
 
 ## Threat Model
 
@@ -270,6 +273,22 @@ The study uses the following assumptions:
 - UAVs operate within a predefined surveillance region.
 - Mission logs can be verified using hash-chain or blockchain-inspired integrity checks.
 
+
+## Qualitative Comparison with Prior Work
+
+Table X summarizes how RA-MARS differs from representative UAV security, anti-jamming, spoofing-resilient navigation, and UAV provenance studies. The comparison is qualitative because the present work uses a controlled synthetic telemetry workflow rather than the same datasets or testbeds used by prior studies.
+
+| Study category | Primary focus | Jamming | Spoofing | Data tampering | Mission-level assurance metric | Adaptive continuation | Tamper-evident provenance |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| UAV anti-jamming communication studies | Link reliability and communication recovery | Yes | Limited | No | Usually no | Sometimes | No |
+| UAV GNSS spoofing/navigation studies | Navigation trust and localization resilience | Limited | Yes | No | Usually no | Limited | No |
+| UAV cyber-intrusion detection studies | Attack classification or anomaly detection | Sometimes | Sometimes | Sometimes | Usually no | No | No |
+| Blockchain/UAV logging studies | Data integrity, auditability, or authentication | No | No | Yes | No | No | Yes |
+| Multi-UAV mission planning studies | Task allocation, route planning, or swarm coordination | Sometimes | Limited | No | Sometimes | Yes | No |
+| Proposed RA-MARS framework | Cross-layer mission assurance for contested UAV surveillance | Yes | Yes | Yes | Yes | Yes | Yes |
+
+This comparison highlights that RA-MARS is designed as a mission-assurance framework rather than a standalone classifier, communication-security module, navigation filter, or logging mechanism. Its novelty lies in connecting attack detection, mission-risk scoring, adaptive continuation, and tamper-evident mission provenance under combined cyber-electromagnetic and navigation threats.
+
 ## Limitations
 
 The threat model does not currently include:
@@ -308,7 +327,7 @@ The methodology consists of four main modules:
 1. AI-based attack detection
 2. Mission-risk scoring
 3. Adaptive mission-continuation logic
-4. Blockchain-inspired tamper-resistant mission logging
+4. Hash-chain-based tamper-evident mission provenance
 
 These modules operate together to detect abnormal mission conditions, estimate the severity of operational degradation, support adaptive mission decisions, and preserve trustworthy mission records.
 
@@ -427,7 +446,7 @@ The purpose of this module is not only to detect attacks but also to preserve mi
 
 ## Tamper-Resistant Mission Logging Module
 
-The tamper-resistant logging module preserves the integrity and traceability of mission records. Each mission record is linked to the previous record using a hash-chain or blockchain-inspired structure.
+The tamper-evident provenance module preserves the integrity and traceability of mission records. Each mission record is linked to the previous record using a hash-chain or blockchain-inspired structure.
 
 Each record may include:
 
@@ -452,7 +471,7 @@ The RA-MARS workflow follows these steps:
 3. The AI module evaluates whether the mission state is normal or attacked.
 4. The mission-risk scoring module calculates the risk level.
 5. The adaptive mission-continuation module selects an appropriate response.
-6. Mission records are stored using tamper-resistant logging.
+6. Mission records are stored using tamper-evident provenance.
 7. Performance metrics are calculated for evaluation.
 
 ## Evaluation Strategy
@@ -598,11 +617,11 @@ RA-MARS is compared against four baseline systems.
 
 | Baseline | Description |
 |---|---|
-| B1: Conventional UAV System | No AI detection, no risk scoring, no adaptive response, and no tamper-resistant logging |
-| B2: AI-Only Detection System | Uses AI detection but does not include risk scoring, adaptive logic, or tamper-resistant logging |
-| B3: Logging-Only System | Uses tamper-resistant logging but does not include AI detection or adaptive mission logic |
+| B1: Conventional UAV System | No AI detection, no risk scoring, no adaptive response, and no tamper-evident provenance |
+| B2: AI-Only Detection System | Uses AI detection but does not include risk scoring, adaptive logic, or tamper-evident provenance |
+| B3: Logging-Only System | Uses tamper-evident provenance but does not include AI detection or adaptive mission logic |
 | B4: Non-Adaptive Secure System | Uses AI detection, risk scoring, and logging, but does not perform adaptive mission continuation |
-| B5: RA-MARS | Uses AI detection, mission-risk scoring, adaptive mission logic, and tamper-resistant logging |
+| B5: RA-MARS | Uses AI detection, mission-risk scoring, adaptive mission logic, and tamper-evident provenance |
 
 ## AI Detection Models
 
@@ -668,7 +687,7 @@ The evaluation follows these steps:
 4. Evaluate attack classification performance.
 5. Compute mission-risk scores.
 6. Apply adaptive mission-continuation logic in RA-MARS.
-7. Verify mission logs using tamper-resistant logging.
+7. Verify mission logs using tamper-evident provenance.
 8. Compare RA-MARS against baseline systems.
 9. Generate result tables and graphs.
 10. Interpret the findings from a mission-assurance perspective.
@@ -693,7 +712,15 @@ The simulation generated the following result files:
 
 All numerical values used in the final manuscript must be generated from the simulation code. The synthetic dataset should be clearly described as simulation-generated UAV telemetry data and should not be presented as real military flight data.
 
-The results should be interpreted as simulation-based evidence of mission-assurance improvement under controlled attack scenarios. Real-world flight testing and hardware-in-the-loop validation are left for future work.
+The results should be interpreted as simulation-based evidence of mission-assurance behavior under controlled attack scenarios.
+
+
+The evaluation is intentionally limited to simulation-generated telemetry. The study does not claim real military flight testing, hardware-in-the-loop validation, classified operational validation, or deployed battlefield performance. Future validation should include hardware-in-the-loop experiments, controlled RF testbed evaluation, real UAV logs where available, and cross-dataset testing against independent UAV cyber-physical security datasets.
+ Real-world flight testing and hardware-in-the-loop validation are left for future work.
+
+
+Adversarial robustness testing was limited to the binary attack-versus-normal setting because this stage represents the first mission-assurance trigger for detecting whether a mission is under cyber-physical attack. Fine-grained adversarial robustness across all eight mission-state classes is left for future work.
+
 
 ---
 
@@ -718,7 +745,7 @@ The results should be interpreted as simulation-based evidence of mission-assura
 ## 
 ## Main Novelty Message
 
-RA-MARS v4 differs from prior work by connecting cyber-electromagnetic attack detection, Mission Assurance Index scoring, digital twin action selection, adaptive mission continuation, and tamper-resistant mission provenance in a single mission-level framework.
+RA-MARS v4 differs from prior work by connecting cyber-electromagnetic attack detection, Mission Assurance Index scoring, digital twin action selection, adaptive mission continuation, and tamper-evident mission provenance in a single mission-level framework.
 
 
 
@@ -793,7 +820,7 @@ The classifier input excludes derived Mission Assurance Index and component scor
 
 ## v4 Temporal Attack-Detection Results
 
-The v4 model evaluation compares classical baselines, binary LSTM/GRU models, and fine-grained weighted sequence models. For binary attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task.
+The completed validation evaluation compares binary LSTM/GRU sequence models, fine-grained weighted sequence models, and a 1D-CNN temporal baseline. For binary attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task.
 
 The best accuracy model is LSTM, which achieved 78.24% accuracy and 53.40% macro F1-score. The strongest classical baseline is Random Forest, which achieved 77.06% accuracy, 56.56% macro F1-score, and 74.72% weighted F1-score.
 
@@ -886,7 +913,7 @@ First, the evaluation is simulation-based. The UAV telemetry data, attack events
 
 Second, the attack models are simplified representations of RF jamming, GPS/GNSS spoofing, and mission-data tampering. Real contested environments may involve more complex electromagnetic interference, adaptive jammers, multipath effects, stealthy spoofing strategies, insider threats, malware, and coordinated adversarial behavior.
 
-Third, the proposed tamper-resistant logging module is modeled using a lightweight hash-chain or blockchain-inspired structure. While this approach supports mission-record integrity verification, the study does not claim full-scale deployment of a production blockchain network in operational defence UAV systems.
+Third, the proposed tamper-evident provenance module is modeled using a lightweight hash-chain or blockchain-inspired structure. While this approach supports mission-record integrity verification, the study does not claim full-scale deployment of a production blockchain network in operational defence UAV systems.
 
 Fourth, the simulation does not include physical UAV capture, hardware compromise, firmware-level malware, classified defence communication protocols, or real electronic warfare hardware. These factors may significantly affect system performance in real operational environments.
 
@@ -902,7 +929,7 @@ First, hardware-in-the-loop and real UAV flight experiments can be conducted to 
 
 Second, future studies can incorporate more advanced adversarial models, including adaptive jamming, coordinated spoofing, adversarial machine learning attacks, malware-based telemetry manipulation, and insider threats.
 
-Third, the tamper-resistant logging module can be extended using lightweight distributed ledger architectures optimized for resource-constrained UAV swarms.
+Third, the tamper-evident provenance module can be extended using lightweight distributed ledger architectures optimized for resource-constrained UAV swarms.
 
 Fourth, RA-MARS can be evaluated with larger swarm sizes, heterogeneous UAV platforms, and cross-domain autonomous systems involving air, ground, and maritime agents.
 
@@ -914,11 +941,11 @@ Finally, future work can investigate human-machine teaming interfaces that allow
 
 # Conclusion
 
-This paper proposed RA-MARS, a cross-layer mission assurance digital twin for secure multi-UAV defence surveillance under cyber-electromagnetic and navigation attacks. The framework addresses radio-frequency jamming, GPS/GNSS spoofing, mission-data tampering, and combined attacks by linking temporal attack detection, Mission Assurance Index scoring, digital twin-based action selection, adaptive mission continuation, and tamper-resistant mission provenance.
+This paper proposed RA-MARS, a cross-layer mission assurance digital twin for secure multi-UAV defence surveillance under cyber-electromagnetic and navigation attacks. The framework addresses radio-frequency jamming, GPS/GNSS spoofing, mission-data tampering, and combined attacks by linking temporal attack detection, Mission Assurance Index scoring, digital twin-based action selection, adaptive mission continuation, and tamper-evident mission provenance.
 
 Unlike isolated UAV security approaches that focus only on attack detection, anti-jamming communication, navigation trust, task allocation, or secure logging, RA-MARS evaluates resilience at the mission level. The framework is designed to support mission continuity by converting raw telemetry, communication, navigation, energy, and mission-progress indicators into operational assurance decisions.
 
-The physics-based v4 evaluation used synthetic multi-UAV telemetry data with 90,000 sampled telemetry rows and 82,875 time-series windows. Each window contained 20 telemetry steps and 9 raw non-leakage features per step. Derived Mission Assurance Index and component scores were excluded from classifier inputs to avoid feature leakage. For attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task.
+The completed physics-informed evaluation used synthetic multi-UAV telemetry data with 90,000 sampled telemetry rows and 82,875 time-series windows. Each window contained 20 telemetry steps and 9 raw non-leakage features per step. Derived Mission Assurance Index and component scores were excluded from classifier inputs to avoid feature leakage. For attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task.
 
 At the mission level, full RA-MARS achieved a Mission Assurance Index of 0.7012 and a mission success rate of 73.61% under stressed attack scenarios. The ablation study confirmed that removing core mission-assurance components reduced mission performance, while latency-budget analysis showed that RA-MARS added only 11.5 ms of framework overhead per telemetry cycle. Scalability results showed that mission success remained stable across 10, 20, and 30 UAV swarms, while attack-intensity analysis showed an expected reduction in mission success from low-intensity to high-intensity attacks.
 

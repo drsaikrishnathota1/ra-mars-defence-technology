@@ -211,28 +211,39 @@ twin for secure multi-UAV defence surveillance under
 cyber-electromagnetic and navigation attacks. RA-MARS integrates
 temporal AI-based attack detection, a Mission Assurance Index, digital
 twin-based action selection, adaptive mission continuation, and
-tamper-resistant mission provenance. The framework converts
-communication, navigation, integrity, and mission-progress indicators
-into mission-level assurance decisions.</p>
-<p>A simulation-based v4 evaluation is conducted using synthetic
-multi-UAV telemetry data. The physics-based v4 dataset contains 90,000
-sampled telemetry rows and 82,875 time-series windows, with 20 telemetry
-steps per window and 9 raw non-leakage features per step. The classifier
-excludes derived Mission Assurance Index and component scores from
-attack-detection inputs to avoid leakage. For attack-versus-normal
-mission assurance classification, Binary LSTM achieved 99.85% accuracy
-and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and
-99.76% macro F1-score. For fine-grained eight-class mission-state
-classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro
-F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro
-F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96%
-macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro
-F1-score on the fine-grained task. These high classification scores
-should be interpreted within the controlled synthetic-telemetry setting:
-the data are simulation-generated, the attack signatures are
-physics-informed but not collected from real military flight tests, and
-the primary contribution of RA-MARS is the mission-assurance integration
-of detection, risk scoring, adaptive continuation, and tamper-evident
+tamper-evident mission provenance. The framework converts communication,
+navigation, integrity, and mission-progress indicators into
+mission-level assurance decisions.</p>
+<p>A simulation-based final validation evaluation is conducted using
+synthetic multi-UAV telemetry data. The physics-informed synthetic
+dataset contains 90,000 sampled telemetry rows and 82,875 time-series
+windows, with 20 telemetry steps per window and 9 raw non-leakage
+features per step. The classifier excludes derived Mission Assurance
+Index and component scores from attack-detection inputs to avoid
+leakage. For attack-versus-normal mission assurance classification,
+Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while
+Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For
+fine-grained eight-class mission-state classification, Weighted LSTM
+achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU
+achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal
+baseline achieved 99.97% accuracy and 99.96% macro F1-score on the
+binary task, and 98.82% accuracy and 98.18% macro F1-score on the
+fine-grained task.</p>
+<p>The high classification scores should be interpreted as evidence that
+the controlled physics-informed synthetic telemetry produces strongly
+separable attack signatures under the assumed simulation conditions.
+These values should not be interpreted as direct battlefield
+performance, real-flight deployment readiness, or validation on
+classified operational data. Therefore, the main contribution of RA-MARS
+is not classifier accuracy alone, but the integration of temporal attack
+detection with mission-risk scoring, adaptive mission continuation,
+RF/SINR-aware mission evaluation, and hash-chain-based tamper-evident
+mission provenance. These high classification scores should be
+interpreted within the controlled synthetic-telemetry setting: the data
+are simulation-generated, the attack signatures are physics-informed but
+not collected from real military flight tests, and the primary
+contribution of RA-MARS is the mission-assurance integration of
+detection, risk scoring, adaptive continuation, and tamper-evident
 provenance.</p>
 <p>Mission-level evaluation shows that full RA-MARS achieved a Mission
 Assurance Index of 0.7012 and a mission success rate of 73.61% under
@@ -248,7 +259,7 @@ decreasing from 81.34% under low-intensity attacks to 76.98% under
 high-intensity attacks.</p>
 <p>The results indicate that RA-MARS improves multi-UAV resilience by
 linking temporal attack detection, mission assurance scoring, adaptive
-action selection, operational recovery, and tamper-resistant mission
+action selection, operational recovery, and tamper-evident mission
 provenance. The study provides simulation-based evidence for a
 defence-oriented mission assurance digital twin, while acknowledging
 that real UAV flight tests and hardware-in-the-loop validation are
@@ -297,10 +308,10 @@ adaptive continuation, and preserve trustworthy mission records.</p>
 AI-driven mission assurance framework for secure multi-UAV defence
 surveillance under jamming, GPS spoofing, and data-tampering attacks.
 RA-MARS integrates AI-based attack detection, mission-risk scoring,
-adaptive mission-continuation logic, and blockchain-inspired
-tamper-resistant mission logging. Instead of treating UAV cybersecurity,
-mission continuity, and data integrity as separate problems, RA-MARS
-connects them into a unified mission-assurance workflow.</p>
+adaptive mission-continuation logic, and hash-chain-based tamper-evident
+mission provenance. Instead of treating UAV cybersecurity, mission
+continuity, and data integrity as separate problems, RA-MARS connects
+them into a unified mission-assurance workflow.</p>
 <p>The main contributions of this paper are as follows:</p>
 <ol type="1">
 <li><p>A resilient AI-driven mission assurance framework is proposed for
@@ -312,7 +323,7 @@ UAV surveillance operations.</p></li>
 <li><p>A mission-risk scoring model is introduced to estimate
 operational degradation and support adaptive mission-continuation
 decisions under adversarial conditions.</p></li>
-<li><p>A blockchain-inspired tamper-resistant logging mechanism is
+<li><p>A hash-chain-based tamper-evident provenance mechanism is
 incorporated to improve the integrity, traceability, and auditability of
 UAV mission records.</p></li>
 <li><p>A simulation-based evaluation is conducted to compare the
@@ -324,7 +335,7 @@ latency, energy consumption, and tamper-detection performance.</p></li>
 <p>The remainder of this paper is organized as follows. Section 2
 reviews related work on UAV defence surveillance, AI-based attack
 detection, jamming and spoofing mitigation, UAV cybersecurity, and
-tamper-resistant mission logging. Section 3 presents the system model
+tamper-evident mission provenance. Section 3 presents the system model
 and threat model. Section 4 describes the proposed RA-MARS framework.
 Section 5 explains the experimental setup and evaluation metrics.
 Section 6 discusses the results and comparative analysis. Section 7
@@ -334,7 +345,7 @@ presents limitations and future work. Section 8 concludes the paper.</p>
 <h2 id="overview">Overview</h2>
 <p>This section reviews prior work related to UAV defence surveillance,
 contested UAV communication, GPS/GNSS spoofing, UAV cybersecurity,
-AI-based intrusion detection, tamper-resistant mission logging, and
+AI-based intrusion detection, tamper-evident mission provenance, and
 mission assurance. The purpose of this section is to identify the
 research gap that motivates RA-MARS.</p>
 <h2 id="uav-defence-surveillance-and-swarm-reconnaissance">UAV Defence
@@ -411,7 +422,7 @@ using cryptographic proofs and decentralized audit structures.
 Lightweight blockchain mechanisms also address the resource limitations
 of UAV ad-hoc networks.</p>
 <p>However, blockchain should not be treated as the main novelty of
-RA-MARS. Instead, tamper-resistant logging is used as a supporting
+RA-MARS. Instead, tamper-evident provenance is used as a supporting
 component to preserve mission-data trustworthiness. Existing
 blockchain-UAV studies often focus on data integrity or authentication
 but do not fully connect log integrity with mission assurance under
@@ -432,7 +443,7 @@ However, many resilience models treat degradation abstractly and do not
 explicitly integrate cyber-electromagnetic threats such as jamming,
 spoofing, and mission-data tampering. RA-MARS addresses this gap by
 connecting cyber-physical attack detection, mission-risk scoring,
-adaptive mission continuation, and tamper-resistant logging in one
+adaptive mission continuation, and tamper-evident provenance in one
 framework.</p>
 <h2 id="research-gap">Research Gap</h2>
 <p>The reviewed literature shows that UAV surveillance, anti-jamming
@@ -456,7 +467,7 @@ framework for secure multi-UAV defence surveillance in contested
 environments. Unlike prior studies that focus only on isolated security
 or optimization functions, RA-MARS integrates AI-based attack detection,
 mission-risk scoring, adaptive mission-continuation logic, and
-tamper-resistant mission logging.</p>
+tamper-evident mission provenance.</p>
 <p>The framework evaluates UAV resilience not only through attack
 detection accuracy but also through operational metrics such as mission
 success rate, packet delivery ratio, latency, energy consumption,
@@ -466,7 +477,7 @@ tamper-detection rate, and mission recovery time.</p>
 mission-assurance problem rather than an isolated detection,
 communication, navigation, or logging problem. By integrating AI-based
 cyber-physical attack detection with mission-risk scoring, adaptive
-mission continuation, and tamper-resistant logging, RA-MARS provides a
+mission continuation, and tamper-evident provenance, RA-MARS provides a
 unified evaluation framework for secure multi-UAV defence surveillance
 under jamming, GPS spoofing, and data-tampering attacks.</p>
 <hr />
@@ -526,7 +537,7 @@ inconsistent movement patterns that deviate from the expected route.</p>
 <p>Each UAV telemetry record is stored as part of a mission log. The
 mission log is used for post-mission analysis, mission accountability,
 and surveillance record verification.</p>
-<p>RA-MARS uses a tamper-resistant logging model based on hash-chain or
+<p>RA-MARS uses a tamper-evident provenance model based on hash-chain or
 blockchain-inspired record linking. Each mission record includes the
 hash of the previous record and its own current hash. If any record is
 modified after storage, the recalculated hash will not match the stored
@@ -630,6 +641,105 @@ capture all UAV nodes.</li>
 <li>Mission logs can be verified using hash-chain or blockchain-inspired
 integrity checks.</li>
 </ul>
+<h2 id="qualitative-comparison-with-prior-work">Qualitative Comparison
+with Prior Work</h2>
+<p>Table X summarizes how RA-MARS differs from representative UAV
+security, anti-jamming, spoofing-resilient navigation, and UAV
+provenance studies. The comparison is qualitative because the present
+work uses a controlled synthetic telemetry workflow rather than the same
+datasets or testbeds used by prior studies.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>Study category</th>
+<th>Primary focus</th>
+<th>Jamming</th>
+<th>Spoofing</th>
+<th>Data tampering</th>
+<th>Mission-level assurance metric</th>
+<th>Adaptive continuation</th>
+<th>Tamper-evident provenance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UAV anti-jamming communication studies</td>
+<td>Link reliability and communication recovery</td>
+<td>Yes</td>
+<td>Limited</td>
+<td>No</td>
+<td>Usually no</td>
+<td>Sometimes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>UAV GNSS spoofing/navigation studies</td>
+<td>Navigation trust and localization resilience</td>
+<td>Limited</td>
+<td>Yes</td>
+<td>No</td>
+<td>Usually no</td>
+<td>Limited</td>
+<td>No</td>
+</tr>
+<tr>
+<td>UAV cyber-intrusion detection studies</td>
+<td>Attack classification or anomaly detection</td>
+<td>Sometimes</td>
+<td>Sometimes</td>
+<td>Sometimes</td>
+<td>Usually no</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Blockchain/UAV logging studies</td>
+<td>Data integrity, auditability, or authentication</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Multi-UAV mission planning studies</td>
+<td>Task allocation, route planning, or swarm coordination</td>
+<td>Sometimes</td>
+<td>Limited</td>
+<td>No</td>
+<td>Sometimes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Proposed RA-MARS framework</td>
+<td>Cross-layer mission assurance for contested UAV surveillance</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>This comparison highlights that RA-MARS is designed as a
+mission-assurance framework rather than a standalone classifier,
+communication-security module, navigation filter, or logging mechanism.
+Its novelty lies in connecting attack detection, mission-risk scoring,
+adaptive continuation, and tamper-evident mission provenance under
+combined cyber-electromagnetic and navigation threats.</p>
 <h2 id="limitations">Limitations</h2>
 <p>The threat model does not currently include:</p>
 <ul>
@@ -670,7 +780,7 @@ radio-frequency jamming, GPS spoofing, and data-tampering attacks.</p>
 <li>AI-based attack detection</li>
 <li>Mission-risk scoring</li>
 <li>Adaptive mission-continuation logic</li>
-<li>Blockchain-inspired tamper-resistant mission logging</li>
+<li>Hash-chain-based tamper-evident mission provenance</li>
 </ol>
 <p>These modules operate together to detect abnormal mission conditions,
 estimate the severity of operational degradation, support adaptive
@@ -817,7 +927,7 @@ should respond when risk increases.</p>
 preserve mission success under degraded conditions.</p>
 <h2 id="tamper-resistant-mission-logging-module">Tamper-Resistant
 Mission Logging Module</h2>
-<p>The tamper-resistant logging module preserves the integrity and
+<p>The tamper-evident provenance module preserves the integrity and
 traceability of mission records. Each mission record is linked to the
 previous record using a hash-chain or blockchain-inspired structure.</p>
 <p>Each record may include:</p>
@@ -845,7 +955,7 @@ attacked.</li>
 <li>The mission-risk scoring module calculates the risk level.</li>
 <li>The adaptive mission-continuation module selects an appropriate
 response.</li>
-<li>Mission records are stored using tamper-resistant logging.</li>
+<li>Mission records are stored using tamper-evident provenance.</li>
 <li>Performance metrics are calculated for evaluation.</li>
 </ol>
 <h2 id="evaluation-strategy">Evaluation Strategy</h2>
@@ -1039,16 +1149,16 @@ simultaneous cyber-electromagnetic and data-integrity threats.</p>
 <tr>
 <td>B1: Conventional UAV System</td>
 <td>No AI detection, no risk scoring, no adaptive response, and no
-tamper-resistant logging</td>
+tamper-evident provenance</td>
 </tr>
 <tr>
 <td>B2: AI-Only Detection System</td>
 <td>Uses AI detection but does not include risk scoring, adaptive logic,
-or tamper-resistant logging</td>
+or tamper-evident provenance</td>
 </tr>
 <tr>
 <td>B3: Logging-Only System</td>
-<td>Uses tamper-resistant logging but does not include AI detection or
+<td>Uses tamper-evident provenance but does not include AI detection or
 adaptive mission logic</td>
 </tr>
 <tr>
@@ -1059,7 +1169,7 @@ adaptive mission continuation</td>
 <tr>
 <td>B5: RA-MARS</td>
 <td>Uses AI detection, mission-risk scoring, adaptive mission logic, and
-tamper-resistant logging</td>
+tamper-evident provenance</td>
 </tr>
 </tbody>
 </table>
@@ -1204,7 +1314,7 @@ and integrity features.</p>
 <li>Evaluate attack classification performance.</li>
 <li>Compute mission-risk scores.</li>
 <li>Apply adaptive mission-continuation logic in RA-MARS.</li>
-<li>Verify mission logs using tamper-resistant logging.</li>
+<li>Verify mission logs using tamper-evident provenance.</li>
 <li>Compare RA-MARS against baseline systems.</li>
 <li>Generate result tables and graphs.</li>
 <li>Interpret the findings from a mission-assurance perspective.</li>
@@ -1263,9 +1373,20 @@ from the simulation code. The synthetic dataset should be clearly
 described as simulation-generated UAV telemetry data and should not be
 presented as real military flight data.</p>
 <p>The results should be interpreted as simulation-based evidence of
-mission-assurance improvement under controlled attack scenarios.
-Real-world flight testing and hardware-in-the-loop validation are left
-for future work.</p>
+mission-assurance behavior under controlled attack scenarios.</p>
+<p>The evaluation is intentionally limited to simulation-generated
+telemetry. The study does not claim real military flight testing,
+hardware-in-the-loop validation, classified operational validation, or
+deployed battlefield performance. Future validation should include
+hardware-in-the-loop experiments, controlled RF testbed evaluation, real
+UAV logs where available, and cross-dataset testing against independent
+UAV cyber-physical security datasets. Real-world flight testing and
+hardware-in-the-loop validation are left for future work.</p>
+<p>Adversarial robustness testing was limited to the binary
+attack-versus-normal setting because this stage represents the first
+mission-assurance trigger for detecting whether a mission is under
+cyber-physical attack. Fine-grained adversarial robustness across all
+eight mission-state classes is left for future work.</p>
 <hr />
 <hr />
 <h2 id="v4-prior-work-comparison">v4 Prior Work Comparison</h2>
@@ -1383,7 +1504,7 @@ Approaches</h3>
 <p>RA-MARS v4 differs from prior work by connecting
 cyber-electromagnetic attack detection, Mission Assurance Index scoring,
 digital twin action selection, adaptive mission continuation, and
-tamper-resistant mission provenance in a single mission-level
+tamper-evident mission provenance in a single mission-level
 framework.</p>
 <hr />
 <h1 id="leakage-prevention-and-reproducibility-controls">Leakage
@@ -1515,16 +1636,17 @@ tampering, jamming_spoofing, jamming_tampering, spoofing_tampering, and
 combined.</p>
 <h2 id="v4-temporal-attack-detection-results">v4 Temporal
 Attack-Detection Results</h2>
-<p>The v4 model evaluation compares classical baselines, binary LSTM/GRU
-models, and fine-grained weighted sequence models. For binary
-attack-versus-normal mission assurance classification, Binary LSTM
-achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU
-achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained
-eight-class mission-state classification, Weighted LSTM achieved 99.53%
-accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24%
-accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved
-99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82%
-accuracy and 98.18% macro F1-score on the fine-grained task.</p>
+<p>The completed validation evaluation compares binary LSTM/GRU sequence
+models, fine-grained weighted sequence models, and a 1D-CNN temporal
+baseline. For binary attack-versus-normal mission assurance
+classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro
+F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro
+F1-score. For fine-grained eight-class mission-state classification,
+Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while
+Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A
+1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro
+F1-score on the binary task, and 98.82% accuracy and 98.18% macro
+F1-score on the fine-grained task.</p>
 <p>The best accuracy model is LSTM, which achieved 78.24% accuracy and
 53.40% macro F1-score. The strongest classical baseline is Random
 Forest, which achieved 77.06% accuracy, 56.56% macro F1-score, and
@@ -1740,7 +1862,7 @@ jamming, GPS/GNSS spoofing, and mission-data tampering. Real contested
 environments may involve more complex electromagnetic interference,
 adaptive jammers, multipath effects, stealthy spoofing strategies,
 insider threats, malware, and coordinated adversarial behavior.</p>
-<p>Third, the proposed tamper-resistant logging module is modeled using
+<p>Third, the proposed tamper-evident provenance module is modeled using
 a lightweight hash-chain or blockchain-inspired structure. While this
 approach supports mission-record integrity verification, the study does
 not claim full-scale deployment of a production blockchain network in
@@ -1768,7 +1890,7 @@ navigation, and mission-control conditions.</p>
 models, including adaptive jamming, coordinated spoofing, adversarial
 machine learning attacks, malware-based telemetry manipulation, and
 insider threats.</p>
-<p>Third, the tamper-resistant logging module can be extended using
+<p>Third, the tamper-evident provenance module can be extended using
 lightweight distributed ledger architectures optimized for
 resource-constrained UAV swarms.</p>
 <p>Fourth, RA-MARS can be evaluated with larger swarm sizes,
@@ -1788,18 +1910,18 @@ cyber-electromagnetic and navigation attacks. The framework addresses
 radio-frequency jamming, GPS/GNSS spoofing, mission-data tampering, and
 combined attacks by linking temporal attack detection, Mission Assurance
 Index scoring, digital twin-based action selection, adaptive mission
-continuation, and tamper-resistant mission provenance.</p>
+continuation, and tamper-evident mission provenance.</p>
 <p>Unlike isolated UAV security approaches that focus only on attack
 detection, anti-jamming communication, navigation trust, task
 allocation, or secure logging, RA-MARS evaluates resilience at the
 mission level. The framework is designed to support mission continuity
 by converting raw telemetry, communication, navigation, energy, and
 mission-progress indicators into operational assurance decisions.</p>
-<p>The physics-based v4 evaluation used synthetic multi-UAV telemetry
-data with 90,000 sampled telemetry rows and 82,875 time-series windows.
-Each window contained 20 telemetry steps and 9 raw non-leakage features
-per step. Derived Mission Assurance Index and component scores were
-excluded from classifier inputs to avoid feature leakage. For
+<p>The completed physics-informed evaluation used synthetic multi-UAV
+telemetry data with 90,000 sampled telemetry rows and 82,875 time-series
+windows. Each window contained 20 telemetry steps and 9 raw non-leakage
+features per step. Derived Mission Assurance Index and component scores
+were excluded from classifier inputs to avoid feature leakage. For
 attack-versus-normal mission assurance classification, Binary LSTM
 achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU
 achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained
