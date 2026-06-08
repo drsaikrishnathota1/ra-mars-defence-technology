@@ -716,6 +716,8 @@ The results should be interpreted as simulation-based evidence of mission-assura
 
 
 The evaluation is intentionally limited to simulation-generated telemetry. The study does not claim real military flight testing, hardware-in-the-loop validation, classified operational validation, or deployed battlefield performance. Future validation should include hardware-in-the-loop experiments, controlled RF testbed evaluation, real UAV logs where available, and cross-dataset testing against independent UAV cyber-physical security datasets.
+
+A further limitation is that the current synthetic telemetry distribution may not capture all domain shifts found in real UAV operations, including sensor drift, multipath propagation, weather-dependent RF attenuation, adversarial adaptation, pilot/operator behavior, platform-specific autopilot dynamics, and unmodeled failure modes. Future work should therefore evaluate RA-MARS under cross-domain testing, independent synthetic generators, real flight logs where available, and controlled hardware-in-the-loop RF experiments.
  Real-world flight testing and hardware-in-the-loop validation are left for future work.
 
 
@@ -820,7 +822,7 @@ The classifier input excludes derived Mission Assurance Index and component scor
 
 ## v4 Temporal Attack-Detection Results
 
-The completed validation evaluation compares binary LSTM/GRU sequence models, fine-grained weighted sequence models, and a 1D-CNN temporal baseline. For binary attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task.
+The completed validation evaluation compares binary LSTM/GRU sequence models, fine-grained weighted sequence models, and a 1D-CNN temporal baseline. Classical machine-learning baselines were used during development for sanity checking, but the final reported model-comparison emphasis is placed on temporal deep-learning models because the task is sequence-based. For binary attack-versus-normal mission assurance classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro F1-score. For fine-grained eight-class mission-state classification, Weighted LSTM achieved 99.53% accuracy and 99.18% macro F1-score, while Weighted GRU achieved 99.24% accuracy and 98.66% macro F1-score. A 1D-CNN temporal baseline achieved 99.97% accuracy and 99.96% macro F1-score on the binary task, and 98.82% accuracy and 98.18% macro F1-score on the fine-grained task.
 
 The best accuracy model is LSTM, which achieved 78.24% accuracy and 53.40% macro F1-score. The strongest classical baseline is Random Forest, which achieved 77.06% accuracy, 56.56% macro F1-score, and 74.72% weighted F1-score.
 
@@ -941,7 +943,7 @@ Finally, future work can investigate human-machine teaming interfaces that allow
 
 # Conclusion
 
-This paper proposed RA-MARS, a cross-layer mission assurance digital twin for secure multi-UAV defence surveillance under cyber-electromagnetic and navigation attacks. The framework addresses radio-frequency jamming, GPS/GNSS spoofing, mission-data tampering, and combined attacks by linking temporal attack detection, Mission Assurance Index scoring, digital twin-based action selection, adaptive mission continuation, and tamper-evident mission provenance.
+This paper proposed RA-MARS, a cross-layer mission assurance digital twin for secure multi-UAV defence surveillance under cyber-electromagnetic and navigation attacks. The reported results should be interpreted as controlled simulation evidence of framework behavior rather than proof of deployed battlefield effectiveness. The framework addresses radio-frequency jamming, GPS/GNSS spoofing, mission-data tampering, and combined attacks by linking temporal attack detection, Mission Assurance Index scoring, digital twin-based action selection, adaptive mission continuation, and tamper-evident mission provenance.
 
 Unlike isolated UAV security approaches that focus only on attack detection, anti-jamming communication, navigation trust, task allocation, or secure logging, RA-MARS evaluates resilience at the mission level. The framework is designed to support mission continuity by converting raw telemetry, communication, navigation, energy, and mission-progress indicators into operational assurance decisions.
 

@@ -1380,8 +1380,17 @@ hardware-in-the-loop validation, classified operational validation, or
 deployed battlefield performance. Future validation should include
 hardware-in-the-loop experiments, controlled RF testbed evaluation, real
 UAV logs where available, and cross-dataset testing against independent
-UAV cyber-physical security datasets. Real-world flight testing and
-hardware-in-the-loop validation are left for future work.</p>
+UAV cyber-physical security datasets.</p>
+<p>A further limitation is that the current synthetic telemetry
+distribution may not capture all domain shifts found in real UAV
+operations, including sensor drift, multipath propagation,
+weather-dependent RF attenuation, adversarial adaptation, pilot/operator
+behavior, platform-specific autopilot dynamics, and unmodeled failure
+modes. Future work should therefore evaluate RA-MARS under cross-domain
+testing, independent synthetic generators, real flight logs where
+available, and controlled hardware-in-the-loop RF experiments.
+Real-world flight testing and hardware-in-the-loop validation are left
+for future work.</p>
 <p>Adversarial robustness testing was limited to the binary
 attack-versus-normal setting because this stage represents the first
 mission-assurance trigger for detecting whether a mission is under
@@ -1638,7 +1647,10 @@ combined.</p>
 Attack-Detection Results</h2>
 <p>The completed validation evaluation compares binary LSTM/GRU sequence
 models, fine-grained weighted sequence models, and a 1D-CNN temporal
-baseline. For binary attack-versus-normal mission assurance
+baseline. Classical machine-learning baselines were used during
+development for sanity checking, but the final reported model-comparison
+emphasis is placed on temporal deep-learning models because the task is
+sequence-based. For binary attack-versus-normal mission assurance
 classification, Binary LSTM achieved 99.85% accuracy and 99.81% macro
 F1-score, while Binary GRU achieved 99.80% accuracy and 99.76% macro
 F1-score. For fine-grained eight-class mission-state classification,
@@ -1906,11 +1918,14 @@ and adaptive response recommendations in real time.</p>
 <h1 id="conclusion">Conclusion</h1>
 <p>This paper proposed RA-MARS, a cross-layer mission assurance digital
 twin for secure multi-UAV defence surveillance under
-cyber-electromagnetic and navigation attacks. The framework addresses
-radio-frequency jamming, GPS/GNSS spoofing, mission-data tampering, and
-combined attacks by linking temporal attack detection, Mission Assurance
-Index scoring, digital twin-based action selection, adaptive mission
-continuation, and tamper-evident mission provenance.</p>
+cyber-electromagnetic and navigation attacks. The reported results
+should be interpreted as controlled simulation evidence of framework
+behavior rather than proof of deployed battlefield effectiveness. The
+framework addresses radio-frequency jamming, GPS/GNSS spoofing,
+mission-data tampering, and combined attacks by linking temporal attack
+detection, Mission Assurance Index scoring, digital twin-based action
+selection, adaptive mission continuation, and tamper-evident mission
+provenance.</p>
 <p>Unlike isolated UAV security approaches that focus only on attack
 detection, anti-jamming communication, navigation trust, task
 allocation, or secure logging, RA-MARS evaluates resilience at the
