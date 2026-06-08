@@ -1052,7 +1052,3 @@ This study uses simulation-generated synthetic data for controlled experimental 
 [42] K. Li, J. Liu, X. Gu, Y. Yang, C. Chang, H. Chen, L. Wan, and Y. Lin, “Dynamic Decision-Making of UAV Swarm Based on Constrained Multi-Objective Optimization Under Incomplete Interference Information,” Chinese Journal of Aeronautics, article 103846, 2025, doi: 10.1016/j.cja.2025.103846.
 
 [43] X. Wang, Z. Zhao, L. Yi, Z. Ning, L. Guo, F. R. Yu, and S. Guo, “A Survey on Security of UAV Swarm Networks: Attacks and Countermeasures,” ACM Computing Surveys, vol. 57, no. 3, article 74, pp. 1–37, 2024, doi: 10.1145/3703625.
-
-## Figure Update Note
-
-Old v3 figure links were removed from this v4 draft because the v3 figures have been archived. New v4 figures should be regenerated from the final v4 CSV outputs before journal submission.
