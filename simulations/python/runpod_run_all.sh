@@ -27,13 +27,13 @@ mkdir -p simulations/datasets simulations/results
 
 # ── Step 1: Generate v4 physics-based dataset ─────────────────────
 echo ""
-echo "STEP 1/8: Generating v4 physics-based dataset..."
+echo "STEP 1/9: Generating v4 physics-based dataset..."
 python simulations/python/generate_dataset_v4.py
 echo "✓ Step 1 complete"
 
 # ── Step 2: Create sequence windows ───────────────────────────────
 echo ""
-echo "STEP 2/8: Creating sequence windows for LSTM/GRU..."
+echo "STEP 2/9: Creating raw sequence windows for LSTM/GRU/CNN..."
 python simulations/python/create_sequence_windows_v4.py
 echo "✓ Step 2 complete"
 
@@ -49,54 +49,36 @@ echo "STEP 4/9: Training classical baseline models..."
 python simulations/python/train_classical_baselines_v4.py
 echo "✓ Step 4 complete"
 
-# ── Step 5: 1D-CNN temporal baseline ───────────────────────────────
+# ── Step 5: Train 1D-CNN temporal baseline ────────────────────────
 echo ""
 echo "STEP 5/9: Training 1D-CNN temporal baseline..."
 python simulations/python/train_cnn_baseline_v4.py
 echo "✓ Step 5 complete"
 
-# ── Step 5: 1D-CNN temporal baseline ───────────────────────────────
-echo ""
-echo "STEP 5/9: Training 1D-CNN temporal baseline..."
-python simulations/python/train_cnn_baseline_v4.py
-echo "✓ Step 5 complete"
-
-# ── Step 5: 1D-CNN temporal baseline ───────────────────────────────
-echo ""
-echo "STEP 5/9: Training 1D-CNN temporal baseline..."
-python simulations/python/train_cnn_baseline_v4.py
-echo "✓ Step 5 complete"
-
-# ── Step 5: 1D-CNN temporal baseline ───────────────────────────────
-echo ""
-echo "STEP 5/9: Training 1D-CNN temporal baseline..."
-python simulations/python/train_cnn_baseline_v4.py
-echo "✓ Step 5 complete"
-
-# ── Step 5: Mission assurance + ablation evaluation ───────────────
+# ── Step 6: Mission assurance + ablation evaluation ───────────────
 echo ""
 echo "STEP 6/9: Running mission assurance, ablation, scalability, intensity, and SINR evaluation..."
 python simulations/python/evaluate_ablation_v4.py
-echo "✓ Step 5 complete"
+echo "✓ Step 6 complete"
 
-# ── Step 6: Adversarial robustness testing ────────────────────────
+# ── Step 7: Adversarial robustness testing ────────────────────────
 echo ""
 echo "STEP 7/9: Running FGSM + PGD adversarial robustness tests..."
 ls simulations/results/best_model_v4_*.pt 2>/dev/null && echo "Model files found" || echo "No model files found"
 python simulations/python/adversarial_robustness_v4.py
-echo "✓ Step 6 complete"
+echo "✓ Step 7 complete"
 
-# ── Step 7: Latency budget analysis ───────────────────────────────
+# ── Step 8: Latency budget analysis ───────────────────────────────
 echo ""
 echo "STEP 8/9: Computing latency budget analysis..."
 python simulations/python/latency_budget_v4.py
-echo "✓ Step 7 complete"
+echo "✓ Step 8 complete"
 
-# ── Step 8: Adversarial training ──────────────────────────────────
+# ── Step 9: Adversarial training ──────────────────────────────────
 echo ""
 echo "STEP 9/9: Running PGD-augmented adversarial training..."
 python simulations/python/train_adversarial_v4.py
-echo "✓ Step 8 complete"
+echo "✓ Step 9 complete"
 
 # ── Final summary ─────────────────────────────────────────────────
 echo ""
@@ -108,6 +90,10 @@ echo "Results generated:"
 ls -lh simulations/results/*.csv 2>/dev/null | awk '{print "  "$5, $9}'
 echo ""
 echo "Important outputs:"
+echo "  simulations/results/model_performance_v4_binary.csv"
+echo "  simulations/results/model_performance_v4_finegrained.csv"
+echo "  simulations/results/model_performance_v4_cnn_baseline.csv"
+echo "  simulations/results/model_performance_v4_classical.csv"
 echo "  simulations/results/adversarial_training_results_v4.csv"
 echo "  simulations/results/best_model_v4_adversarial.pt"
 echo "  simulations/datasets/uav_mission_telemetry_v4_sample.csv"
