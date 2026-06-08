@@ -77,9 +77,9 @@ RA-MARS should be positioned as a defence mission-assurance framework, not as a 
 
 # RA-MARS v5 Completed Validation Status
 
-Updated: 2026-06-08 06:26
+Updated: 2026-06-08 06:27
 Branch: `main`
-Latest commit: `54742ba`
+Latest commit: `0ce8f41`
 
 ## Current Status
 
@@ -130,7 +130,8 @@ The main contribution of RA-MARS is the mission-assurance integration of attack 
 ## Recent Commits
 
 ```text
-54742ba (HEAD -> main, origin/main, origin/HEAD) Update submission files with completed v5 results
+0ce8f41 (HEAD -> main, origin/main, origin/HEAD) Update README with completed v5 validation status
+54742ba Update submission files with completed v5 results
 e9789ab Update manuscript with completed v5 validation results
 6aea1d1 Add v5 completed result tables
 3b7f55b Update raw v5 validation result artifacts
@@ -141,7 +142,6 @@ dbdfc0d Clean RunPod pipeline with single 1D-CNN baseline step
 b5f434a Add 1D-CNN baseline to RunPod pipeline
 a071c72 Add 1D-CNN baseline to RunPod pipeline
 ee1851e Add 1D-CNN baseline to RunPod pipeline
-2686adf Add 1D-CNN baseline to RunPod pipeline
 ```
 
 ## Remaining Before Submission
