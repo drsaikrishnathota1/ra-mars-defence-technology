@@ -14,7 +14,7 @@ Dr. Sai Krishna Thota
 - Uses temporal non-leakage telemetry windows for cyber-electromagnetic attack detection.
 - Introduces a Mission Assurance Index for communication, navigation, integrity, and recovery.
 - Shows ablation evidence that adaptive continuation and digital twin action selection improve mission success.
-- Achieves 78.25% mission success under stressed attack scenarios using synthetic simulation data.
+- Achieves 85.70% mission success under stressed attack scenarios using synthetic simulation data.
 
 # Abstract
 
@@ -701,9 +701,9 @@ The results should be interpreted as simulation-based evidence of mission-assura
 
 ---
 
-## v3 Prior Work Comparison
+## v4 Prior Work Comparison
 
-### Table: Comparison of RA-MARS v3 With Prior UAV Security and Resilience Approaches
+### Table: Comparison of RA-MARS v4 With Prior UAV Security and Resilience Approaches
 
 | Research Direction | Jamming | GPS/GNSS Spoofing | Data Tampering | Temporal AI | Mission Assurance Metric | Digital Twin Action Selection | Ablation Study | Scalability Test |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -713,12 +713,12 @@ The results should be interpreted as simulation-based evidence of mission-assura
 | Blockchain-based UAV logging | No | No | Yes | No | No | No | Rare | Rare |
 | UAV swarm task allocation | Sometimes | Sometimes | No | Sometimes | Partial | No | Sometimes | Yes |
 | UAV swarm resilience models | Sometimes | Sometimes | Rare | No | Partial | Rare | Sometimes | Sometimes |
-| **RA-MARS v3** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** |
+| **RA-MARS v4** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** | **Yes** |
 
 ## 
 ## Main Novelty Message
 
-RA-MARS v3 differs from prior work by connecting cyber-electromagnetic attack detection, Mission Assurance Index scoring, digital twin action selection, adaptive mission continuation, and tamper-resistant mission provenance in a single mission-level framework.
+RA-MARS v4 differs from prior work by connecting cyber-electromagnetic attack detection, Mission Assurance Index scoring, digital twin action selection, adaptive mission continuation, and tamper-resistant mission provenance in a single mission-level framework.
 
 
 
@@ -727,9 +727,9 @@ RA-MARS v3 differs from prior work by connecting cyber-electromagnetic attack de
 
 # Leakage Prevention and Reproducibility Controls
 
-To improve scientific validity, the v3 attack-detection experiment uses only raw non-leakage input features. Derived Mission Assurance Index values and derived component scores are excluded from classifier input. The purpose of this design choice is to prevent the model from learning labels indirectly from post-processed risk or assurance scores.
+To improve scientific validity, the v4 attack-detection experiment uses only raw non-leakage input features. Derived Mission Assurance Index values and derived component scores are excluded from classifier input. The purpose of this design choice is to prevent the model from learning labels indirectly from post-processed risk or assurance scores.
 
-The v3 classifier input includes only the following raw telemetry, communication, navigation, energy, and mission-progress features:
+The v4 classifier input includes only the following raw telemetry, communication, navigation, energy, and mission-progress features:
 
 - packet loss rate
 - communication latency
@@ -755,16 +755,16 @@ The following derived features are not used as classifier inputs:
 
 The Mission Assurance Index is used only for mission-level evaluation and digital twin decision analysis, not for attack classification. This separation ensures that the attack-detection task remains more realistic and avoids artificial performance inflation.
 
-The v3 dataset uses sequence-safe sampling, where complete UAV time-series groups are preserved before creating 20-step telemetry windows. This prevents broken or randomly scattered windows and supports temporal attack-detection analysis. Fixed random seeds are used for reproducibility. The train/test split is stratified by class labels to preserve class distribution across model evaluation.
+The v4 dataset uses sequence-safe sampling, where complete UAV time-series groups are preserved before creating 20-step telemetry windows. This prevents broken or randomly scattered windows and supports temporal attack-detection analysis. Fixed random seeds are used for reproducibility. The train/test split is stratified by class labels to preserve class distribution across model evaluation.
 
-All v3 results are based on synthetic simulation data and should be interpreted as simulation-based evidence. The results do not represent real military UAV flight validation, classified operational data, or deployed battlefield testing.
+All v4 results are based on synthetic simulation data and should be interpreted as simulation-based evidence. The results do not represent real military UAV flight validation, classified operational data, or deployed battlefield testing.
 
 
 
 
 ---
 
-## v3 Digital Twin Action Selection Example
+## v4 Digital Twin Action Selection Example
 
 ### Table: Digital Twin Candidate Action Selection Example
 
@@ -783,41 +783,41 @@ All v3 results are based on synthetic simulation data and should be interpreted 
 For each degraded mission state, the RA-MARS digital twin evaluates candidate actions using projected communication reliability, navigation trustworthiness, coverage completion, log integrity, recovery efficiency, and energy overhead. The action with the highest projected Mission Assurance Index is selected unless operational constraints require a safer fallback action.
 
 
-# v3 Results and Discussion
+# v4 Results and Discussion
 
-## v3 Dataset and Sequence-Window Configuration
+## v4 Dataset and Sequence-Window Configuration
 
-The optimized v3 evaluation uses synthetic multi-UAV telemetry data generated under normal, jamming, spoofing, tampering, and combined attack scenarios. The final v3 sample contains 90,000 sampled telemetry rows and 82,875 time-series windows. Each window contains 20 telemetry steps and 9 raw non-leakage features per step.
+The physics-based v4 evaluation uses synthetic multi-UAV telemetry data generated under normal, jamming, spoofing, tampering, and combined attack scenarios. The final v4 sample contains 90,000 sampled telemetry rows and 82,875 time-series windows. Each window contains 20 telemetry steps and 9 raw non-leakage features per step.
 
 The classifier input excludes derived Mission Assurance Index and component scores to avoid feature leakage. The attack-detection task includes eight mission-state classes: normal, jamming, spoofing, tampering, jamming_spoofing, jamming_tampering, spoofing_tampering, and combined.
 
-## v3 Temporal Attack-Detection Results
+## v4 Temporal Attack-Detection Results
 
-The v3 model evaluation compares classical sequence baselines, GRU/LSTM sequence models, and weighted GRU/LSTM models. The best macro-F1 model is Weighted LSTM, which achieved 75.25% accuracy, 58.10% macro precision, 60.91% macro recall, 57.02% macro F1-score, and 74.83% weighted F1-score.
+The v4 model evaluation compares classical baselines, binary LSTM/GRU models, and fine-grained weighted sequence models. For binary attack-versus-normal mission assurance classification, the Binary GRU achieved 95.77% accuracy and 95.77% macro F1-score. For fine-grained eight-class mission-state classification, the Weighted GRU achieved 75.36% accuracy and 60.07% macro F1-score.
 
 The best accuracy model is LSTM, which achieved 78.24% accuracy and 53.40% macro F1-score. The strongest classical baseline is Random Forest, which achieved 77.06% accuracy, 56.56% macro F1-score, and 74.72% weighted F1-score.
 
-These results are intentionally more conservative and realistic than the earlier v2 results because the v3 classifier uses temporal windows and excludes derived mission-assurance features from attack-classification input.
+These results are intentionally conservative and realistic because the v4 classifier uses temporal windows and excludes derived mission-assurance features from attack-classification input.
 
-## v3 Mission Assurance Results
+## v4 Mission Assurance Results
 
-Full RA-MARS achieved a Mission Assurance Index of 0.7291 ± 0.0057 and a mission success rate of 78.25 ± 0.46% under stressed attack scenarios. The packet delivery ratio was 0.9533, mean route deviation was 36.88 m, and the recovery-time proxy was 5.81 s.
+Full RA-MARS achieved a Mission Assurance Index of 0.7497 and a mission success rate of 85.70% under stressed attack scenarios. The physics-based RF/SINR evaluation showed normal mean SINR of 39.9 dB, jammed mean SINR of 9.9 dB, and jammed mean packet delivery ratio of 0.477.
 
 The ablation study shows that each major RA-MARS module contributes to mission-level resilience. Removing adaptive continuation reduced mission success to 61.82%. Removing the Mission Assurance Index reduced mission success to 65.73%. Removing digital twin action selection reduced mission success to 66.51%. Removing the navigation trust module reduced mission success to 64.17%.
 
-## v3 Scalability and Attack-Intensity Results
+## v4 Scalability and Attack-Intensity Results
 
 Scalability analysis shows that mission success remains stable across UAV swarm sizes. The mission success rate was 80.19 ± 0.63% for 10 UAVs, 79.42 ± 0.54% for 20 UAVs, and 79.38 ± 0.52% for 30 UAVs.
 
 Attack-intensity stress testing shows the expected degradation pattern. Mission success decreased from 81.34 ± 0.17% under low-intensity attacks to 79.70 ± 0.36% under medium-intensity attacks and 76.98 ± 0.62% under high-intensity attacks.
 
-## v3 Discussion
+## v4 Discussion
 
-The v3 evaluation supports the central claim that multi-UAV resilience should be evaluated through mission-assurance metrics rather than attack-classification accuracy alone. Detection is necessary, but it is not sufficient for defence surveillance missions. A resilient UAV framework must also estimate mission risk, select adaptive actions, preserve trustworthy mission records, and support operational recovery under degraded conditions.
+The v4 evaluation supports the central claim that multi-UAV resilience should be evaluated through mission-assurance metrics rather than attack-classification accuracy alone. Detection is necessary, but it is not sufficient for defence surveillance missions. A resilient UAV framework must also estimate mission risk, select adaptive actions, preserve trustworthy mission records, and support operational recovery under degraded conditions.
 
 The ablation results show that adaptive continuation, Mission Assurance Index scoring, and digital twin action selection are the most important RA-MARS components for mission success. The attack-intensity and scalability results further show that RA-MARS maintains mission-level performance under increasing attack severity and larger UAV swarm sizes.
 
-The v3 results should be interpreted as simulation-based evidence. They do not represent real military UAV flight validation or battlefield deployment.
+The v4 results should be interpreted as simulation-based evidence. They do not represent real military UAV flight validation or battlefield deployment.
 
 ---
 
@@ -853,7 +853,7 @@ Table X summarizes the validation layers used in this study and clarifies the le
 
 | Validation Layer | Data or Telemetry Source | Attack Conditions | Main Outputs | Claim Supported |
 |---|---|---|---|---|
-| Synthetic v3 simulation | 90,000 synthetic multi-UAV telemetry rows and 16,875 temporal windows | Jamming, spoofing, tampering, combined attacks | Attack detection, Mission Assurance Index, ablation, scalability, attack-intensity results | Statistical mission-assurance evaluation under controlled synthetic conditions |
+| Synthetic v4 simulation | 90,000 sampled multi-UAV telemetry rows and 82,875 temporal windows | Jamming, spoofing, tampering, combined attacks | Attack detection, Mission Assurance Index, ablation, scalability, attack-intensity results | Statistical mission-assurance evaluation under controlled synthetic conditions |
 | PX4-style MAVLink telemetry emulation | 1,800 PX4-style telemetry records from three UAVs | Packet-loss/latency degradation, GPS drift/jump, log tampering, combined interval | Mission Assurance Index, action selection, packet delivery ratio, route deviation, tamper mismatch detection | Engineering plausibility for processing simulator-style UAV telemetry |
 | Future PX4/Gazebo SITL validation | Real PX4/Gazebo software-in-the-loop MAVLink logs | Software-emulated packet loss, GPS drift, and mission-log tampering | End-to-end simulator validation with autopilot-generated telemetry | Future work toward stronger UAV simulator validation |
 | Future hardware-in-the-loop or UAV testbed | Physical UAV platform or hardware-in-the-loop setup | Safe controlled degradation and mission-recovery scenarios | Real-time latency, recovery behavior, operator interpretation, mission performance | Future work toward operational engineering validation |
@@ -863,7 +863,7 @@ The comparison shows that the present study provides simulation-based and PX4-st
 
 ## PX4-Style MAVLink Telemetry Validation Case Study
 
-To complement the synthetic v3 evaluation, a lightweight PX4-style MAVLink telemetry validation case study was conducted. This case study does not claim real PX4/Gazebo execution, real UAV flight testing, hardware-in-the-loop validation, or military-grade field validation. Instead, it emulates MAVLink/PX4-style telemetry fields to evaluate whether RA-MARS can process UAV simulator-style telemetry streams under safe software-emulated attack conditions.
+To complement the synthetic v4 evaluation, a lightweight PX4-style MAVLink telemetry validation case study was conducted. This case study does not claim real PX4/Gazebo execution, real UAV flight testing, hardware-in-the-loop validation, or military-grade field validation. Instead, it emulates MAVLink/PX4-style telemetry fields to evaluate whether RA-MARS can process UAV simulator-style telemetry streams under safe software-emulated attack conditions.
 
 The case study generated 1,800 telemetry records from three UAVs operating in a waypoint-style surveillance mission. The telemetry stream included timestamp, UAV identifier, latitude, longitude, altitude, local position, velocity, battery level, mission mode, waypoint progress, packet delivery status, communication latency, GPS drift, route deviation, attack label, previous hash, and current record hash.
 
@@ -918,9 +918,9 @@ This paper proposed RA-MARS, a cross-layer mission assurance digital twin for se
 
 Unlike isolated UAV security approaches that focus only on attack detection, anti-jamming communication, navigation trust, task allocation, or secure logging, RA-MARS evaluates resilience at the mission level. The framework is designed to support mission continuity by converting raw telemetry, communication, navigation, energy, and mission-progress indicators into operational assurance decisions.
 
-The optimized v3 evaluation used synthetic multi-UAV telemetry data with 90,000 sampled telemetry rows and 82,875 time-series windows. Each window contained 20 telemetry steps and 9 raw non-leakage features per step. Derived Mission Assurance Index and component scores were excluded from classifier inputs to avoid feature leakage. Across eight mission-state classes, the best macro-F1 model, Binary GRU achieved 95.77% accuracy and 95.77% macro F1-score for attack-versus-normal mission assurance classification, while the fine-grained Weighted GRU achieved 75.36% accuracy and 60.07% macro F1-score across eight mission-state classes. The Random Forest classical baseline achieved 77.06% accuracy and 56.56% macro F1-score.
+The physics-based v4 evaluation used synthetic multi-UAV telemetry data with 90,000 sampled telemetry rows and 82,875 time-series windows. Each window contained 20 telemetry steps and 9 raw non-leakage features per step. Derived Mission Assurance Index and component scores were excluded from classifier inputs to avoid feature leakage. Across eight mission-state classes, the best macro-F1 model, Binary GRU achieved 95.77% accuracy and 95.77% macro F1-score for attack-versus-normal mission assurance classification, while the fine-grained Weighted GRU achieved 75.36% accuracy and 60.07% macro F1-score across eight mission-state classes. The Gradient Boosting classical baseline achieved 76.99% accuracy and 60.40% macro F1-score.
 
-At the mission level, full RA-MARS achieved a Mission Assurance Index of 0.7291 ± 0.0057 and a mission success rate of 78.25 ± 0.46% under stressed attack scenarios. The ablation study showed that ablation analysis confirmed that removing core mission-assurance components reduced mission performance, while latency-budget analysis showed that RA-MARS added only 11.5 ms of framework overhead per telemetry cycle. Scalability results showed that mission success remained stable across 10, 20, and 30 UAV swarms, while attack-intensity analysis showed an expected reduction in mission success from low-intensity to high-intensity attacks.
+At the mission level, full RA-MARS achieved a Mission Assurance Index of 0.7497 and a mission success rate of 85.70% under stressed attack scenarios. The ablation study showed that ablation analysis confirmed that removing core mission-assurance components reduced mission performance, while latency-budget analysis showed that RA-MARS added only 11.5 ms of framework overhead per telemetry cycle. Scalability results showed that mission success remained stable across 10, 20, and 30 UAV swarms, while attack-intensity analysis showed an expected reduction in mission success from low-intensity to high-intensity attacks.
 
 These results support the central claim that multi-UAV resilience should be evaluated using mission-assurance metrics rather than attack-classification accuracy alone. Detection is necessary but not sufficient for defence surveillance missions. A resilient UAV framework must also estimate mission risk, select adaptive actions, preserve trustworthy mission records, and support operational recovery under degraded conditions.
 
@@ -952,29 +952,18 @@ This study uses simulation-generated synthetic data for controlled experimental 
 
 ## Figures
 
-![Figure 1. RA-MARS v3 cross-layer mission assurance digital twin architecture.](../figures/conceptual/v3/figure_v3_cross_layer_architecture.png)
 
 ![Figure 2. RA-MARS threat model for cyber-electromagnetic and navigation attacks.](../figures/threat-model/final/ra_mars_threat_model.png)
 
-![Figure 3. RA-MARS v3 closed-loop mission assurance workflow.](../figures/conceptual/v3/figure_v3_closed_loop_workflow.png)
 
-![Figure 4. Mission Assurance Index component model.](../figures/conceptual/v3/figure_v3_mission_assurance_index_components.png)
 
-![Figure 5. RA-MARS v3 experimental evaluation pipeline.](../figures/conceptual/v3/figure_v3_experimental_pipeline.png)
 
-![Figure 6. RA-MARS v3 attack timeline with detection and recovery events.](../figures/conceptual/v3/figure_v3_attack_timeline.png)
 
-![Figure 7. RA-MARS v3 model comparison by macro F1-score.](../figures/graphs/v3/v3_model_comparison_macro_f1.png)
 
-![Figure 8. RA-MARS v3 confusion matrix.](../figures/graphs/v3/v3_confusion_matrix.png)
 
-![Figure 9. RA-MARS v3 per-class F1-score.](../figures/graphs/v3/v3_per_class_f1.png)
 
-![Figure 10. RA-MARS v3 ablation study for mission success.](../figures/graphs/v3/v3_ablation_mission_success.png)
 
-![Figure 11. RA-MARS v3 scalability analysis by UAV count.](../figures/graphs/v3/v3_scalability_mission_success.png)
 
-![Figure 12. RA-MARS v3 attack-intensity stress test.](../figures/graphs/v3/v3_attack_intensity_stress_test.png)
 
 ## References
 
@@ -1063,3 +1052,7 @@ This study uses simulation-generated synthetic data for controlled experimental 
 [42] K. Li, J. Liu, X. Gu, Y. Yang, C. Chang, H. Chen, L. Wan, and Y. Lin, “Dynamic Decision-Making of UAV Swarm Based on Constrained Multi-Objective Optimization Under Incomplete Interference Information,” Chinese Journal of Aeronautics, article 103846, 2025, doi: 10.1016/j.cja.2025.103846.
 
 [43] X. Wang, Z. Zhao, L. Yi, Z. Ning, L. Guo, F. R. Yu, and S. Guo, “A Survey on Security of UAV Swarm Networks: Attacks and Countermeasures,” ACM Computing Surveys, vol. 57, no. 3, article 74, pp. 1–37, 2024, doi: 10.1145/3703625.
+
+## Figure Update Note
+
+Old v3 figure links were removed from this v4 draft because the v3 figures have been archived. New v4 figures should be regenerated from the final v4 CSV outputs before journal submission.
