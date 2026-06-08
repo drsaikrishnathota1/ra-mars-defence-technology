@@ -23,7 +23,7 @@ from sklearn.metrics import f1_score, accuracy_score
 from sklearn.model_selection import train_test_split
 
 DATA_PATH   = "simulations/datasets/uav_sequence_windows_v4.npz"
-MODEL_PATH  = "simulations/results/best_model_v4.pt"
+MODEL_PATH  = "simulations/results/best_model_v4_binary_gru.pt"
 OUTPUT_DIR  = "simulations/results"
 RANDOM_SEED = 42
 BATCH_SIZE  = 128
