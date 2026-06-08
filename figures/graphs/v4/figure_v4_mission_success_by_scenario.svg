@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="650" viewBox="0 0 1100 650">
+<rect width="100%" height="100%" fill="white"/>
+<text x="550.0" y="40" text-anchor="middle" font-family="Arial" font-size="24" font-weight="bold">RA-MARS v4 Mission Success by Scenario</text>
+<line x1="90" y1="80" x2="90" y2="500" stroke="black" stroke-width="2"/>
+<line x1="90" y1="500" x2="1060" y2="500" stroke="black" stroke-width="2"/>
+<text x="25" y="325.0" transform="rotate(-90 25,325.0)" text-anchor="middle" font-family="Arial" font-size="16">Mission Success (%)</text>
+<line x1="85" y1="500.0" x2="90" y2="500.0" stroke="black"/>
+<text x="80" y="505.0" text-anchor="end" font-family="Arial" font-size="12">0.0</text>
+<line x1="90" y1="500.0" x2="1060" y2="500.0" stroke="#ddd"/>
+<line x1="85" y1="416.0" x2="90" y2="416.0" stroke="black"/>
+<text x="80" y="421.0" text-anchor="end" font-family="Arial" font-size="12">24.0</text>
+<line x1="90" y1="416.0" x2="1060" y2="416.0" stroke="#ddd"/>
+<line x1="85" y1="332.0" x2="90" y2="332.0" stroke="black"/>
+<text x="80" y="337.0" text-anchor="end" font-family="Arial" font-size="12">48.0</text>
+<line x1="90" y1="332.0" x2="1060" y2="332.0" stroke="#ddd"/>
+<line x1="85" y1="248.0" x2="90" y2="248.0" stroke="black"/>
+<text x="80" y="253.0" text-anchor="end" font-family="Arial" font-size="12">72.0</text>
+<line x1="90" y1="248.0" x2="1060" y2="248.0" stroke="#ddd"/>
+<line x1="85" y1="164.0" x2="90" y2="164.0" stroke="black"/>
+<text x="80" y="169.0" text-anchor="end" font-family="Arial" font-size="12">96.0</text>
+<line x1="90" y1="164.0" x2="1060" y2="164.0" stroke="#ddd"/>
+<line x1="85" y1="80.0" x2="90" y2="80.0" stroke="black"/>
+<text x="80" y="85.0" text-anchor="end" font-family="Arial" font-size="12">120.0</text>
+<line x1="90" y1="80.0" x2="1060" y2="80.0" stroke="#ddd"/>
+<rect x="102.0" y="281.2" width="31.5" height="218.8" fill="#4a78c2"/>
+<text x="117.8" y="273.2" text-anchor="middle" font-family="Arial" font-size="12">62.50</text>
+<text x="117.8" y="518" text-anchor="end" transform="rotate(-45 117.8,518)" font-family="Arial" font-size="12">combined-high</text>
+<rect x="145.5" y="207.1" width="31.5" height="292.9" fill="#4a78c2"/>
+<text x="161.3" y="199.1" text-anchor="middle" font-family="Arial" font-size="12">83.69</text>
+<text x="161.3" y="518" text-anchor="end" transform="rotate(-45 161.3,518)" font-family="Arial" font-size="12">combined-low</text>
+<rect x="189.1" y="246.9" width="31.5" height="253.1" fill="#4a78c2"/>
+<text x="204.9" y="238.9" text-anchor="middle" font-family="Arial" font-size="12">72.32</text>
+<text x="204.9" y="518" text-anchor="end" transform="rotate(-45 204.9,518)" font-family="Arial" font-size="12">combined-medium</text>
+<rect x="232.6" y="191.2" width="31.5" height="308.8" fill="#4a78c2"/>
+<text x="248.4" y="183.2" text-anchor="middle" font-family="Arial" font-size="12">88.22</text>
+<text x="248.4" y="518" text-anchor="end" transform="rotate(-45 248.4,518)" font-family="Arial" font-size="12">jamming-high</text>
+<rect x="276.2" y="153.9" width="31.5" height="346.1" fill="#4a78c2"/>
+<text x="292.0" y="145.9" text-anchor="middle" font-family="Arial" font-size="12">98.89</text>
+<text x="292.0" y="518" text-anchor="end" transform="rotate(-45 292.0,518)" font-family="Arial" font-size="12">jamming-low</text>
+<rect x="319.7" y="164.9" width="31.5" height="335.1" fill="#4a78c2"/>
+<text x="335.5" y="156.9" text-anchor="middle" font-family="Arial" font-size="12">95.74</text>
+<text x="335.5" y="518" text-anchor="end" transform="rotate(-45 335.5,518)" font-family="Arial" font-size="12">jamming-medium</text>
+<rect x="363.3" y="266.9" width="31.5" height="233.1" fill="#4a78c2"/>
+<text x="379.0" y="258.9" text-anchor="middle" font-family="Arial" font-size="12">66.59</text>
+<text x="379.0" y="518" text-anchor="end" transform="rotate(-45 379.0,518)" font-family="Arial" font-size="12">jamming_spoofing-…</text>
+<rect x="406.8" y="163.9" width="31.5" height="336.1" fill="#4a78c2"/>
+<text x="422.6" y="155.9" text-anchor="middle" font-family="Arial" font-size="12">96.03</text>
+<text x="422.6" y="518" text-anchor="end" transform="rotate(-45 422.6,518)" font-family="Arial" font-size="12">jamming_spoofing-…</text>
+<rect x="450.4" y="213.1" width="31.5" height="286.9" fill="#4a78c2"/>
+<text x="466.1" y="205.1" text-anchor="middle" font-family="Arial" font-size="12">81.96</text>
+<text x="466.1" y="518" text-anchor="end" transform="rotate(-45 466.1,518)" font-family="Arial" font-size="12">jamming_spoofing-…</text>
+<rect x="493.9" y="266.8" width="31.5" height="233.2" fill="#4a78c2"/>
+<text x="509.7" y="258.8" text-anchor="middle" font-family="Arial" font-size="12">66.64</text>
+<text x="509.7" y="518" text-anchor="end" transform="rotate(-45 509.7,518)" font-family="Arial" font-size="12">jamming_tampering…</text>
+<rect x="537.5" y="185.0" width="31.5" height="315.0" fill="#4a78c2"/>
+<text x="553.2" y="177.0" text-anchor="middle" font-family="Arial" font-size="12">90.00</text>
+<text x="553.2" y="518" text-anchor="end" transform="rotate(-45 553.2,518)" font-family="Arial" font-size="12">jamming_tampering…</text>
+<rect x="581.0" y="223.1" width="31.5" height="276.9" fill="#4a78c2"/>
+<text x="596.8" y="215.1" text-anchor="middle" font-family="Arial" font-size="12">79.12</text>
+<text x="596.8" y="518" text-anchor="end" transform="rotate(-45 596.8,518)" font-family="Arial" font-size="12">jamming_tampering…</text>
+<rect x="624.5" y="150.0" width="31.5" height="350.0" fill="#4a78c2"/>
+<text x="640.3" y="142.0" text-anchor="middle" font-family="Arial" font-size="12">100.00</text>
+<text x="640.3" y="518" text-anchor="end" transform="rotate(-45 640.3,518)" font-family="Arial" font-size="12">normal-none</text>
+<rect x="668.1" y="191.9" width="31.5" height="308.1" fill="#4a78c2"/>
+<text x="683.9" y="183.9" text-anchor="middle" font-family="Arial" font-size="12">88.03</text>
+<text x="683.9" y="518" text-anchor="end" transform="rotate(-45 683.9,518)" font-family="Arial" font-size="12">spoofing-high</text>
+<rect x="711.6" y="150.2" width="31.5" height="349.8" fill="#4a78c2"/>
+<text x="727.4" y="142.2" text-anchor="middle" font-family="Arial" font-size="12">99.94</text>
+<text x="727.4" y="518" text-anchor="end" transform="rotate(-45 727.4,518)" font-family="Arial" font-size="12">spoofing-low</text>
+<rect x="755.2" y="160.3" width="31.5" height="339.7" fill="#4a78c2"/>
+<text x="771.0" y="152.3" text-anchor="middle" font-family="Arial" font-size="12">97.05</text>
+<text x="771.0" y="518" text-anchor="end" transform="rotate(-45 771.0,518)" font-family="Arial" font-size="12">spoofing-medium</text>
+<rect x="798.7" y="280.4" width="31.5" height="219.6" fill="#4a78c2"/>
+<text x="814.5" y="272.4" text-anchor="middle" font-family="Arial" font-size="12">62.75</text>
+<text x="814.5" y="518" text-anchor="end" transform="rotate(-45 814.5,518)" font-family="Arial" font-size="12">spoofing_tamperin…</text>
+<rect x="842.3" y="203.2" width="31.5" height="296.8" fill="#4a78c2"/>
+<text x="858.0" y="195.2" text-anchor="middle" font-family="Arial" font-size="12">84.80</text>
+<text x="858.0" y="518" text-anchor="end" transform="rotate(-45 858.0,518)" font-family="Arial" font-size="12">spoofing_tamperin…</text>
+<rect x="885.8" y="248.4" width="31.5" height="251.6" fill="#4a78c2"/>
+<text x="901.6" y="240.4" text-anchor="middle" font-family="Arial" font-size="12">71.88</text>
+<text x="901.6" y="518" text-anchor="end" transform="rotate(-45 901.6,518)" font-family="Arial" font-size="12">spoofing_tamperin…</text>
+<rect x="929.4" y="164.4" width="31.5" height="335.6" fill="#4a78c2"/>
+<text x="945.1" y="156.4" text-anchor="middle" font-family="Arial" font-size="12">95.88</text>
+<text x="945.1" y="518" text-anchor="end" transform="rotate(-45 945.1,518)" font-family="Arial" font-size="12">tampering-high</text>
+<rect x="972.9" y="164.0" width="31.5" height="336.0" fill="#4a78c2"/>
+<text x="988.7" y="156.0" text-anchor="middle" font-family="Arial" font-size="12">96.01</text>
+<text x="988.7" y="518" text-anchor="end" transform="rotate(-45 988.7,518)" font-family="Arial" font-size="12">tampering-low</text>
+<rect x="1016.5" y="164.9" width="31.5" height="335.1" fill="#4a78c2"/>
+<text x="1032.2" y="156.9" text-anchor="middle" font-family="Arial" font-size="12">95.73</text>
+<text x="1032.2" y="518" text-anchor="end" transform="rotate(-45 1032.2,518)" font-family="Arial" font-size="12">tampering-medium</text>
+</svg>
