@@ -11,7 +11,6 @@ echo "=============================================="
 echo "Started: $(date)"
 echo ""
 
-# ── Setup ─────────────────────────────────────
 cd /workspace
 
 if [ ! -d "ra-mars-defence-technology" ]; then
@@ -25,62 +24,52 @@ pip install numpy pandas scikit-learn torch scipy matplotlib seaborn foolbox --q
 
 mkdir -p simulations/datasets simulations/results
 
-# ── Step 1: Generate v4 physics-based dataset ─────────────────────
 echo ""
 echo "STEP 1/9: Generating v4 physics-based dataset..."
 python simulations/python/generate_dataset_v4.py
 echo "✓ Step 1 complete"
 
-# ── Step 2: Create sequence windows ───────────────────────────────
 echo ""
 echo "STEP 2/9: Creating raw sequence windows for LSTM/GRU/CNN..."
 python simulations/python/create_sequence_windows_v4.py
 echo "✓ Step 2 complete"
 
-# ── Step 3: Train LSTM/GRU models ─────────────────────────────────
 echo ""
 echo "STEP 3/9: Training v4 binary + fine-grained LSTM/GRU models..."
 python simulations/python/train_sequence_models_v4.py
 echo "✓ Step 3 complete"
 
-# ── Step 4: Train classical baselines ─────────────────────────────
 echo ""
 echo "STEP 4/9: Training classical baseline models..."
 python simulations/python/train_classical_baselines_v4.py
 echo "✓ Step 4 complete"
 
-# ── Step 5: Train 1D-CNN temporal baseline ────────────────────────
 echo ""
 echo "STEP 5/9: Training 1D-CNN temporal baseline..."
 python simulations/python/train_cnn_baseline_v4.py
 echo "✓ Step 5 complete"
 
-# ── Step 6: Mission assurance + ablation evaluation ───────────────
 echo ""
 echo "STEP 6/9: Running mission assurance, ablation, scalability, intensity, and SINR evaluation..."
 python simulations/python/evaluate_ablation_v4.py
 echo "✓ Step 6 complete"
 
-# ── Step 7: Adversarial robustness testing ────────────────────────
 echo ""
 echo "STEP 7/9: Running FGSM + PGD adversarial robustness tests..."
 ls simulations/results/best_model_v4_*.pt 2>/dev/null && echo "Model files found" || echo "No model files found"
 python simulations/python/adversarial_robustness_v4.py
 echo "✓ Step 7 complete"
 
-# ── Step 8: Latency budget analysis ───────────────────────────────
 echo ""
 echo "STEP 8/9: Computing latency budget analysis..."
 python simulations/python/latency_budget_v4.py
 echo "✓ Step 8 complete"
 
-# ── Step 9: Adversarial training ──────────────────────────────────
 echo ""
 echo "STEP 9/9: Running PGD-augmented adversarial training..."
 python simulations/python/train_adversarial_v4.py
 echo "✓ Step 9 complete"
 
-# ── Final summary ─────────────────────────────────────────────────
 echo ""
 echo "=============================================="
 echo "ALL 9 STEPS COMPLETE"
