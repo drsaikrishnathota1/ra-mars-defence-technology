@@ -17,6 +17,7 @@ import numpy as np
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -91,6 +92,18 @@ def evaluate_model(name, model, X_train, X_test, y_train, y_test, labels):
     return performance, per_class_rows, cm_df
 
 
+
+def scale_flat_splits_train_only(X_train, X_test):
+    """
+    Fit StandardScaler only on training flattened windows.
+    This prevents preprocessing leakage from the test split.
+    """
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    return X_train_scaled, X_test_scaled, scaler
+
+
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -103,6 +116,9 @@ def main():
         random_state=42,
         stratify=y,
     )
+
+    X_train, X_test, scaler = scale_flat_splits_train_only(X_train, X_test)
+    print("Applied train-only scaling to classical baseline features.")
 
     models = [
         ("Logistic Regression", LogisticRegression(max_iter=1000)),
