@@ -55,6 +55,12 @@ echo "STEP 5/9: Training 1D-CNN temporal baseline..."
 python simulations/python/train_cnn_baseline_v4.py
 echo "✓ Step 5 complete"
 
+# ── Step 5: 1D-CNN temporal baseline ───────────────────────────────
+echo ""
+echo "STEP 5/9: Training 1D-CNN temporal baseline..."
+python simulations/python/train_cnn_baseline_v4.py
+echo "✓ Step 5 complete"
+
 # ── Step 5: Mission assurance + ablation evaluation ───────────────
 echo ""
 echo "STEP 6/9: Running mission assurance, ablation, scalability, intensity, and SINR evaluation..."
