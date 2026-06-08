@@ -112,7 +112,8 @@ def main():
     print(f"\n✓ Saved: {OUTPUT_PATH}")
     print(f"  X shape: {X.shape}")
     print(f"  y shape: {y.shape}")
-    print(f"  Features: {FEATURES}")\n    print("  Scaling: deferred to training split only")
+    print(f"  Features: {FEATURES}")
+    print("  Scaling: deferred to training split only")
     print(f"  Sequence length: {SEQ_LEN} steps")
 
 
