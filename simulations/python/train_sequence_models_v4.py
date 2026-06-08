@@ -30,6 +30,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import (accuracy_score, precision_score,
                               recall_score, f1_score,
                               classification_report, confusion_matrix)
+from sklearn.preprocessing import StandardScaler
 
 DATA_PATH  = "simulations/datasets/uav_sequence_windows_v4.npz"
 OUTPUT_DIR = "simulations/results"
@@ -132,6 +133,27 @@ def make_splits(X, y):
     X_train, X_val, y_train, y_val = train_test_split(
         X_tv, y_tv, test_size=0.15/0.85, random_state=RANDOM_SEED, stratify=y_tv)
     return X_train, X_val, X_test, y_train, y_val, y_test
+
+
+
+def scale_splits_train_only(X_train, X_val, X_test):
+    """
+    Fit StandardScaler only on the training split to avoid preprocessing leakage.
+    The same train-fitted scaler is applied to validation and test splits.
+    """
+    n_train, seq_len, n_feat = X_train.shape
+
+    scaler = StandardScaler()
+    X_train_2d = X_train.reshape(-1, n_feat)
+    scaler.fit(X_train_2d)
+
+    def transform(X):
+        n = X.shape[0]
+        X_2d = X.reshape(-1, n_feat)
+        X_scaled = scaler.transform(X_2d)
+        return X_scaled.reshape(n, seq_len, n_feat).astype(np.float32)
+
+    return transform(X_train), transform(X_val), transform(X_test), scaler
 
 
 def make_loaders(X_train, X_val, X_test, y_train, y_val, y_test):

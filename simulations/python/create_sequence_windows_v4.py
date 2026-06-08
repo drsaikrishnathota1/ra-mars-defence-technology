@@ -14,7 +14,7 @@ Output: simulations/datasets/uav_sequence_windows_v4.npz
 import os
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder
 
 RANDOM_SEED  = 42
 SEQ_LEN      = 20       # 20 timesteps per window
@@ -101,25 +101,18 @@ def main():
     for lbl, idx in zip(labels_arr, range(len(labels_arr))):
         print(f"  {lbl:25s}: {(y == idx).sum():,}")
 
-    # Standardise features (per-feature, fit on all data)
-    # Reshape to 2D, scale, reshape back
-    n_samples, seq_l, n_feat = X.shape
-    X_2d = X.reshape(-1, n_feat)
-    scaler = StandardScaler()
-    X_2d_scaled = scaler.fit_transform(X_2d)
-    X_scaled = X_2d_scaled.reshape(n_samples, seq_l, n_feat)
-
+    # Do NOT standardise here.
+    # Scaling is fitted only on the training split inside train_sequence_models_v4.py
+    # to prevent train/test preprocessing leakage.
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     np.savez_compressed(OUTPUT_PATH,
-                        X=X_scaled, y=y, labels=labels_arr,
-                        feature_names=np.array(FEATURES),
-                        scaler_mean=scaler.mean_,
-                        scaler_scale=scaler.scale_)
+                        X=X, y=y, labels=labels_arr,
+                        feature_names=np.array(FEATURES))
 
     print(f"\n✓ Saved: {OUTPUT_PATH}")
-    print(f"  X shape: {X_scaled.shape}")
+    print(f"  X shape: {X.shape}")
     print(f"  y shape: {y.shape}")
-    print(f"  Features: {FEATURES}")
+    print(f"  Features: {FEATURES}")\n    print("  Scaling: deferred to training split only")
     print(f"  Sequence length: {SEQ_LEN} steps")
 
 
