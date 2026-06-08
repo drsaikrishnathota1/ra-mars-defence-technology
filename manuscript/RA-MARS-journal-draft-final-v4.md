@@ -1052,3 +1052,19 @@ This study uses simulation-generated synthetic data for controlled experimental 
 [42] K. Li, J. Liu, X. Gu, Y. Yang, C. Chang, H. Chen, L. Wan, and Y. Lin, “Dynamic Decision-Making of UAV Swarm Based on Constrained Multi-Objective Optimization Under Incomplete Interference Information,” Chinese Journal of Aeronautics, article 103846, 2025, doi: 10.1016/j.cja.2025.103846.
 
 [43] X. Wang, Z. Zhao, L. Yi, Z. Ning, L. Guo, F. R. Yu, and S. Guo, “A Survey on Security of UAV Swarm Networks: Attacks and Countermeasures,” ACM Computing Surveys, vol. 57, no. 3, article 74, pp. 1–37, 2024, doi: 10.1145/3703625.
+
+
+# v4 Figure Links
+
+![Figure 1. RA-MARS v4 model macro-F1 comparison.](../figures/graphs/v4/figure_v4_model_f1_comparison.svg)
+
+![Figure 2. RA-MARS v4 mission success by scenario.](../figures/graphs/v4/figure_v4_mission_success_by_scenario.svg)
+
+![Figure 3. RA-MARS v4 ablation study for mission success.](../figures/graphs/v4/figure_v4_ablation_mission_success.svg)
+
+![Figure 4. RA-MARS v4 RF/SINR validation summary.](../figures/graphs/v4/figure_v4_rf_sinr_validation.svg)
+
+![Figure 5. RA-MARS v4 detection-delay analysis.](../figures/graphs/v4/figure_v4_detection_delay.svg)
+
+![Figure 6. RA-MARS v4 adversarial training robustness.](../figures/graphs/v4/figure_v4_adversarial_training_robustness.svg)
+
