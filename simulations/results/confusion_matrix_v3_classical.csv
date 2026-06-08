@@ -1,9 +1,0 @@
-,combined,jamming,jamming_spoofing,jamming_tampering,normal,spoofing,spoofing_tampering,tampering
-combined,19,0,201,0,2,0,0,0
-jamming,0,337,0,22,19,0,0,2
-jamming_spoofing,19,0,301,0,8,0,0,0
-jamming_tampering,0,244,0,39,13,0,0,1
-normal,2,30,18,3,2032,2,22,103
-spoofing,0,0,0,0,9,147,85,0
-spoofing_tampering,0,0,0,0,4,133,108,0
-tampering,0,0,0,0,26,0,0,268
