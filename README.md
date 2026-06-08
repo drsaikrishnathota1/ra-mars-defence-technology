@@ -53,8 +53,8 @@ RA-MARS v4 simulation pipeline has been completed on RunPod. The repository now 
 - Binary GRU attack-vs-normal classification: macro-F1 = 0.9577, accuracy = 0.9577
 - Binary LSTM attack-vs-normal classification: macro-F1 = 0.9573, accuracy = 0.9573
 - Fine-grained Weighted GRU 8-class classification: macro-F1 = 0.6007, accuracy = 0.7536
-- Full RA-MARS Mission Assurance Index: 0.7497
-- Full RA-MARS mission success rate: 85.70%
+- Full RA-MARS Mission Assurance Index: 0.7012
+- Full RA-MARS mission success rate: 73.61%
 - Framework overhead: 11.5 ms per telemetry cycle
 - Adversarially trained binary LSTM clean macro-F1: 0.9986
 - FGSM ε=0.01 macro-F1 after adversarial training: 0.9975
