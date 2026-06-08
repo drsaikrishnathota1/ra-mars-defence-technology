@@ -46,7 +46,7 @@ echo "✓ Step 3 complete"
 # ── Step 4: Train classical baselines ─────────────────────────────
 echo ""
 echo "STEP 4/8: Training classical baseline models..."
-python simulations/python/train_classical_models_v3.py
+python simulations/python/train_classical_baselines_v4.py
 echo "✓ Step 4 complete"
 
 # ── Step 5: Mission assurance + ablation evaluation ───────────────
