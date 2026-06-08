@@ -58,8 +58,7 @@ class CNN1DClassifier(nn.Module):
         self.fc = nn.Linear(128, num_classes)
 
     def forward(self, x):
-        # input x: [batch, seq_len, features]
-        x = x.transpose(1, 2)  # [batch, features, seq_len]
+        x = x.transpose(1, 2)
         x = self.net(x).squeeze(-1)
         return self.fc(x)
 
@@ -85,7 +84,7 @@ def split_and_scale(X, y):
         X_tv, y_tv, test_size=0.15 / 0.85, random_state=RANDOM_SEED, stratify=y_tv
     )
 
-    n_train, seq_len, n_feat = X_train.shape
+    _, seq_len, n_feat = X_train.shape
     scaler = StandardScaler()
     scaler.fit(X_train.reshape(-1, n_feat))
 
