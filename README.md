@@ -45,16 +45,28 @@ RA-MARS integrates:
 - archive: older drafts and unused material
 
 ## Current Status
-Initial documentation structure is complete.
+
+RA-MARS v4 simulation pipeline has been completed on RunPod. The repository now includes a physics-based RF/SINR dataset workflow, sequence-window generation, binary and fine-grained LSTM/GRU models, classical baselines, mission-assurance evaluation, ablation analysis, scalability testing, attack-intensity testing, latency-budget analysis, and adversarial training results.
+
+## Key v4 Results
+
+- Binary GRU attack-vs-normal classification: macro-F1 = 0.9577, accuracy = 0.9577
+- Binary LSTM attack-vs-normal classification: macro-F1 = 0.9573, accuracy = 0.9573
+- Fine-grained Weighted GRU 8-class classification: macro-F1 = 0.6007, accuracy = 0.7536
+- Full RA-MARS Mission Assurance Index: 0.7497
+- Full RA-MARS mission success rate: 85.70%
+- Framework overhead: 11.5 ms per telemetry cycle
+- Adversarially trained binary LSTM clean macro-F1: 0.9986
+- FGSM ε=0.01 macro-F1 after adversarial training: 0.9975
+- PGD ε=0.05 macro-F1 after adversarial training: 0.9831
 
 ## Next Phase
-1. Collect and verify 45-70 references.
-2. Build the literature comparison matrix.
-3. Develop the Python simulation.
-4. Generate synthetic UAV mission data.
-5. Produce result tables and graphs.
-6. Convert section drafts into a full manuscript.
-7. Polish the manuscript for journal submission.
+
+1. Update the manuscript from v3 results to v4 results.
+2. Create paper-ready result tables and figures from the generated CSV files.
+3. Move selected final CSVs into a lightweight reproducibility folder.
+4. Polish the methodology, results, limitations, and conclusion sections.
+5. Prepare the final Defence Technology submission package.
 
 ## Research Integrity Notes
 This project uses simulation-generated synthetic UAV telemetry data. It should not be presented as real military flight data.
