@@ -89,7 +89,7 @@ class FocalLoss(nn.Module):
 
 def pgd_attack(model, X, y, epsilon, alpha, n_steps, criterion):
     """PGD adversarial example generation."""
-    model.eval()
+    model.train()  # Required for cuDNN RNN backward during PGD
     X_adv = X.clone().detach() + torch.empty_like(X).uniform_(-epsilon, epsilon)
     X_adv = torch.clamp(X_adv, X - epsilon, X + epsilon).detach()
     for _ in range(n_steps):
