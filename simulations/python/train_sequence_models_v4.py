@@ -274,6 +274,8 @@ def main():
     bin_lbls = ["normal", "attack"]
 
     Xtr, Xvl, Xte, ytr, yvl, yte = make_splits(X, y_bin)
+    Xtr, Xvl, Xte, bin_scaler = scale_splits_train_only(Xtr, Xvl, Xte)
+    print("Applied train-only feature standardization for binary LSTM/GRU task.")
     tr_l, vl_l, te_l = make_loaders(Xtr, Xvl, Xte, ytr, yvl, yte)
     w_bin = class_weights_tensor(ytr, 2)
 
@@ -306,6 +308,8 @@ def main():
     print("=" * 60)
 
     Xtr, Xvl, Xte, ytr, yvl, yte = make_splits(X, y)
+    Xtr, Xvl, Xte, fg_scaler = scale_splits_train_only(Xtr, Xvl, Xte)
+    print("Applied train-only feature standardization for fine-grained LSTM/GRU task.")
     tr_l, vl_l, te_l = make_loaders(Xtr, Xvl, Xte, ytr, yvl, yte)
     w8 = class_weights_tensor(ytr, len(labels))
 
