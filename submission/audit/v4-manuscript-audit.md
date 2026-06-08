@@ -12,7 +12,7 @@ Matches: 1
 
 - Line 970: [1] P. Stodola, J. Nohel, and L. Horák, “Dynamic reconnaissance operations with UAV swarms: adapting to environmental changes,” Scientific Reports, vol. 15, article 15092, 2025, doi: 10.1038/s41598-025-00201-4.
 
-## missing_real_world_limitations
+## synthetic_data_limitations
 
 Matches: 26
 
