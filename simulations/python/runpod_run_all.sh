@@ -1,6 +1,6 @@
 #!/bin/bash
 # RA-MARS v4 RunPod Master Script
-# Runs all 8 steps in sequence on a single GPU pod
+# Runs all 9 steps in sequence on a single GPU pod
 # Expected runtime: ~45-90 mins on RTX 4090/A6000-class GPU
 
 set -e
@@ -39,45 +39,51 @@ echo "✓ Step 2 complete"
 
 # ── Step 3: Train LSTM/GRU models ─────────────────────────────────
 echo ""
-echo "STEP 3/8: Training v4 binary + fine-grained LSTM/GRU models..."
+echo "STEP 3/9: Training v4 binary + fine-grained LSTM/GRU models..."
 python simulations/python/train_sequence_models_v4.py
 echo "✓ Step 3 complete"
 
 # ── Step 4: Train classical baselines ─────────────────────────────
 echo ""
-echo "STEP 4/8: Training classical baseline models..."
+echo "STEP 4/9: Training classical baseline models..."
 python simulations/python/train_classical_baselines_v4.py
 echo "✓ Step 4 complete"
 
+# ── Step 5: 1D-CNN temporal baseline ───────────────────────────────
+echo ""
+echo "STEP 5/9: Training 1D-CNN temporal baseline..."
+python simulations/python/train_cnn_baseline_v4.py
+echo "✓ Step 5 complete"
+
 # ── Step 5: Mission assurance + ablation evaluation ───────────────
 echo ""
-echo "STEP 5/8: Running mission assurance, ablation, scalability, intensity, and SINR evaluation..."
+echo "STEP 6/9: Running mission assurance, ablation, scalability, intensity, and SINR evaluation..."
 python simulations/python/evaluate_ablation_v4.py
 echo "✓ Step 5 complete"
 
 # ── Step 6: Adversarial robustness testing ────────────────────────
 echo ""
-echo "STEP 6/8: Running FGSM + PGD adversarial robustness tests..."
+echo "STEP 7/9: Running FGSM + PGD adversarial robustness tests..."
 ls simulations/results/best_model_v4_*.pt 2>/dev/null && echo "Model files found" || echo "No model files found"
 python simulations/python/adversarial_robustness_v4.py
 echo "✓ Step 6 complete"
 
 # ── Step 7: Latency budget analysis ───────────────────────────────
 echo ""
-echo "STEP 7/8: Computing latency budget analysis..."
+echo "STEP 8/9: Computing latency budget analysis..."
 python simulations/python/latency_budget_v4.py
 echo "✓ Step 7 complete"
 
 # ── Step 8: Adversarial training ──────────────────────────────────
 echo ""
-echo "STEP 8/8: Running PGD-augmented adversarial training..."
+echo "STEP 9/9: Running PGD-augmented adversarial training..."
 python simulations/python/train_adversarial_v4.py
 echo "✓ Step 8 complete"
 
 # ── Final summary ─────────────────────────────────────────────────
 echo ""
 echo "=============================================="
-echo "ALL 8 STEPS COMPLETE"
+echo "ALL 9 STEPS COMPLETE"
 echo "Finished: $(date)"
 echo ""
 echo "Results generated:"
